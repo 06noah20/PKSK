@@ -1,8 +1,19 @@
 # Portal PKSK 🎓
 
-Portal pembelajaran dan pentaksiran **interaktif** khas untuk **PKSK**, diasingkan
-daripada portal induk (`PORTAL-UASA / portal-pintar_8`) supaya PKSK mempunyai
-laman tersendiri.
+Portal pembelajaran dan pentaksiran **interaktif** khas untuk **PKSK** —
+*Cabaran Kemasukan Sekolah Khusus*. Fungsi dan **soalan sebenar PKSK** telah
+diekstrak daripada portal induk (`PORTAL-UASA / portal-pintar_8`, bahagian
+CABARAN "PKSK") dan disatukan ke dalam laman tersendiri ini.
+
+## 📚 Kandungan (65 soalan sebenar)
+
+| Topik | Soalan |
+|-------|--------|
+| 🧠 Pengetahuan Am | 30 |
+| 🧩 Corak & Logik (Penaakulan) | 10 |
+| 🔬 Sains | 10 |
+| 🔤 English | 10 |
+| ➗ Matematik | 5 |
 
 ## ✨ Ciri-ciri
 
@@ -16,6 +27,7 @@ laman tersendiri.
 
 - Reka bentuk moden, responsif (mobil & desktop)
 - Tema **terang / gelap** (auto ikut sistem)
+- **Pemasa 20 saat** setiap soalan dalam mod Kuiz (autentik seperti cabaran asal)
 - Kemajuan disimpan automatik dalam pelayar (localStorage)
 - **Tiada pemasangan** — buka `index.html` terus dalam pelayar
 
@@ -44,9 +56,9 @@ Format satu soalan:
 }
 ```
 
-> ⚠️ **Nota:** Soalan sedia ada dalam `js/questions.js` adalah **contoh**.
-> Gantikan dengan soalan sebenar PKSK daripada portal asal. Setelah akses
-> ke repo `PORTAL-UASA` dibenarkan, soalan sebenar boleh diimport terus.
+> ✅ **Nota:** `js/questions.js` sudah mengandungi **soalan sebenar PKSK**
+> yang diekstrak daripada portal induk. Anda boleh tambah soalan baharu
+> dengan mengikut format yang sama.
 
 ## 📁 Struktur
 

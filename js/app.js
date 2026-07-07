@@ -153,17 +153,65 @@
 
   /* ---------------- Sesi soalan (Latihan / Kuiz) ---------------- */
   function runSession(topic, mode) {
-    let idx = 0, score = 0, answered = false;
+    let idx = 0, score = 0, answered = false, timerId = null;
     const total = topic.questions.length;
+    const TIME_PER_Q = 20; // saat setiap soalan (mod Kuiz sahaja)
+
+    function clearTimer() { if (timerId) { clearInterval(timerId); timerId = null; } }
+
+    // Dedahkan jawapan. chosen === -1 bermakna masa tamat.
+    function reveal(chosen) {
+      if (answered) return;
+      answered = true;
+      clearTimer();
+      const qn = topic.questions[idx];
+      const correct = qn.answer;
+      app.querySelectorAll("#opts .opt").forEach(b => {
+        b.disabled = true;
+        if (+b.dataset.i === correct) b.classList.add("correct");
+        if (+b.dataset.i === chosen && chosen !== correct) b.classList.add("wrong");
+      });
+      const right = chosen === correct;
+      if (right) score++;
+      const head = chosen === -1 ? "⏰ Masa tamat!" : right ? "✅ Betul!" : "❌ Kurang tepat.";
+      app.querySelector("#explainBox").innerHTML =
+        `<div class="explain"><b>${head}</b>${qn.explain ? " " + esc(qn.explain) : ""}</div>`;
+      const last = idx === total - 1;
+      app.querySelector("#navBox").innerHTML =
+        `<button class="btn" id="next">${last ? "Lihat Keputusan →" : "Soalan Seterusnya →"}</button>`;
+      app.querySelector("#next").onclick = () => {
+        if (last) return finish();
+        idx++; render();
+      };
+    }
+
+    function startTimer() {
+      const el = app.querySelector("#timer");
+      if (!el) return;
+      let left = TIME_PER_Q;
+      const tick = () => {
+        if (!document.body.contains(el)) { clearTimer(); return; } // beralih tab
+        el.textContent = "⏱️ " + left + "s";
+        el.classList.toggle("low", left <= 5);
+        if (left <= 0) { reveal(-1); return; }
+        left--;
+      };
+      tick();
+      timerId = setInterval(tick, 1000);
+    }
 
     function render() {
+      clearTimer();
+      answered = false;
       const qn = topic.questions[idx];
       const pct = Math.round((idx / total) * 100);
+      const timer = mode === "quiz"
+        ? `<span class="qcount timer" id="timer">⏱️ ${TIME_PER_Q}s</span>` : "";
       app.innerHTML = `
         <div class="card">
           <div class="qhead">
             <span class="qcount">${topic.icon} ${esc(topic.title)} · ${mode === "quiz" ? "Kuiz" : "Latihan"}</span>
-            <span class="qcount">Soalan ${idx + 1} / ${total}</span>
+            <span class="qcount">${timer}${timer ? " · " : ""}Soalan ${idx + 1} / ${total}</span>
           </div>
           <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
           <div class="qtext">${esc(qn.q)}</div>
@@ -177,33 +225,9 @@
           <div id="navBox"></div>
         </div>`;
 
-      const optsEl = app.querySelector("#opts");
-      optsEl.querySelectorAll(".opt").forEach(btn => {
-        btn.addEventListener("click", () => {
-          if (answered) return;
-          answered = true;
-          const chosen = +btn.dataset.i;
-          const correct = qn.answer;
-          optsEl.querySelectorAll(".opt").forEach(b => {
-            b.disabled = true;
-            if (+b.dataset.i === correct) b.classList.add("correct");
-            if (+b.dataset.i === chosen && chosen !== correct) b.classList.add("wrong");
-          });
-          if (chosen === correct) score++;
-          app.querySelector("#explainBox").innerHTML = `
-            <div class="explain">
-              <b>${chosen === correct ? "✅ Betul!" : "❌ Kurang tepat."}</b>
-              ${qn.explain ? " " + esc(qn.explain) : ""}
-            </div>`;
-          const last = idx === total - 1;
-          app.querySelector("#navBox").innerHTML =
-            `<button class="btn" id="next">${last ? "Lihat Keputusan →" : "Soalan Seterusnya →"}</button>`;
-          app.querySelector("#next").onclick = () => {
-            if (last) return finish();
-            idx++; answered = false; render();
-          };
-        });
-      });
+      app.querySelectorAll("#opts .opt").forEach(btn =>
+        btn.addEventListener("click", () => reveal(+btn.dataset.i)));
+      if (mode === "quiz") startTimer();
     }
 
     function finish() {
