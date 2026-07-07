@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal PKSK — Pusat Pembelajaran Interaktif</title>
+  <meta name="description" content="Portal pembelajaran dan pentaksiran interaktif khas untuk PKSK." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ================= HEADER ================= -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-logo">🎓</span>
+      <div>
+        <h1 class="brand-title">Portal <span>PKSK</span></h1>
+        <p class="brand-sub">Pusat Pembelajaran &amp; Pentaksiran Interaktif</p>
+      </div>
+    </div>
+    <button id="themeToggle" class="theme-btn" title="Tukar tema" aria-label="Tukar tema">🌙</button>
+  </header>
+
+  <!-- ================= NAV ================= -->
+  <nav class="tabbar" id="tabbar">
+    <button class="tab active" data-view="home">🏠 Utama</button>
+    <button class="tab" data-view="learn">📖 Belajar</button>
+    <button class="tab" data-view="practice">✏️ Latihan</button>
+    <button class="tab" data-view="quiz">🏆 Kuiz</button>
+    <button class="tab" data-view="progress">📊 Kemajuan</button>
+  </nav>
+
+  <main class="container" id="app">
+    <!-- Kandungan dijana oleh js/app.js -->
+  </main>
+
+  <footer class="footer">
+    <p>Portal PKSK · Dibina untuk pembelajaran interaktif · Data soalan boleh diedit dalam <code>js/questions.js</code></p>
+  </footer>
+
+  <script src="js/questions.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
