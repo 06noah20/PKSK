@@ -5,15 +5,17 @@ Portal pembelajaran dan pentaksiran **interaktif** khas untuk **PKSK** —
 diekstrak daripada portal induk (`PORTAL-UASA / portal-pintar_8`, bahagian
 CABARAN "PKSK") dan disatukan ke dalam laman tersendiri ini.
 
-## 📚 Kandungan (65 soalan sebenar)
+## 📚 Kandungan (119 soalan sebenar)
+
+Diekstrak sepenuhnya daripada 4 kertas rasmi PKSK dalam `portal-pintar_8.html`
+(termasuk rajah/jadual soalan):
 
 | Topik | Soalan |
 |-------|--------|
 | 🧠 Pengetahuan Am | 30 |
-| 🧩 Corak & Logik (Penaakulan) | 10 |
-| 🔬 Sains | 10 |
-| 🔤 English | 10 |
-| ➗ Matematik | 5 |
+| ➗ Matematik | 30 |
+| 🔬 Sains | 39 |
+| 🔤 English | 20 |
 
 ## ✨ Ciri-ciri
 

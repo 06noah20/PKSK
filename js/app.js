@@ -215,6 +215,7 @@
           </div>
           <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
           <div class="qtext">${esc(qn.q)}</div>
+          ${qn.fig ? `<div class="figure">${qn.fig}</div>` : ""}
           <div class="opts" id="opts">
             ${qn.options.map((o, i) => `
               <button class="opt" data-i="${i}">
