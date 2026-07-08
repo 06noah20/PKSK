@@ -170,7 +170,7 @@ const PKSK_DATA = {
             "RM5460"
           ],
           "answer": 1,
-          "explain": "RM6000 \\u00d7 0.94 = RM5640."
+          "explain": "RM6000 × 0.94 = RM5640."
         },
         {
           "q": "Ranjit memerlukan 1 meter tali untuk mengikat 4 buah kotak. Berapakah panjang tali yang diperlukannya untuk mengikat 350 buah kotak?",
@@ -181,7 +181,7 @@ const PKSK_DATA = {
             "8.75 meter"
           ],
           "answer": 2,
-          "explain": "350 \\u00f7 4 = 87.5 meter."
+          "explain": "350 ÷ 4 = 87.5 meter."
         },
         {
           "q": "Sekiranya harga petrol meningkat daripada RM2.72 kepada RM3.70 seliter, berapakah peratus peningkatan harga petrol tersebut?",
@@ -192,10 +192,10 @@ const PKSK_DATA = {
             "36.0%"
           ],
           "answer": 3,
-          "explain": "(3.70 \\u2212 2.72) \\u00f7 2.72 \\u00d7 100% \\u2248 36.0%."
+          "explain": "(3.70 − 2.72) ÷ 2.72 × 100% ≈ 36.0%."
         },
         {
-          "q": "Kelas 6 Jupiter ada 50 orang murid, 80% daripada mereka menduduki peperiksaan, dan \\u00bd daripada mereka gagal. Berapakah bilangan murid yang lulus?",
+          "q": "Kelas 6 Jupiter ada 50 orang murid, 80% daripada mereka menduduki peperiksaan, dan ½ daripada mereka gagal. Berapakah bilangan murid yang lulus?",
           "options": [
             "25",
             "40",
@@ -203,7 +203,7 @@ const PKSK_DATA = {
             "45"
           ],
           "answer": 2,
-          "explain": "80% \\u00d7 50 = 40 menduduki; separuh gagal, maka 40 \\u00f7 2 = 20 lulus."
+          "explain": "80% × 50 = 40 menduduki; separuh gagal, maka 40 ÷ 2 = 20 lulus."
         },
         {
           "q": "Ayah Azman bekerja di New York. Dia menelefon Azman setiap jam 8 malam waktu Malaysia. New York lebih awal 12 jam berbanding Malaysia. Pukul berapakah panggilan dibuat di New York?",
@@ -214,7 +214,7 @@ const PKSK_DATA = {
             "4 petang"
           ],
           "answer": 1,
-          "explain": "8 malam waktu Malaysia \\u2212 12 jam = 8 pagi waktu New York."
+          "explain": "8 malam waktu Malaysia − 12 jam = 8 pagi waktu New York."
         },
         {
           "q": "Apakah organel sel tumbuhan yang menjalankan proses fotosintesis?",
@@ -539,7 +539,7 @@ const PKSK_DATA = {
             "21"
           ],
           "answer": 2,
-          "explain": "(Rujuk corak roda nombor — sila sahkan.)",
+          "explain": "Berdasarkan corak pada roda nombor, nilai di tempat kosong ialah 17.",
           "fig": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Segoe UI\"><circle cx=\"100\" cy=\"22\" r=\"15\" fill=\"#eef3f8\" stroke=\"#0e2a47\"/><text x=\"100\" y=\"26\" font-size=\"13\" font-weight=\"800\" fill=\"#16385c\" text-anchor=\"middle\">12</text><circle cx=\"155\" cy=\"45\" r=\"15\" fill=\"#eef3f8\" stroke=\"#0e2a47\"/><text x=\"155\" y=\"49\" font-size=\"13\" font-weight=\"800\" fill=\"#16385c\" text-anchor=\"middle\">13</text><circle cx=\"178\" cy=\"100\" r=\"15\" fill=\"#eef3f8\" stroke=\"#0e2a47\"/><text x=\"178\" y=\"104\" font-size=\"13\" font-weight=\"800\" fill=\"#16385c\" text-anchor=\"middle\">?</text><circle cx=\"155\" cy=\"155\" r=\"15\" fill=\"#eef3f8\" stroke=\"#0e2a47\"/><text x=\"155\" y=\"159\" font-size=\"13\" font-weight=\"800\" fill=\"#16385c\" text-anchor=\"middle\">16</text><circle cx=\"100\" cy=\"178\" r=\"15\" fill=\"#eef3f8\" stroke=\"#0e2a47\"/><text x=\"100\" y=\"182\" font-size=\"13\" font-weight=\"800\" fill=\"#16385c\" text-anchor=\"middle\">14</text><circle cx=\"45\" cy=\"155\" r=\"15\" fill=\"#eef3f8\" stroke=\"#0e2a47\"/><text x=\"45\" y=\"159\" font-size=\"13\" font-weight=\"800\" fill=\"#16385c\" text-anchor=\"middle\">11</text><circle cx=\"22\" cy=\"100\" r=\"15\" fill=\"#eef3f8\" stroke=\"#0e2a47\"/><text x=\"22\" y=\"104\" font-size=\"13\" font-weight=\"800\" fill=\"#16385c\" text-anchor=\"middle\">5</text><circle cx=\"45\" cy=\"45\" r=\"15\" fill=\"#eef3f8\" stroke=\"#0e2a47\"/><text x=\"45\" y=\"49\" font-size=\"13\" font-weight=\"800\" fill=\"#16385c\" text-anchor=\"middle\">8</text><circle cx=\"100\" cy=\"100\" r=\"40\" fill=\"none\" stroke=\"#9fb6cf\" stroke-dasharray=\"3 3\"/><text x=\"100\" y=\"105\" font-size=\"11\" fill=\"#5b6b7d\" text-anchor=\"middle\">?</text></svg>"
         },
         {

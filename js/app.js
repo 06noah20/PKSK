@@ -34,8 +34,7 @@
   const views = {
     home: renderHome,
     learn: renderLearnList,
-    practice: renderTopicPicker,
-    progress: renderProgress
+    practice: renderTopicPicker
   };
 
   function go(view) {
@@ -224,54 +223,12 @@
           <p class="muted">${msg}</p>
           <div class="btn-row" style="justify-content:center">
             <button class="btn" id="retry">🔁 Cuba Semula</button>
-            <button class="btn ghost" id="review">📖 Baca Nota</button>
-            <button class="btn ghost" id="home">🏠 Utama</button>
           </div>
         </div>`;
       app.querySelector("#retry").onclick = () => runSession(topic);
-      app.querySelector("#review").onclick = () => renderLearn(topic.id);
-      app.querySelector("#home").onclick = () => go("home");
     }
 
     render();
-  }
-
-  /* ---------------- Paparan: KEMAJUAN ---------------- */
-  function renderProgress() {
-    const attempts = Object.values(progress).reduce((s, p) => s + (p.attempts || 0), 0);
-    const avg = DATA.topics.length
-      ? Math.round(DATA.topics.reduce((s, t) => s + (progress[t.id]?.best || 0), 0) / DATA.topics.length)
-      : 0;
-    app.innerHTML = `
-      <div class="section-head"><h2>📊 Kemajuan Saya</h2>
-        <button class="btn ghost" id="reset" style="margin:0">🗑️ Set Semula</button></div>
-      <section class="card hero" style="background:linear-gradient(135deg,var(--brand),var(--brand-2))">
-        <div class="stat-row" style="margin-top:0">
-          <div class="stat"><div class="num">${masteredCount()}/${DATA.topics.length}</div><div class="lbl">Topik Dikuasai</div></div>
-          <div class="stat"><div class="num">${avg}%</div><div class="lbl">Purata Terbaik</div></div>
-          <div class="stat"><div class="num">${attempts}</div><div class="lbl">Jumlah Cubaan</div></div>
-        </div>
-      </section>
-      <div class="card">
-        ${DATA.topics.map(t => {
-          const best = progress[t.id]?.best || 0;
-          const done = best >= 80;
-          return `
-          <div style="margin-bottom:16px">
-            <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-              <span><b>${t.icon} ${esc(t.title)}</b>
-                <span class="badge ${done ? "done" : "todo"}">${done ? "Dikuasai" : best ? best + "%" : "Belum"}</span></span>
-              <span class="muted">${best}%</span>
-            </div>
-            <div class="progress-track"><div class="progress-fill" style="width:${best}%"></div></div>
-          </div>`;
-        }).join("")}
-      </div>`;
-    app.querySelector("#reset").onclick = () => {
-      if (confirm("Set semula semua kemajuan?")) {
-        progress = {}; saveProgress(progress); renderProgress();
-      }
-    };
   }
 
   /* ---------------- Tema gelap / terang ---------------- */

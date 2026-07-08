@@ -24,7 +24,6 @@ Diekstrak sepenuhnya daripada 4 kertas rasmi PKSK dalam `portal-pintar_8.html`
 | 🏠 **Utama** | Papan pemuka + senarai topik & status penguasaan |
 | 📖 **Nota** | Nota ringkas setiap topik (flashcard) |
 | ✏️ **Latihan PKSK** | Soalan sebenar PKSK + maklum balas serta-merta, markah terbaik direkodkan |
-| 📊 **Kemajuan** | Jejak penguasaan, purata & jumlah cubaan |
 
 - Reka bentuk moden, responsif (mobil & desktop)
 - Tema **terang / gelap** (auto ikut sistem)
