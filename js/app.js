@@ -245,19 +245,19 @@
 
       <div class="section-head"><span class="bar"></span>
         <h2>Topik Pembelajaran</h2>
-        <span class="muted">Klik untuk mula belajar</span></div>
+        <span class="muted">Subjek yang diuji dalam PKSK</span></div>
       <div class="grid">
         ${DATA.topics.map(t => {
           const best = progress[t.id]?.best || 0;
           const done = best >= 80;
           return `
-          <button class="topic" data-topic="${t.id}">
+          <div class="topic static">
             <div class="t-icon">${t.icon}</div>
             <h3>${esc(t.title)}</h3>
             <p>${esc(t.summary)}</p>
-            <div class="t-meta">${t.questions.length} Soalan →
+            <div class="t-meta">${t.questions.length} Soalan
               ${best ? `<span class="badge ${done ? "done" : "todo"}">Terbaik ${best}%</span>` : ""}</div>
-          </button>`;
+          </div>`;
         }).join("")}
       </div>
 
@@ -273,8 +273,6 @@
 
     app.querySelector("#ctaPractice").onclick = () => go("practice");
     app.querySelector("#ctaNotes").onclick = () => go("learn");
-    app.querySelectorAll(".topic").forEach(el =>
-      el.addEventListener("click", () => renderLearn(el.dataset.topic)));
     initCarousel();
   }
 

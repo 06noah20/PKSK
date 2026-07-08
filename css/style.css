@@ -251,6 +251,9 @@ body {
   transition: transform .16s ease, border-color .16s ease, background .16s ease;
 }
 .topic:hover { transform: translateY(-4px); border-color: var(--accent-2); background: var(--card); }
+/* Kad topik di halaman utama: penerangan sahaja, bukan pautan */
+.topic.static { cursor: default; }
+.topic.static:hover { transform: none; border-color: var(--line); background: var(--bg-soft); }
 .topic .t-icon {
   font-size: 24px; width: 52px; height: 52px; display: grid; place-items: center;
   background: var(--accent-soft); border-radius: 50%;
