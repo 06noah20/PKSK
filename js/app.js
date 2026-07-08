@@ -216,8 +216,8 @@
               <span>Kenali potensi diri, capai kecemerlangan, melangkah ke sekolah impian.&rdquo;</span></div>
             <p class="lead">Platform interaktif untuk membantu calon PKSK bersedia dengan lebih yakin dan terarah.</p>
             <div class="btn-row">
-              <button class="btn" id="ctaPractice">🚀 Mula Belajar →</button>
-              <button class="btn ghost" id="ctaNotes">📖 Teroka Topik</button>
+              <button class="btn" id="ctaPractice">🚀 Mula Latihan →</button>
+              <button class="btn ghost" id="ctaNotes">📖 Nota PKSK</button>
             </div>
           </div>
           <div class="hero-art">${HERO_ART}</div>
