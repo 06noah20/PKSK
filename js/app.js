@@ -257,17 +257,20 @@
       </div>
       <div class="cdots" id="cDots"></div>
 
-      <div class="section-head"><span class="bar"></span>
-        <h2>Topik Pembelajaran</h2>
-        <span class="muted">Subjek yang diuji dalam PKSK</span></div>
-      <div class="grid">
-        ${DATA.topics.map(t => `
-          <div class="topic static">
-            <div class="t-icon">${t.icon}</div>
-            <h3>${esc(t.title)}</h3>
-            <p>${esc(t.summary)}</p>
-          </div>`).join("")}
-      </div>
+      <section class="subject-section">
+        <div class="section-head"><span class="bar"></span>
+          <h2>Topik Pembelajaran</h2>
+          <span class="muted">Subjek yang diuji dalam PKSK</span></div>
+        <div class="subject-grid">
+          ${DATA.topics.map((t, i) => `
+            <div class="subject-card ${["card-pink", "card-purple", "card-green", "card-blue"][i % 4]}">
+              <div class="icon-bubble">${t.icon}</div>
+              <h3>${esc(t.title)}</h3>
+              <p>${esc(t.summary)}</p>
+              <span class="card-tag">Topik PKSK</span>
+            </div>`).join("")}
+        </div>
+      </section>
 
       <div class="features">
         <div class="feature"><div class="ic">🎯</div>
