@@ -135,6 +135,13 @@
         onerror="this.hidden=true;this.previousElementSibling.hidden=false">`;
   }
 
+  const SUBJECT_CARDS = [
+    { color: "pink", image: "pengetahuan-am.webp", button: "Terokai Soalan" },
+    { color: "purple", image: "matematik.webp", button: "Mula Latihan" },
+    { color: "green", image: "sains.webp", button: "Belajar Sekarang" },
+    { color: "blue", image: "english.webp", button: "Start Learning" }
+  ];
+
   // Ilustrasi hero: perisai PKSK — bersih, bercahaya, minimum elemen
   const HERO_ART = `<svg viewBox="0 0 420 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Perisai PKSK">
     <defs>
@@ -262,13 +269,21 @@
           <h2>Topik Pembelajaran</h2>
           <span class="muted">Subjek yang diuji dalam PKSK</span></div>
         <div class="subject-grid">
-          ${DATA.topics.map((t, i) => `
-            <div class="subject-card ${["card-pink", "card-purple", "card-green", "card-blue"][i % 4]}">
-              <div class="icon-bubble">${t.icon}</div>
+          ${DATA.topics.map((t, i) => {
+            const card = SUBJECT_CARDS[i % SUBJECT_CARDS.length];
+            return `
+            <div class="subject-card ${card.color}">
+              <div class="image-wrap">
+                <span class="icon-fallback">${t.icon}</span>
+                <img src="assets/icons/${esc(card.image)}" alt="${esc(t.title)}" loading="lazy" hidden
+                  onload="this.hidden=false;this.previousElementSibling.hidden=true"
+                  onerror="this.hidden=true;this.previousElementSibling.hidden=false">
+              </div>
               <h3>${esc(t.title)}</h3>
               <p>${esc(t.summary)}</p>
-              <span class="card-tag">Topik PKSK</span>
-            </div>`).join("")}
+              <button type="button" class="subject-action" data-view="practice">${esc(card.button)} <span>→</span></button>
+            </div>`;
+          }).join("")}
         </div>
       </section>
 
@@ -284,6 +299,8 @@
 
     app.querySelector("#ctaPractice").onclick = () => go("practice");
     app.querySelector("#ctaNotes").onclick = () => go("learn");
+    app.querySelectorAll(".subject-action").forEach(btn =>
+      btn.addEventListener("click", () => go(btn.dataset.view)));
     initCarousel();
   }
 
