@@ -51,26 +51,26 @@
 
   /* ---------------- Senarai sekolah MRSM & SBP ---------------- */
   const SCHOOLS = [
-    { name: "MRSM Kuala Kubu Bharu", rank: 1, score: "1.261", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Kuala+Kubu+Bharu+gambar+sekolah+rasmi" },
-    { name: "MRSM Kepala Batas", rank: 2, score: "1.312", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Kepala+Batas+gambar+sekolah+rasmi" },
-    { name: "MRSM Johor Bahru", rank: 3, score: "1.350", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Johor+Bahru+gambar+sekolah+rasmi" },
-    { name: "MRSM Tun Ghafar Baba", rank: 4, score: "1.390", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Tun+Ghafar+Baba+gambar+sekolah+rasmi" },
-    { name: "MRSM Gemencheh", rank: 5, score: "1.411", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Gemencheh+gambar+sekolah+rasmi" },
-    { name: "MRSM Taiping", rank: 6, score: "1.414", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Taiping+gambar+sekolah+rasmi" },
-    { name: "MRSM Pengkalan Chepa", rank: 7, score: "1.439", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Pengkalan+Chepa+gambar+sekolah+rasmi" },
-    { name: "MRSM Kota Putra", rank: 8, score: "1.489", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Kota+Putra+gambar+sekolah+rasmi" },
-    { name: "MRSM Sungai Besar", rank: 9, score: "1.489", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Sungai+Besar+gambar+sekolah+rasmi" },
-    { name: "MRSM Balik Pulau", rank: 10, score: "1.489", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Balik+Pulau+gambar+sekolah+rasmi" },
-    { name: "SBPI Gombak", rank: 1, score: "0.93", type: "SBP", search: "https://www.bing.com/images/search?q=SBPI+Gombak+gambar+sekolah+rasmi" },
-    { name: "Sekolah Tun Fatimah", rank: 2, score: "1.04", type: "SBP", search: "https://www.bing.com/images/search?q=Sekolah+Tun+Fatimah+gambar+sekolah+rasmi" },
-    { name: "Kolej Tunku Kurshiah", rank: 3, score: "1.05", type: "SBP", search: "https://www.bing.com/images/search?q=Kolej+Tunku+Kurshiah+gambar+sekolah+rasmi" },
-    { name: "SMS Tuanku Munawir", rank: 4, score: "1.16", type: "SBP", search: "https://www.bing.com/images/search?q=SMS+Tuanku+Munawir+gambar+sekolah+rasmi" },
-    { name: "SBPI Rawang", rank: 5, score: "1.16", type: "SBP", search: "https://www.bing.com/images/search?q=SBPI+Rawang+gambar+sekolah+rasmi" },
-    { name: "Sekolah Alam Shah", rank: 6, score: "1.17", type: "SBP", search: "https://www.bing.com/images/search?q=Sekolah+Alam+Shah+gambar+sekolah+rasmi" },
-    { name: "Kolej Melayu Kuala Kangsar", rank: 7, score: "1.23", type: "SBP", search: "https://www.bing.com/images/search?q=Kolej+Melayu+Kuala+Kangsar+gambar+sekolah+rasmi" },
-    { name: "Sekolah Seri Puteri", rank: 8, score: "1.24", type: "SBP", search: "https://www.bing.com/images/search?q=Sekolah+Seri+Puteri+gambar+sekolah+rasmi" },
-    { name: "Kolej Yayasan Saad", rank: 9, score: "1.24", type: "SBP", search: "https://www.bing.com/images/search?q=Kolej+Yayasan+Saad+gambar+sekolah+rasmi" },
-    { name: "SMS Hulu Selangor", rank: 10, score: "1.32", type: "SBP", search: "https://www.bing.com/images/search?q=SMS+Hulu+Selangor+gambar+sekolah+rasmi" }
+    { name: "MRSM Kuala Kubu Bharu", rank: 1, score: "1.261", type: "MRSM", image: "mrsm-kuala-kubu-bharu.jpg", search: "https://www.bing.com/images/search?q=MRSM+Kuala+Kubu+Bharu+gambar+sekolah+rasmi" },
+    { name: "MRSM Kepala Batas", rank: 2, score: "1.312", type: "MRSM", image: "mrsm-kepala-batas.jpg", search: "https://www.bing.com/images/search?q=MRSM+Kepala+Batas+gambar+sekolah+rasmi" },
+    { name: "MRSM Johor Bahru", rank: 3, score: "1.350", type: "MRSM", image: "mrsm-johor-bahru.jpg", search: "https://www.bing.com/images/search?q=MRSM+Johor+Bahru+gambar+sekolah+rasmi" },
+    { name: "MRSM Tun Ghafar Baba", rank: 4, score: "1.390", type: "MRSM", image: "mrsm-tun-ghafar-baba.jpg", search: "https://www.bing.com/images/search?q=MRSM+Tun+Ghafar+Baba+gambar+sekolah+rasmi" },
+    { name: "MRSM Gemencheh", rank: 5, score: "1.411", type: "MRSM", image: "mrsm-gemencheh.jpg", search: "https://www.bing.com/images/search?q=MRSM+Gemencheh+gambar+sekolah+rasmi" },
+    { name: "MRSM Taiping", rank: 6, score: "1.414", type: "MRSM", image: "mrsm-taiping.jpg", search: "https://www.bing.com/images/search?q=MRSM+Taiping+gambar+sekolah+rasmi" },
+    { name: "MRSM Pengkalan Chepa", rank: 7, score: "1.439", type: "MRSM", image: "mrsm-pengkalan-chepa.jpg", search: "https://www.bing.com/images/search?q=MRSM+Pengkalan+Chepa+gambar+sekolah+rasmi" },
+    { name: "MRSM Kota Putra", rank: 8, score: "1.489", type: "MRSM", image: "mrsm-kota-putra.jpg", search: "https://www.bing.com/images/search?q=MRSM+Kota+Putra+gambar+sekolah+rasmi" },
+    { name: "MRSM Sungai Besar", rank: 9, score: "1.489", type: "MRSM", image: "mrsm-sungai-besar.jpg", search: "https://www.bing.com/images/search?q=MRSM+Sungai+Besar+gambar+sekolah+rasmi" },
+    { name: "MRSM Balik Pulau", rank: 10, score: "1.489", type: "MRSM", image: "mrsm-balik-pulau.jpg", search: "https://www.bing.com/images/search?q=MRSM+Balik+Pulau+gambar+sekolah+rasmi" },
+    { name: "SBPI Gombak", rank: 1, score: "0.93", type: "SBP", image: "sbpi-gombak.jpg", search: "https://www.bing.com/images/search?q=SBPI+Gombak+gambar+sekolah+rasmi" },
+    { name: "Sekolah Tun Fatimah", rank: 2, score: "1.04", type: "SBP", image: "sekolah-tun-fatimah.jpg", search: "https://www.bing.com/images/search?q=Sekolah+Tun+Fatimah+gambar+sekolah+rasmi" },
+    { name: "Kolej Tunku Kurshiah", rank: 3, score: "1.05", type: "SBP", image: "kolej-tunku-kurshiah.jpg", search: "https://www.bing.com/images/search?q=Kolej+Tunku+Kurshiah+gambar+sekolah+rasmi" },
+    { name: "SMS Tuanku Munawir", rank: 4, score: "1.16", type: "SBP", image: "sms-tuanku-munawir.jpg", search: "https://www.bing.com/images/search?q=SMS+Tuanku+Munawir+gambar+sekolah+rasmi" },
+    { name: "SBPI Rawang", rank: 5, score: "1.16", type: "SBP", image: "sbpi-rawang.jpg", search: "https://www.bing.com/images/search?q=SBPI+Rawang+gambar+sekolah+rasmi" },
+    { name: "Sekolah Alam Shah", rank: 6, score: "1.17", type: "SBP", image: "sekolah-alam-shah.jpg", search: "https://www.bing.com/images/search?q=Sekolah+Alam+Shah+gambar+sekolah+rasmi" },
+    { name: "Kolej Melayu Kuala Kangsar", rank: 7, score: "1.23", type: "SBP", image: "kolej-melayu-kuala-kangsar.jpg", search: "https://www.bing.com/images/search?q=Kolej+Melayu+Kuala+Kangsar+gambar+sekolah+rasmi" },
+    { name: "Sekolah Seri Puteri", rank: 8, score: "1.24", type: "SBP", image: "sekolah-seri-puteri.jpg", search: "https://www.bing.com/images/search?q=Sekolah+Seri+Puteri+gambar+sekolah+rasmi" },
+    { name: "Kolej Yayasan Saad", rank: 9, score: "1.24", type: "SBP", image: "kolej-yayasan-saad.jpg", search: "https://www.bing.com/images/search?q=Kolej+Yayasan+Saad+gambar+sekolah+rasmi" },
+    { name: "SMS Hulu Selangor", rank: 10, score: "1.32", type: "SBP", image: "sms-hulu-selangor.jpg", search: "https://www.bing.com/images/search?q=SMS+Hulu+Selangor+gambar+sekolah+rasmi" }
   ];
 
   // Ilustrasi bangunan sekolah (SVG) — gaya senja yang konsisten & elegan.
@@ -124,6 +124,14 @@
       <circle cx="17" cy="17" r="11.5" fill="none" stroke="${ring}" stroke-width="1" opacity=".7"/>
       <text x="17" y="22" font-size="13" font-weight="800" fill="#fff" text-anchor="middle" font-family="Georgia,serif">${ch}</text>
     </svg>`;
+  }
+
+  function schoolMedia(s, i) {
+    const art = schoolArt(i);
+    if (!s.image) return art;
+    return `<img src="assets/sekolah/${esc(s.image)}" alt="Gambar ${esc(s.name)}" loading="lazy"
+        onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+      <span class="fallback-art" hidden>${art}</span>`;
   }
 
   // Ilustrasi hero: perisai PKSK — bersih, bercahaya, minimum elemen
@@ -199,7 +207,7 @@
   function renderHome() {
     const cards = SCHOOLS.map((s, i) => `
       <div class="school">
-        <div class="ph">${schoolArt(i)}</div>
+        <div class="ph">${schoolMedia(s, i)}</div>
         <div class="caption">
           <span class="crest">${crest(s.type)}</span>
           <div>
