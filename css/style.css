@@ -223,7 +223,12 @@ body {
 .school .crest { flex: 0 0 34px; }
 .school .crest svg { width: 34px; height: 34px; display: block; }
 .school h4 { margin: 0; font-size: 13px; line-height: 1.25; font-weight: 700; }
-.school .loc { font-size: 11px; opacity: .8; }
+.school .school-rank { font-size: 10.5px; opacity: .78; font-weight: 800; letter-spacing: .02em; }
+.school .loc {
+  display: inline-block; font-size: 11px; opacity: .85; color: #fff;
+  text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, .35);
+}
+.school .loc:hover { opacity: 1; border-bottom-color: #fff; }
 
 .cnav {
   position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;

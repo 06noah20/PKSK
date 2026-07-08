@@ -51,22 +51,26 @@
 
   /* ---------------- Senarai sekolah MRSM & SBP ---------------- */
   const SCHOOLS = [
-    { name: "Malay College Kuala Kangsar (MCKK)", loc: "Kuala Kangsar, Perak", type: "SBP" },
-    { name: "MRSM Pengkalan Chepa", loc: "Kota Bharu, Kelantan", type: "MRSM" },
-    { name: "Kolej Tunku Kurshiah (TKC)", loc: "Nilai, Negeri Sembilan", type: "SBP" },
-    { name: "MRSM Langkawi", loc: "Langkawi, Kedah", type: "MRSM" },
-    { name: "Sekolah Tun Fatimah (STF)", loc: "Johor Bahru, Johor", type: "SBP" },
-    { name: "MRSM Kepala Batas", loc: "Kepala Batas, Pulau Pinang", type: "MRSM" },
-    { name: "Sekolah Dato' Abdul Razak (SDAR)", loc: "Seremban, Negeri Sembilan", type: "SBP" },
-    { name: "MRSM Kuantan", loc: "Kuantan, Pahang", type: "MRSM" },
-    { name: "Sekolah Sultan Alam Shah (SAS)", loc: "Putrajaya", type: "SBP" },
-    { name: "MRSM Jasin", loc: "Jasin, Melaka", type: "MRSM" },
-    { name: "Sekolah Seri Puteri (SSP)", loc: "Cyberjaya, Selangor", type: "SBP" },
-    { name: "MRSM Balik Pulau", loc: "Balik Pulau, Pulau Pinang", type: "MRSM" },
-    { name: "Sekolah Tuanku Abdul Rahman (STAR)", loc: "Ipoh, Perak", type: "SBP" },
-    { name: "MRSM Serting", loc: "Jempol, Negeri Sembilan", type: "MRSM" },
-    { name: "Sekolah Menengah Sains Selangor", loc: "Cheras, Kuala Lumpur", type: "SBP" },
-    { name: "MRSM Gerik", loc: "Gerik, Perak", type: "MRSM" }
+    { name: "MRSM Kuala Kubu Bharu", rank: 1, score: "1.261", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Kuala+Kubu+Bharu+gambar+sekolah+rasmi" },
+    { name: "MRSM Kepala Batas", rank: 2, score: "1.312", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Kepala+Batas+gambar+sekolah+rasmi" },
+    { name: "MRSM Johor Bahru", rank: 3, score: "1.350", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Johor+Bahru+gambar+sekolah+rasmi" },
+    { name: "MRSM Tun Ghafar Baba", rank: 4, score: "1.390", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Tun+Ghafar+Baba+gambar+sekolah+rasmi" },
+    { name: "MRSM Gemencheh", rank: 5, score: "1.411", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Gemencheh+gambar+sekolah+rasmi" },
+    { name: "MRSM Taiping", rank: 6, score: "1.414", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Taiping+gambar+sekolah+rasmi" },
+    { name: "MRSM Pengkalan Chepa", rank: 7, score: "1.439", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Pengkalan+Chepa+gambar+sekolah+rasmi" },
+    { name: "MRSM Kota Putra", rank: 8, score: "1.489", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Kota+Putra+gambar+sekolah+rasmi" },
+    { name: "MRSM Sungai Besar", rank: 9, score: "1.489", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Sungai+Besar+gambar+sekolah+rasmi" },
+    { name: "MRSM Balik Pulau", rank: 10, score: "1.489", type: "MRSM", search: "https://www.bing.com/images/search?q=MRSM+Balik+Pulau+gambar+sekolah+rasmi" },
+    { name: "SBPI Gombak", rank: 1, score: "0.93", type: "SBP", search: "https://www.bing.com/images/search?q=SBPI+Gombak+gambar+sekolah+rasmi" },
+    { name: "Sekolah Tun Fatimah", rank: 2, score: "1.04", type: "SBP", search: "https://www.bing.com/images/search?q=Sekolah+Tun+Fatimah+gambar+sekolah+rasmi" },
+    { name: "Kolej Tunku Kurshiah", rank: 3, score: "1.05", type: "SBP", search: "https://www.bing.com/images/search?q=Kolej+Tunku+Kurshiah+gambar+sekolah+rasmi" },
+    { name: "SMS Tuanku Munawir", rank: 4, score: "1.16", type: "SBP", search: "https://www.bing.com/images/search?q=SMS+Tuanku+Munawir+gambar+sekolah+rasmi" },
+    { name: "SBPI Rawang", rank: 5, score: "1.16", type: "SBP", search: "https://www.bing.com/images/search?q=SBPI+Rawang+gambar+sekolah+rasmi" },
+    { name: "Sekolah Alam Shah", rank: 6, score: "1.17", type: "SBP", search: "https://www.bing.com/images/search?q=Sekolah+Alam+Shah+gambar+sekolah+rasmi" },
+    { name: "Kolej Melayu Kuala Kangsar", rank: 7, score: "1.23", type: "SBP", search: "https://www.bing.com/images/search?q=Kolej+Melayu+Kuala+Kangsar+gambar+sekolah+rasmi" },
+    { name: "Sekolah Seri Puteri", rank: 8, score: "1.24", type: "SBP", search: "https://www.bing.com/images/search?q=Sekolah+Seri+Puteri+gambar+sekolah+rasmi" },
+    { name: "Kolej Yayasan Saad", rank: 9, score: "1.24", type: "SBP", search: "https://www.bing.com/images/search?q=Kolej+Yayasan+Saad+gambar+sekolah+rasmi" },
+    { name: "SMS Hulu Selangor", rank: 10, score: "1.32", type: "SBP", search: "https://www.bing.com/images/search?q=SMS+Hulu+Selangor+gambar+sekolah+rasmi" }
   ];
 
   // Ilustrasi bangunan sekolah (SVG) — gaya senja yang konsisten & elegan.
@@ -199,8 +203,9 @@
         <div class="caption">
           <span class="crest">${crest(s.type)}</span>
           <div>
+            <div class="school-rank">${esc(s.type)} #${s.rank} - GPS/GPM ${esc(s.score)}</div>
             <h4>${esc(s.name)}</h4>
-            <div class="loc">${esc(s.loc)}</div>
+            <a class="loc" href="${esc(s.search)}" target="_blank" rel="noopener">Cari gambar rasmi / berlesen</a>
           </div>
         </div>
       </div>`).join("");
@@ -234,8 +239,8 @@
       </div>
 
       <div class="section-head"><span class="bar"></span>
-        <h2>Sekolah Berasrama Penuh di Malaysia</h2>
-        <span class="muted">Sasaran anda selepas lulus PKSK</span></div>
+        <h2>MRSM &amp; SBP di Malaysia</h2>
+        <span class="muted">Top 10 MRSM dan SBP berdasarkan rujukan SPM 2024/2025</span></div>
       <div class="carousel-wrap">
         <button class="cnav prev" id="cPrev" aria-label="Sebelumnya">‹</button>
         <div class="carousel" id="carousel" aria-label="Senarai sekolah MRSM dan SBP">${cards}</div>
