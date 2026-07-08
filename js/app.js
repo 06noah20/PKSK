@@ -1,6 +1,6 @@
 /* ========================================================================
  * Portal PKSK — Enjin Interaktif
- * Mengendalikan navigasi, mod Belajar/Latihan/Kuiz, dan penjejakan kemajuan.
+ * Mengendalikan navigasi, mod Nota/Latihan PKSK, dan penjejakan kemajuan.
  * ==================================================================== */
 
 (function () {
@@ -34,8 +34,7 @@
   const views = {
     home: renderHome,
     learn: renderLearnList,
-    practice: () => renderTopicPicker("practice"),
-    quiz: () => renderTopicPicker("quiz"),
+    practice: renderTopicPicker,
     progress: renderProgress
   };
 
@@ -88,10 +87,10 @@
       el.addEventListener("click", () => renderLearn(el.dataset.topic)));
   }
 
-  /* ---------------- Paparan: BELAJAR (senarai) ---------------- */
+  /* ---------------- Paparan: NOTA (senarai) ---------------- */
   function renderLearnList() {
     app.innerHTML = `
-      <div class="section-head"><h2>📖 Mod Belajar</h2>
+      <div class="section-head"><h2>📖 Nota</h2>
         <span class="muted">Baca nota setiap topik</span></div>
       <div class="grid">
         ${DATA.topics.map(t => `
@@ -106,35 +105,31 @@
       el.addEventListener("click", () => renderLearn(el.dataset.topic)));
   }
 
-  /* ---------------- Paparan: BELAJAR (nota topik) ---------------- */
+  /* ---------------- Paparan: NOTA (topik) ---------------- */
   function renderLearn(topicId) {
     const t = DATA.topics.find(x => x.id === topicId);
     if (!t) return renderHome();
     app.innerHTML = `
       <div class="section-head">
         <h2>${t.icon} ${esc(t.title)}</h2>
-        <span class="badge todo">Belajar</span>
+        <span class="badge todo">Nota</span>
       </div>
       <div class="card">
         <p class="muted" style="margin-top:0">${esc(t.summary)}</p>
         ${t.notes.map((n, i) => `<div class="note"><b>${i + 1}.</b> ${esc(n)}</div>`).join("")}
         <div class="btn-row">
-          <button class="btn" id="startPractice">✏️ Latihan Topik Ini</button>
-          <button class="btn ghost" id="startQuiz">🏆 Terus ke Kuiz</button>
+          <button class="btn" id="startPractice">✏️ Mula Latihan PKSK</button>
           <button class="btn ghost" id="backHome">← Kembali</button>
         </div>
       </div>`;
-    app.querySelector("#startPractice").onclick = () => runSession(t, "practice");
-    app.querySelector("#startQuiz").onclick = () => runSession(t, "quiz");
+    app.querySelector("#startPractice").onclick = () => runSession(t);
     app.querySelector("#backHome").onclick = () => go("home");
   }
 
-  /* ---------------- Pemilih topik (Latihan / Kuiz) ---------------- */
-  function renderTopicPicker(mode) {
-    const label = mode === "quiz" ? "🏆 Kuiz" : "✏️ Latihan";
-    const desc = mode === "quiz"
-      ? "Kuiz bermarkah — markah anda direkodkan."
-      : "Latihan tanpa markah — maklum balas serta-merta.";
+  /* ---------------- Pemilih topik (Latihan PKSK) ---------------- */
+  function renderTopicPicker() {
+    const label = "✏️ Latihan PKSK";
+    const desc = "Jawab soalan sebenar PKSK — markah terbaik anda direkodkan.";
     app.innerHTML = `
       <div class="section-head"><h2>${label}</h2><span class="muted">${desc}</span></div>
       <div class="grid">
@@ -148,22 +143,18 @@
       </div>`;
     app.querySelectorAll(".topic").forEach(el =>
       el.addEventListener("click", () =>
-        runSession(DATA.topics.find(x => x.id === el.dataset.topic), mode)));
+        runSession(DATA.topics.find(x => x.id === el.dataset.topic))));
   }
 
-  /* ---------------- Sesi soalan (Latihan / Kuiz) ---------------- */
-  function runSession(topic, mode) {
-    let idx = 0, score = 0, answered = false, timerId = null;
+  /* ---------------- Sesi soalan (Latihan PKSK) ---------------- */
+  function runSession(topic) {
+    let idx = 0, score = 0, answered = false;
     const total = topic.questions.length;
-    const TIME_PER_Q = 20; // saat setiap soalan (mod Kuiz sahaja)
 
-    function clearTimer() { if (timerId) { clearInterval(timerId); timerId = null; } }
-
-    // Dedahkan jawapan. chosen === -1 bermakna masa tamat.
+    // Dedahkan jawapan.
     function reveal(chosen) {
       if (answered) return;
       answered = true;
-      clearTimer();
       const qn = topic.questions[idx];
       const correct = qn.answer;
       app.querySelectorAll("#opts .opt").forEach(b => {
@@ -173,7 +164,7 @@
       });
       const right = chosen === correct;
       if (right) score++;
-      const head = chosen === -1 ? "⏰ Masa tamat!" : right ? "✅ Betul!" : "❌ Kurang tepat.";
+      const head = right ? "✅ Betul!" : "❌ Kurang tepat.";
       app.querySelector("#explainBox").innerHTML =
         `<div class="explain"><b>${head}</b>${qn.explain ? " " + esc(qn.explain) : ""}</div>`;
       const last = idx === total - 1;
@@ -185,33 +176,15 @@
       };
     }
 
-    function startTimer() {
-      const el = app.querySelector("#timer");
-      if (!el) return;
-      let left = TIME_PER_Q;
-      const tick = () => {
-        if (!document.body.contains(el)) { clearTimer(); return; } // beralih tab
-        el.textContent = "⏱️ " + left + "s";
-        el.classList.toggle("low", left <= 5);
-        if (left <= 0) { reveal(-1); return; }
-        left--;
-      };
-      tick();
-      timerId = setInterval(tick, 1000);
-    }
-
     function render() {
-      clearTimer();
       answered = false;
       const qn = topic.questions[idx];
       const pct = Math.round((idx / total) * 100);
-      const timer = mode === "quiz"
-        ? `<span class="qcount timer" id="timer">⏱️ ${TIME_PER_Q}s</span>` : "";
       app.innerHTML = `
         <div class="card">
           <div class="qhead">
-            <span class="qcount">${topic.icon} ${esc(topic.title)} · ${mode === "quiz" ? "Kuiz" : "Latihan"}</span>
-            <span class="qcount">${timer}${timer ? " · " : ""}Soalan ${idx + 1} / ${total}</span>
+            <span class="qcount">${topic.icon} ${esc(topic.title)} · Latihan PKSK</span>
+            <span class="qcount">Soalan ${idx + 1} / ${total}</span>
           </div>
           <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
           <div class="qtext">${esc(qn.q)}</div>
@@ -228,20 +201,17 @@
 
       app.querySelectorAll("#opts .opt").forEach(btn =>
         btn.addEventListener("click", () => reveal(+btn.dataset.i)));
-      if (mode === "quiz") startTimer();
     }
 
     function finish() {
       const pct = Math.round((score / total) * 100);
-      // Rekod markah untuk mod kuiz
-      if (mode === "quiz") {
-        const prev = progress[topic.id] || { best: 0, attempts: 0 };
-        progress[topic.id] = {
-          best: Math.max(prev.best, pct),
-          attempts: prev.attempts + 1
-        };
-        saveProgress(progress);
-      }
+      // Rekod markah terbaik untuk penjejakan kemajuan
+      const prev = progress[topic.id] || { best: 0, attempts: 0 };
+      progress[topic.id] = {
+        best: Math.max(prev.best, pct),
+        attempts: prev.attempts + 1
+      };
+      saveProgress(progress);
       const pass = pct >= 80;
       const color = pass ? "var(--good)" : pct >= 50 ? "var(--warn)" : "var(--bad)";
       const msg = pass ? "Cemerlang! Anda menguasai topik ini. 🎉"
@@ -258,7 +228,7 @@
             <button class="btn ghost" id="home">🏠 Utama</button>
           </div>
         </div>`;
-      app.querySelector("#retry").onclick = () => runSession(topic, mode);
+      app.querySelector("#retry").onclick = () => runSession(topic);
       app.querySelector("#review").onclick = () => renderLearn(topic.id);
       app.querySelector("#home").onclick = () => go("home");
     }

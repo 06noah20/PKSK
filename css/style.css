@@ -156,9 +156,6 @@ body {
 /* ---------- Quiz ---------- */
 .qhead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .qcount { font-size: 13px; color: var(--ink-soft); font-weight: 600; }
-.timer { color: var(--brand); font-weight: 800; }
-.timer.low { color: var(--bad); animation: pulse .6s ease-in-out infinite; }
-@keyframes pulse { 50% { opacity: .45; } }
 .progress-track { height: 8px; background: var(--line); border-radius: 999px; overflow: hidden; margin-bottom: 18px; }
 .progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--brand), var(--brand-2)); transition: width .3s ease; }
 

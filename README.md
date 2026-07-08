@@ -22,14 +22,12 @@ Diekstrak sepenuhnya daripada 4 kertas rasmi PKSK dalam `portal-pintar_8.html`
 | Mod | Fungsi |
 |-----|--------|
 | 🏠 **Utama** | Papan pemuka + senarai topik & status penguasaan |
-| 📖 **Belajar** | Nota ringkas setiap topik (flashcard) |
-| ✏️ **Latihan** | Soalan tanpa markah + maklum balas serta-merta |
-| 🏆 **Kuiz** | Kuiz bermarkah, markah terbaik direkodkan |
+| 📖 **Nota** | Nota ringkas setiap topik (flashcard) |
+| ✏️ **Latihan PKSK** | Soalan sebenar PKSK + maklum balas serta-merta, markah terbaik direkodkan |
 | 📊 **Kemajuan** | Jejak penguasaan, purata & jumlah cubaan |
 
 - Reka bentuk moden, responsif (mobil & desktop)
 - Tema **terang / gelap** (auto ikut sistem)
-- **Pemasa 20 saat** setiap soalan dalam mod Kuiz (autentik seperti cabaran asal)
 - Kemajuan disimpan automatik dalam pelayar (localStorage)
 - **Tiada pemasangan** — buka `index.html` terus dalam pelayar
 
