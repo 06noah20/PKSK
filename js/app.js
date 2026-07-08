@@ -206,7 +206,12 @@
               <button class="btn ghost" id="ctaNotes">📖 Nota PKSK</button>
             </div>
           </div>
-          <div class="hero-art">${HERO_ART_NEW}</div>
+          <div class="hero-art">
+            <img class="hero-photo" src="assets/hero-pksk.jpg" alt="Perisai PKSK"
+              onload="this.nextElementSibling.style.display='none'"
+              onerror="this.remove()">
+            ${HERO_ART_NEW}
+          </div>
         </div>
       </section>
       <div class="wrap">
