@@ -85,15 +85,33 @@ body {
 .tab:hover { color: var(--ink); }
 .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-.theme-btn {
-  font-size: 16px; width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+.topbar-right { display: flex; align-items: center; gap: 10px; }
+.theme-btn, .icon-btn {
+  font-size: 15px; width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
   border: 1px solid var(--line); background: var(--card); color: var(--ink);
-  transition: transform .15s ease; flex: 0 0 40px;
+  transition: transform .15s ease; flex: 0 0 40px; position: relative;
 }
 .theme-btn:hover { transform: rotate(-15deg) scale(1.05); }
+.icon-btn .dot {
+  position: absolute; top: 8px; right: 9px; width: 7px; height: 7px;
+  border-radius: 50%; background: var(--bad); border: 1.5px solid var(--card);
+}
+.avatar-chip {
+  display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700;
+  padding: 5px 12px 5px 5px; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--card); white-space: nowrap;
+}
+.avatar-chip .avatar {
+  width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--navy); color: #fff; font-size: 13px; font-weight: 800;
+}
+.avatar-chip .chev { color: var(--ink-soft); font-size: 10px; }
 
 /* ---------- Layout ---------- */
-.container { max-width: 1080px; margin: 0 auto; padding: 22px 20px 60px; }
+/* Kontena penuh; setiap seksyen dibalut .wrap supaya hero boleh full-bleed */
+.container { padding: 0 0 60px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 22px; }
+.wrap.view { padding-top: 26px; }
 
 .card {
   background: var(--card); border: 1px solid var(--line);
@@ -101,44 +119,48 @@ body {
   padding: 22px; margin-bottom: 18px;
 }
 
-/* ---------- Hero ---------- */
+/* ---------- Hero (full-bleed, lengkung bawah) ---------- */
 .hero {
-  display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 24px;
-  border-radius: 24px; border: none; padding: 44px 44px;
-  color: #fff; overflow: hidden; position: relative; margin-bottom: 20px;
+  color: #fff; overflow: hidden; position: relative; margin-bottom: 26px;
+  border-radius: 0 0 44px 44px;
   background:
-    radial-gradient(900px 420px at 118% -20%, rgba(46, 124, 246, .28), transparent 55%),
-    radial-gradient(700px 480px at -15% 118%, rgba(46, 124, 246, .20), transparent 55%),
-    linear-gradient(120deg, #081a35 0%, #0a2246 55%, #0d2c5c 100%);
+    radial-gradient(1000px 480px at 112% -10%, rgba(46, 124, 246, .30), transparent 55%),
+    radial-gradient(800px 520px at -12% 115%, rgba(46, 124, 246, .16), transparent 55%),
+    linear-gradient(118deg, #071730 0%, #0a2246 52%, #0e2f61 100%);
 }
 .hero::before, .hero::after {
   content: ""; position: absolute; border-radius: 50%;
-  border: 1.5px solid rgba(95, 160, 249, .18); pointer-events: none;
+  border: 1px solid rgba(95, 160, 249, .16); pointer-events: none;
 }
-.hero::before { width: 560px; height: 560px; right: -140px; top: -220px; }
-.hero::after  { width: 720px; height: 720px; right: -220px; top: -300px; }
+.hero::before { width: 640px; height: 640px; right: -120px; top: -260px; }
+.hero::after  { width: 880px; height: 880px; right: -240px; top: -380px; }
 
+.hero-inner {
+  max-width: 1080px; margin: 0 auto; padding: 56px 22px 64px;
+  display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 28px;
+  position: relative; z-index: 1;
+}
 .hero .eyebrow {
-  font-size: 12px; font-weight: 800; letter-spacing: .22em;
-  text-transform: uppercase; color: var(--accent-2); margin: 0 0 8px;
+  font-size: 12px; font-weight: 800; letter-spacing: .26em;
+  text-transform: uppercase; color: #8fb8f9; margin: 0 0 10px;
 }
 .hero h2 {
-  margin: 0 0 6px; font-size: 46px; line-height: 1.05; letter-spacing: .01em;
-  font-weight: 800; text-transform: uppercase;
+  margin: 0 0 8px; font-size: 54px; line-height: 1.02; letter-spacing: .01em;
+  font-weight: 800; text-transform: uppercase; text-wrap: balance;
 }
-.hero h2 b { color: var(--accent-2); }
-.hero .sub { margin: 0 0 18px; font-size: 15.5px; opacity: .9; }
+.hero h2 b { color: #4f94f8; }
+.hero .sub { margin: 0 0 24px; font-size: 16px; opacity: .88; }
 .hero .quote {
-  display: flex; gap: 10px; font-size: 18px; font-weight: 700; line-height: 1.45;
-  margin: 0 0 14px; max-width: 42ch;
+  display: flex; gap: 12px; font-size: 19px; font-weight: 700; line-height: 1.5;
+  margin: 0 0 18px; max-width: 40ch;
 }
-.hero .quote .qm { color: var(--accent-2); font-size: 34px; line-height: 1; font-family: Georgia, serif; }
+.hero .quote .qm { color: #4f94f8; font-size: 40px; line-height: .9; font-family: Georgia, serif; }
 .hero .lead {
-  border-left: 3px solid var(--accent); padding: 4px 0 4px 14px;
-  font-size: 14px; opacity: .85; margin: 0 0 22px; max-width: 48ch;
+  border-left: 3px solid var(--accent); padding: 5px 0 5px 15px;
+  font-size: 14px; opacity: .82; margin: 0 0 28px; max-width: 46ch; line-height: 1.65;
 }
-.hero-art { display: grid; place-items: center; position: relative; z-index: 1; }
-.hero-art svg { width: 100%; max-width: 380px; height: auto; }
+.hero-art { display: grid; place-items: center; }
+.hero-art svg { width: 100%; max-width: 420px; height: auto; }
 .btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* ---------- Butang ---------- */

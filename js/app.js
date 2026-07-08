@@ -69,25 +69,44 @@
     { name: "MRSM Gerik", loc: "Gerik, Perak", type: "MRSM" }
   ];
 
-  // Ilustrasi bangunan sekolah (SVG) — digunakan jika tiada foto sebenar
-  // dalam assets/sekolah/. Warna berbeza mengikut indeks.
+  // Ilustrasi bangunan sekolah (SVG) — gaya senja yang konsisten & elegan.
+  // Digantikan foto sebenar secara automatik jika ada dalam assets/sekolah/.
   function schoolArt(i) {
-    const skies = ["#dbeafe", "#e0e7ff", "#dcfce7", "#fef3c7", "#fce7f3", "#e0f2fe"];
-    const walls = ["#14336b", "#7c2d92", "#0e7490", "#a16207", "#9d174d", "#166534"];
-    const sky = skies[i % skies.length], wall = walls[i % walls.length];
-    return `<svg viewBox="0 0 250 130" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi sekolah">
-      <rect width="250" height="130" fill="${sky}"/>
-      <circle cx="215" cy="24" r="13" fill="#fbbf24" opacity=".85"/>
-      <rect x="0" y="102" width="250" height="28" fill="#86b98a"/>
-      <rect x="30" y="52" width="60" height="50" fill="${wall}" opacity=".85"/>
-      <rect x="160" y="52" width="60" height="50" fill="${wall}" opacity=".85"/>
-      <rect x="85" y="40" width="80" height="62" fill="${wall}"/>
-      <polygon points="80,40 125,16 170,40" fill="#b45309"/>
-      <rect x="118" y="72" width="14" height="30" rx="2" fill="#fde68a"/>
-      <rect x="95" y="50" width="12" height="12" fill="#e0f2fe"/><rect x="143" y="50" width="12" height="12" fill="#e0f2fe"/>
-      <rect x="40" y="60" width="11" height="11" fill="#e0f2fe"/><rect x="62" y="60" width="11" height="11" fill="#e0f2fe"/>
-      <rect x="170" y="60" width="11" height="11" fill="#e0f2fe"/><rect x="192" y="60" width="11" height="11" fill="#e0f2fe"/>
-      <rect x="123" y="8" width="3" height="14" fill="#64748b"/><rect x="126" y="8" width="12" height="7" fill="#dc2626"/>
+    const skies = [
+      ["#bcd6f7", "#e8f1fd"], ["#c3d9f2", "#f0e9dd"], ["#b6cff0", "#ddeafc"],
+      ["#c9ddf5", "#f5eee1"], ["#b1cceb", "#e4effc"], ["#c0d8f4", "#eef0e6"]
+    ][i % 6];
+    const roof = ["#9a3b2e", "#8d4a2f", "#7d3b3b"][i % 3];
+    const g = `sk${i}`;
+    return `<svg viewBox="0 0 252 190" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi sekolah">
+      <defs><linearGradient id="${g}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="${skies[0]}"/><stop offset="1" stop-color="${skies[1]}"/>
+      </linearGradient></defs>
+      <rect width="252" height="190" fill="url(#${g})"/>
+      <circle cx="212" cy="34" r="15" fill="#fff" opacity=".75"/>
+      <ellipse cx="60" cy="30" rx="26" ry="9" fill="#fff" opacity=".5"/>
+      <ellipse cx="150" cy="18" rx="20" ry="7" fill="#fff" opacity=".4"/>
+      <rect x="0" y="142" width="252" height="48" fill="#9dbb92"/>
+      <rect x="0" y="142" width="252" height="7" fill="#87a87c"/>
+      <ellipse cx="28" cy="132" rx="18" ry="22" fill="#4e7a52"/>
+      <rect x="25" y="140" width="6" height="14" fill="#5d4a37"/>
+      <ellipse cx="228" cy="128" rx="20" ry="26" fill="#456e4a"/>
+      <rect x="225" y="140" width="6" height="16" fill="#5d4a37"/>
+      <rect x="42" y="88" width="168" height="54" rx="3" fill="#f2ede2"/>
+      <rect x="42" y="88" width="168" height="8" fill="#e4dcc9"/>
+      <polygon points="36,88 126,58 216,88" fill="${roof}"/>
+      <polygon points="52,88 126,64 200,88" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/>
+      <rect x="106" y="70" width="40" height="72" rx="3" fill="#e8e0cf"/>
+      <polygon points="100,70 126,54 152,70" fill="${roof}"/>
+      <rect x="118" y="108" width="16" height="34" rx="2" fill="#59493a"/>
+      <rect x="121" y="98" width="10" height="6" rx="2" fill="#7d99c9"/>
+      ${[54, 72, 158, 176, 194].map(x =>
+        `<rect x="${x}" y="100" width="12" height="16" rx="1.5" fill="#7d99c9"/>
+         <rect x="${x}" y="122" width="12" height="14" rx="1.5" fill="#8fa9d4"/>`).join("")}
+      <rect x="124" y="36" width="2.5" height="20" fill="#8a8f99"/>
+      <rect x="126.5" y="36" width="13" height="8" fill="#1d4a94"/>
+      <path d="M0 152 h252" stroke="#b7cbae" stroke-width="1.5" opacity=".6"/>
+      <rect x="112" y="152" width="28" height="38" fill="#c9cfd8" opacity=".55"/>
     </svg>`;
   }
 
@@ -103,49 +122,73 @@
     </svg>`;
   }
 
-  // Ilustrasi hero: perisai PKSK + buku & kad terapung (gaya mockup)
-  const HERO_ART = `<svg viewBox="0 0 380 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Perisai PKSK">
+  // Ilustrasi hero: perisai PKSK — bersih, bercahaya, minimum elemen
+  const HERO_ART = `<svg viewBox="0 0 420 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Perisai PKSK">
     <defs>
-      <linearGradient id="shg" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#3f6db4"/><stop offset=".5" stop-color="#16386e"/><stop offset="1" stop-color="#0b204a"/>
+      <radialGradient id="glow" cx=".5" cy=".45" r=".55">
+        <stop offset="0" stop-color="#2e7cf6" stop-opacity=".38"/>
+        <stop offset="1" stop-color="#2e7cf6" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#2f5fa8"/>
+        <stop offset=".55" stop-color="#153a72"/>
+        <stop offset="1" stop-color="#0a1f44"/>
       </linearGradient>
-      <linearGradient id="shg2" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#dfe9f7"/><stop offset="1" stop-color="#9fb6d9"/>
+      <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#e8f0fb"/>
+        <stop offset="1" stop-color="#8fa9cf"/>
+      </linearGradient>
+      <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset=".6" stop-color="#d7e3f5"/>
+        <stop offset="1" stop-color="#9fb6d9"/>
       </linearGradient>
     </defs>
-    <ellipse cx="190" cy="272" rx="150" ry="14" fill="rgba(0,0,0,.30)"/>
-    <ellipse cx="190" cy="252" rx="96" ry="20" fill="#0d2650"/>
-    <rect x="94" y="216" width="192" height="38" rx="8" fill="#123061"/>
-    <rect x="52" y="120" width="72" height="52" rx="9" fill="rgba(223,233,247,.10)" stroke="rgba(159,182,217,.35)"/>
-    <rect x="64" y="134" width="30" height="22" rx="4" fill="#2e7cf6" opacity=".85"/>
-    <polygon points="75,140 85,145 75,150" fill="#fff"/>
-    <rect x="64" y="160" width="48" height="4" rx="2" fill="rgba(255,255,255,.35)"/>
-    <rect x="286" y="96" width="66" height="56" rx="9" fill="rgba(223,233,247,.10)" stroke="rgba(159,182,217,.35)"/>
-    <rect x="296" y="108" width="14" height="12" rx="3" fill="#5fa0f9"/>
-    <rect x="314" y="110" width="30" height="4" rx="2" fill="rgba(255,255,255,.4)"/>
-    <rect x="296" y="126" width="14" height="12" rx="3" fill="#5fa0f9"/>
-    <rect x="314" y="128" width="30" height="4" rx="2" fill="rgba(255,255,255,.4)"/>
-    <rect x="60" y="44" width="60" height="52" rx="9" fill="rgba(223,233,247,.10)" stroke="rgba(159,182,217,.35)"/>
-    <path d="M72 84 l10 -16 8 9 10 -18 8 25" stroke="#5fa0f9" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <rect x="292" y="30" width="58" height="52" rx="9" fill="rgba(223,233,247,.10)" stroke="rgba(159,182,217,.35)"/>
-    <circle cx="321" cy="50" r="10" fill="none" stroke="#5fa0f9" stroke-width="3"/>
-    <path d="M321 60 l0 12 m-6 -4 l6 4 6 -4" stroke="#5fa0f9" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <circle cx="210" cy="172" r="165" fill="url(#glow)"/>
+    <circle cx="210" cy="172" r="128" fill="none" stroke="rgba(143,184,249,.22)"/>
+    <circle cx="210" cy="172" r="152" fill="none" stroke="rgba(143,184,249,.12)"/>
+
+    <ellipse cx="210" cy="332" rx="130" ry="12" fill="rgba(0,0,0,.32)"/>
+    <path d="M128 300 h164 a8 8 0 0 1 8 8 v14 a8 8 0 0 1 -8 8 h-164 a8 8 0 0 1 -8 -8 v-14 a8 8 0 0 1 8 -8 z" fill="#0d2650"/>
+    <ellipse cx="210" cy="300" rx="90" ry="14" fill="#123061"/>
+
     <g>
-      <path d="M190 52 l84 22 v58 c0 52 -38 84 -84 100 -46 -16 -84 -48 -84 -100 v-58 z" fill="url(#shg)" stroke="#7fa6e8" stroke-width="2.5"/>
-      <path d="M190 66 l70 18 v50 c0 44 -32 72 -70 86 -38 -14 -70 -42 -70 -86 v-50 z" fill="none" stroke="rgba(223,233,247,.4)" stroke-width="1.5"/>
-      <text x="190" y="138" font-size="42" font-weight="800" fill="url(#shg2)" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" letter-spacing="2">PKSK</text>
-      <text x="190" y="160" font-size="9.5" fill="#c9d8ef" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" letter-spacing=".8">PENTAKSIRAN KEMASUKAN</text>
-      <text x="190" y="173" font-size="9.5" fill="#c9d8ef" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" letter-spacing=".8">SEKOLAH KHUSUS</text>
-      <polygon points="190,190 168,178 190,166 212,178" fill="#dfe9f7"/>
-      <rect x="186" y="190" width="8" height="3" fill="#dfe9f7"/>
-      <path d="M154 196 q-14 14 0 30 M226 196 q14 14 0 30" stroke="#9fb6d9" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M210 42 l96 26 v66 c0 62 -44 98 -96 118 -52 -20 -96 -56 -96 -118 v-66 z"
+        fill="url(#rim)"/>
+      <path d="M210 50 l88 24 v60 c0 57 -40 90 -88 109 -48 -19 -88 -52 -88 -109 v-60 z"
+        fill="url(#face)"/>
+      <path d="M210 62 l76 21 v52 c0 49 -34 78 -76 95 -42 -17 -76 -46 -76 -95 v-52 z"
+        fill="none" stroke="rgba(232,240,251,.30)" stroke-width="1.5"/>
+      <text x="210" y="158" font-size="46" font-weight="800" fill="url(#metal)"
+        text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" letter-spacing="3">PKSK</text>
+      <text x="210" y="182" font-size="9" fill="#b9cdec" text-anchor="middle"
+        font-family="Segoe UI, Arial, sans-serif" letter-spacing="1.4">PENTAKSIRAN KEMASUKAN</text>
+      <text x="210" y="195" font-size="9" fill="#b9cdec" text-anchor="middle"
+        font-family="Segoe UI, Arial, sans-serif" letter-spacing="1.4">SEKOLAH KHUSUS</text>
+      <path d="M166 216 q-16 18 0 40 M254 216 q16 18 0 40"
+        stroke="url(#metal)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <polygon points="210,232 186,220 210,208 234,220" fill="url(#metal)"/>
+      <line x1="228" y1="224" x2="228" y2="238" stroke="#d7e3f5" stroke-width="2.5"/>
+      <circle cx="228" cy="241" r="3" fill="#d7e3f5"/>
     </g>
-    <rect x="284" y="196" width="70" height="13" rx="3" fill="#1c4a8f"/>
-    <rect x="290" y="182" width="70" height="13" rx="3" fill="#2e7cf6"/>
-    <rect x="286" y="168" width="66" height="13" rx="3" fill="#123061" stroke="#2c5fb3"/>
-    <rect x="36" y="206" width="44" height="48" rx="6" fill="#123061"/>
-    <path d="M46 206 q12 -22 24 0" stroke="#3f8f5f" stroke-width="5" fill="none"/>
-    <path d="M58 206 q0 -18 -14 -24 M58 206 q2 -20 16 -26" stroke="#4caf72" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+    <g opacity=".95">
+      <rect x="18" y="96" width="66" height="54" rx="10" fill="rgba(232,240,251,.07)" stroke="rgba(143,184,249,.30)"/>
+      <path d="M32 134 l11 -16 9 9 12 -19" stroke="#5fa0f9" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="336" y="76" width="66" height="54" rx="10" fill="rgba(232,240,251,.07)" stroke="rgba(143,184,249,.30)"/>
+      <rect x="348" y="90" width="10" height="10" rx="2.5" fill="#5fa0f9"/>
+      <rect x="364" y="92" width="26" height="4" rx="2" fill="rgba(232,240,251,.45)"/>
+      <rect x="348" y="108" width="10" height="10" rx="2.5" fill="#5fa0f9"/>
+      <rect x="364" y="110" width="26" height="4" rx="2" fill="rgba(232,240,251,.45)"/>
+    </g>
+
+    <g>
+      <ellipse cx="357" cy="305" rx="48" ry="6" fill="rgba(0,0,0,.28)"/>
+      <rect x="316" y="288" width="82" height="13" rx="3" fill="#1c4a8f"/>
+      <rect x="322" y="274" width="82" height="13" rx="3" fill="#2e7cf6"/>
+      <rect x="318" y="260" width="78" height="13" rx="3" fill="#0f2a55" stroke="#2c5fb3"/>
+    </g>
   </svg>`;
 
   /* ---------------- Paparan: UTAMA ---------------- */
@@ -164,21 +207,23 @@
 
     app.innerHTML = `
       <section class="hero">
-        <div>
-          <p class="eyebrow">Selamat Datang Ke</p>
-          <h2>Portal <b>PKSK</b></h2>
-          <p class="sub">Pentaksiran Kemasukan Sekolah Khusus</p>
-          <div class="quote"><span class="qm">&ldquo;</span>
-            <span>Kenali potensi diri, capai kecemerlangan, melangkah ke sekolah impian.&rdquo;</span></div>
-          <p class="lead">Platform interaktif untuk membantu calon PKSK bersedia dengan lebih yakin dan terarah.</p>
-          <div class="btn-row">
-            <button class="btn" id="ctaPractice">🚀 Mula Belajar →</button>
-            <button class="btn ghost" id="ctaNotes">📖 Teroka Topik</button>
+        <div class="hero-inner">
+          <div>
+            <p class="eyebrow">Selamat Datang Ke</p>
+            <h2>Portal <b>PKSK</b></h2>
+            <p class="sub">Pentaksiran Kemasukan Sekolah Khusus</p>
+            <div class="quote"><span class="qm">&ldquo;</span>
+              <span>Kenali potensi diri, capai kecemerlangan, melangkah ke sekolah impian.&rdquo;</span></div>
+            <p class="lead">Platform interaktif untuk membantu calon PKSK bersedia dengan lebih yakin dan terarah.</p>
+            <div class="btn-row">
+              <button class="btn" id="ctaPractice">🚀 Mula Belajar →</button>
+              <button class="btn ghost" id="ctaNotes">📖 Teroka Topik</button>
+            </div>
           </div>
+          <div class="hero-art">${HERO_ART}</div>
         </div>
-        <div class="hero-art">${HERO_ART}</div>
       </section>
-
+      <div class="wrap">
       <div class="statbar">
         <div class="stat"><div class="ic">🎓</div>
           <div><div class="num">${DATA.topics.length}</div><div class="lbl">Topik Pembelajaran</div></div></div>
@@ -223,6 +268,7 @@
           <div><h4>Maklum Balas Serta-Merta</h4><p>Jawapan disemak terus dengan jalan kira & penerangan.</p></div></div>
         <div class="feature"><div class="ic">💡</div>
           <div><h4>Belajar Bila-Bila Masa</h4><p>Akses di mana-mana, pada bila-bila masa.</p></div></div>
+      </div>
       </div>`;
 
     app.querySelector("#ctaPractice").onclick = () => go("practice");
@@ -279,7 +325,7 @@
 
   /* ---------------- Paparan: NOTA (senarai) ---------------- */
   function renderLearnList() {
-    app.innerHTML = `
+    app.innerHTML = `<div class="wrap view">
       <div class="section-head"><h2>📖 Nota</h2>
         <span class="muted">Baca nota setiap topik</span></div>
       <div class="grid">
@@ -290,7 +336,7 @@
             <p>${esc(t.summary)}</p>
             <div class="t-meta">${t.notes.length} nota →</div>
           </button>`).join("")}
-      </div>`;
+      </div></div>`;
     app.querySelectorAll(".topic").forEach(el =>
       el.addEventListener("click", () => renderLearn(el.dataset.topic)));
   }
@@ -299,7 +345,7 @@
   function renderLearn(topicId) {
     const t = DATA.topics.find(x => x.id === topicId);
     if (!t) return renderHome();
-    app.innerHTML = `
+    app.innerHTML = `<div class="wrap view">
       <div class="section-head">
         <h2>${t.icon} ${esc(t.title)}</h2>
         <span class="badge todo">Nota</span>
@@ -311,7 +357,7 @@
           <button class="btn" id="startPractice">✏️ Mula Latihan PKSK</button>
           <button class="btn ghost" id="backHome">← Kembali</button>
         </div>
-      </div>`;
+      </div></div>`;
     app.querySelector("#startPractice").onclick = () => runSession(t);
     app.querySelector("#backHome").onclick = () => go("home");
   }
@@ -320,7 +366,7 @@
   function renderTopicPicker() {
     const label = "✏️ Latihan PKSK";
     const desc = "Jawab soalan sebenar PKSK — markah terbaik anda direkodkan.";
-    app.innerHTML = `
+    app.innerHTML = `<div class="wrap view">
       <div class="section-head"><h2>${label}</h2><span class="muted">${desc}</span></div>
       <div class="grid">
         ${DATA.topics.map(t => `
@@ -330,7 +376,7 @@
             <p>${esc(t.summary)}</p>
             <div class="t-meta">${t.questions.length} soalan →</div>
           </button>`).join("")}
-      </div>`;
+      </div></div>`;
     app.querySelectorAll(".topic").forEach(el =>
       el.addEventListener("click", () =>
         runSession(DATA.topics.find(x => x.id === el.dataset.topic))));
@@ -370,7 +416,7 @@
       answered = false;
       const qn = topic.questions[idx];
       const pct = Math.round((idx / total) * 100);
-      app.innerHTML = `
+      app.innerHTML = `<div class="wrap view">
         <div class="card">
           <div class="qhead">
             <span class="qcount">${topic.icon} ${esc(topic.title)} · Latihan PKSK</span>
@@ -387,7 +433,7 @@
           </div>
           <div id="explainBox"></div>
           <div id="navBox"></div>
-        </div>`;
+        </div></div>`;
 
       app.querySelectorAll("#opts .opt").forEach(btn =>
         btn.addEventListener("click", () => reveal(+btn.dataset.i)));
@@ -407,7 +453,7 @@
       const msg = pass ? "Cemerlang! Anda menguasai topik ini. 🎉"
         : pct >= 50 ? "Bagus! Ulang untuk tingkatkan markah."
         : "Jangan putus asa — cuba baca nota semula.";
-      app.innerHTML = `
+      app.innerHTML = `<div class="wrap view">
         <div class="card result">
           <div class="ring" style="background:${color}">${pct}%</div>
           <h2>${score} / ${total} betul</h2>
@@ -415,7 +461,7 @@
           <div class="btn-row" style="justify-content:center">
             <button class="btn" id="retry">🔁 Cuba Semula</button>
           </div>
-        </div>`;
+        </div></div>`;
       app.querySelector("#retry").onclick = () => runSession(topic);
     }
 
