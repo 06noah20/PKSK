@@ -49,31 +49,28 @@
     if (btn) go(btn.dataset.view);
   });
 
-  /* ---------------- Senarai sekolah MRSM & SBP ----------------
-   * Top 10 MRSM & Top 10 SBP berdasarkan ranking SPM 2024 (terbit 2025).
-   * img: letak foto sebenar di assets/sekolah/<fail>.jpg — ia akan
-   * dipapar secara automatik menggantikan ilustrasi. */
+  /* ---------------- Senarai sekolah MRSM & SBP ---------------- */
   const SCHOOLS = [
-    { name: "MRSM Kuala Kubu Bharu", loc: "Selangor", type: "MRSM", rank: 1, img: "mrsm-kuala-kubu-bharu" },
-    { name: "SBPI Gombak", loc: "Selangor", type: "SBP", rank: 1, img: "sbpi-gombak" },
-    { name: "MRSM Kepala Batas", loc: "Pulau Pinang", type: "MRSM", rank: 2, img: "mrsm-kepala-batas" },
-    { name: "Sekolah Tun Fatimah", loc: "Johor Bahru, Johor", type: "SBP", rank: 2, img: "sekolah-tun-fatimah" },
-    { name: "MRSM Johor Bahru", loc: "Johor", type: "MRSM", rank: 3, img: "mrsm-johor-bahru" },
-    { name: "Kolej Tunku Kurshiah", loc: "Nilai, Negeri Sembilan", type: "SBP", rank: 3, img: "kolej-tunku-kurshiah" },
-    { name: "MRSM Tun Ghafar Baba", loc: "Jasin, Melaka", type: "MRSM", rank: 4, img: "mrsm-tun-ghafar-baba" },
-    { name: "SMS Tuanku Munawir", loc: "Kuala Pilah, Negeri Sembilan", type: "SBP", rank: 4, img: "sms-tuanku-munawir" },
-    { name: "MRSM Gemencheh", loc: "Negeri Sembilan", type: "MRSM", rank: 5, img: "mrsm-gemencheh" },
-    { name: "SBPI Rawang", loc: "Selangor", type: "SBP", rank: 5, img: "sbpi-rawang" },
-    { name: "MRSM Taiping", loc: "Perak", type: "MRSM", rank: 6, img: "mrsm-taiping" },
-    { name: "Sekolah Alam Shah", loc: "Putrajaya", type: "SBP", rank: 6, img: "sekolah-alam-shah" },
-    { name: "MRSM Pengkalan Chepa", loc: "Kelantan", type: "MRSM", rank: 7, img: "mrsm-pengkalan-chepa" },
-    { name: "Kolej Melayu Kuala Kangsar", loc: "Perak", type: "SBP", rank: 7, img: "kolej-melayu-kuala-kangsar" },
-    { name: "MRSM Kota Putra", loc: "Besut, Terengganu", type: "MRSM", rank: 8, img: "mrsm-kota-putra" },
-    { name: "Sekolah Seri Puteri", loc: "Cyberjaya, Selangor", type: "SBP", rank: 8, img: "sekolah-seri-puteri" },
-    { name: "MRSM Sungai Besar", loc: "Selangor", type: "MRSM", rank: 9, img: "mrsm-sungai-besar" },
-    { name: "Kolej Yayasan Saad", loc: "Melaka", type: "SBP", rank: 9, img: "kolej-yayasan-saad" },
-    { name: "MRSM Balik Pulau", loc: "Pulau Pinang", type: "MRSM", rank: 10, img: "mrsm-balik-pulau" },
-    { name: "SMS Hulu Selangor", loc: "Selangor", type: "SBP", rank: 10, img: "sms-hulu-selangor" }
+    { name: "MRSM Kuala Kubu Bharu", rank: 1, score: "1.261", type: "MRSM", image: "mrsm-kuala-kubu-bharu.jpg", search: "https://www.bing.com/images/search?q=MRSM+Kuala+Kubu+Bharu+gambar+sekolah+rasmi" },
+    { name: "MRSM Kepala Batas", rank: 2, score: "1.312", type: "MRSM", image: "mrsm-kepala-batas.jpg", search: "https://www.bing.com/images/search?q=MRSM+Kepala+Batas+gambar+sekolah+rasmi" },
+    { name: "MRSM Johor Bahru", rank: 3, score: "1.350", type: "MRSM", image: "mrsm-johor-bahru.jpg", search: "https://www.bing.com/images/search?q=MRSM+Johor+Bahru+gambar+sekolah+rasmi" },
+    { name: "MRSM Tun Ghafar Baba", rank: 4, score: "1.390", type: "MRSM", image: "mrsm-tun-ghafar-baba.jpg", search: "https://www.bing.com/images/search?q=MRSM+Tun+Ghafar+Baba+gambar+sekolah+rasmi" },
+    { name: "MRSM Gemencheh", rank: 5, score: "1.411", type: "MRSM", image: "mrsm-gemencheh.jpg", search: "https://www.bing.com/images/search?q=MRSM+Gemencheh+gambar+sekolah+rasmi" },
+    { name: "MRSM Taiping", rank: 6, score: "1.414", type: "MRSM", image: "mrsm-taiping.jpg", search: "https://www.bing.com/images/search?q=MRSM+Taiping+gambar+sekolah+rasmi" },
+    { name: "MRSM Pengkalan Chepa", rank: 7, score: "1.439", type: "MRSM", image: "mrsm-pengkalan-chepa.jpg", search: "https://www.bing.com/images/search?q=MRSM+Pengkalan+Chepa+gambar+sekolah+rasmi" },
+    { name: "MRSM Kota Putra", rank: 8, score: "1.489", type: "MRSM", image: "mrsm-kota-putra.jpg", search: "https://www.bing.com/images/search?q=MRSM+Kota+Putra+gambar+sekolah+rasmi" },
+    { name: "MRSM Sungai Besar", rank: 9, score: "1.489", type: "MRSM", image: "mrsm-sungai-besar.jpg", search: "https://www.bing.com/images/search?q=MRSM+Sungai+Besar+gambar+sekolah+rasmi" },
+    { name: "MRSM Balik Pulau", rank: 10, score: "1.489", type: "MRSM", image: "mrsm-balik-pulau.jpg", search: "https://www.bing.com/images/search?q=MRSM+Balik+Pulau+gambar+sekolah+rasmi" },
+    { name: "SBPI Gombak", rank: 1, score: "0.93", type: "SBP", image: "sbpi-gombak.jpg", search: "https://www.bing.com/images/search?q=SBPI+Gombak+gambar+sekolah+rasmi" },
+    { name: "Sekolah Tun Fatimah", rank: 2, score: "1.04", type: "SBP", image: "sekolah-tun-fatimah.jpg", search: "https://www.bing.com/images/search?q=Sekolah+Tun+Fatimah+gambar+sekolah+rasmi" },
+    { name: "Kolej Tunku Kurshiah", rank: 3, score: "1.05", type: "SBP", image: "kolej-tunku-kurshiah.jpg", search: "https://www.bing.com/images/search?q=Kolej+Tunku+Kurshiah+gambar+sekolah+rasmi" },
+    { name: "SMS Tuanku Munawir", rank: 4, score: "1.16", type: "SBP", image: "sms-tuanku-munawir.jpg", search: "https://www.bing.com/images/search?q=SMS+Tuanku+Munawir+gambar+sekolah+rasmi" },
+    { name: "SBPI Rawang", rank: 5, score: "1.16", type: "SBP", image: "sbpi-rawang.jpg", search: "https://www.bing.com/images/search?q=SBPI+Rawang+gambar+sekolah+rasmi" },
+    { name: "Sekolah Alam Shah", rank: 6, score: "1.17", type: "SBP", image: "sekolah-alam-shah.jpg", search: "https://www.bing.com/images/search?q=Sekolah+Alam+Shah+gambar+sekolah+rasmi" },
+    { name: "Kolej Melayu Kuala Kangsar", rank: 7, score: "1.23", type: "SBP", image: "kolej-melayu-kuala-kangsar.jpg", search: "https://www.bing.com/images/search?q=Kolej+Melayu+Kuala+Kangsar+gambar+sekolah+rasmi" },
+    { name: "Sekolah Seri Puteri", rank: 8, score: "1.24", type: "SBP", image: "sekolah-seri-puteri.jpg", search: "https://www.bing.com/images/search?q=Sekolah+Seri+Puteri+gambar+sekolah+rasmi" },
+    { name: "Kolej Yayasan Saad", rank: 9, score: "1.24", type: "SBP", image: "kolej-yayasan-saad.jpg", search: "https://www.bing.com/images/search?q=Kolej+Yayasan+Saad+gambar+sekolah+rasmi" },
+    { name: "SMS Hulu Selangor", rank: 10, score: "1.32", type: "SBP", image: "sms-hulu-selangor.jpg", search: "https://www.bing.com/images/search?q=SMS+Hulu+Selangor+gambar+sekolah+rasmi" }
   ];
 
   // Ilustrasi bangunan sekolah (SVG) — gaya senja yang konsisten & elegan.
@@ -128,6 +125,22 @@
       <text x="17" y="22" font-size="13" font-weight="800" fill="#fff" text-anchor="middle" font-family="Georgia,serif">${ch}</text>
     </svg>`;
   }
+
+  function schoolMedia(s, i) {
+    const art = schoolArt(i);
+    if (!s.image) return art;
+    return `<span class="fallback-art">${art}</span>
+      <img src="assets/sekolah/${esc(s.image)}" alt="Gambar ${esc(s.name)}" loading="lazy" hidden
+        onload="this.hidden=false;this.previousElementSibling.hidden=true"
+        onerror="this.hidden=true;this.previousElementSibling.hidden=false">`;
+  }
+
+  const SUBJECT_CARDS = [
+    { color: "pink", image: "pengetahuan-am.webp", button: "Terokai Soalan" },
+    { color: "purple", image: "matematik.webp", button: "Mula Latihan" },
+    { color: "green", image: "sains.webp", button: "Belajar Sekarang" },
+    { color: "blue", image: "english.webp", button: "Start Learning" }
+  ];
 
   // Ilustrasi hero: perisai PKSK — bersih, bercahaya, minimum elemen
   const HERO_ART = `<svg viewBox="0 0 420 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Perisai PKSK">
@@ -198,21 +211,58 @@
     </g>
   </svg>`;
 
+  const HERO_ART_NEW = `<div class="pksk-hero-visual" aria-label="Visual PKSK">
+    <div class="pksk-bg-ring ring-1"></div>
+    <div class="pksk-bg-ring ring-2"></div>
+    <div class="pksk-bg-ring ring-3"></div>
+
+    <div class="floating-card chart-card">
+      <svg viewBox="0 0 80 80" aria-hidden="true">
+        <polyline points="12,54 28,36 40,45 58,18" />
+        <circle cx="58" cy="18" r="3" />
+      </svg>
+    </div>
+
+    <div class="floating-card list-card">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="pksk-shield">
+      <div class="shield-inner">
+        <div class="shield-glow"></div>
+        <h1>PKSK</h1>
+        <p>PENTAKSIRAN KEMASUKAN<br>SEKOLAH KHUSUS</p>
+        <div class="graduate-cap">
+          <div class="cap-top"></div>
+          <div class="cap-base"></div>
+          <div class="cap-string left"></div>
+          <div class="cap-string right"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="book-stack">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <div class="pksk-platform"></div>
+  </div>`;
+
   /* ---------------- Paparan: UTAMA ---------------- */
   function renderHome() {
     const cards = SCHOOLS.map((s, i) => `
       <div class="school">
-        <div class="ph">
-          ${schoolArt(i)}
-          <img src="assets/sekolah/${s.img}.jpg" alt="${esc(s.name)}"
-            loading="lazy" onerror="this.remove()">
-          <span class="rank ${s.type.toLowerCase()}">${s.type} #${s.rank}</span>
-        </div>
+        <div class="ph">${schoolMedia(s, i)}</div>
         <div class="caption">
           <span class="crest">${crest(s.type)}</span>
           <div>
+            <div class="school-rank">${esc(s.type)} #${s.rank} - GPS/GPM ${esc(s.score)}</div>
             <h4>${esc(s.name)}</h4>
-            <div class="loc">${esc(s.loc)}</div>
+            <a class="loc" href="${esc(s.search)}" target="_blank" rel="noopener">Cari gambar rasmi / berlesen</a>
           </div>
         </div>
       </div>`).join("");
@@ -232,7 +282,7 @@
               <button class="btn ghost" id="ctaNotes">📖 Nota PKSK</button>
             </div>
           </div>
-          <div class="hero-art">${HERO_ART}</div>
+          <div class="hero-art">${HERO_ART_NEW}</div>
         </div>
       </section>
       <div class="wrap">
@@ -247,7 +297,7 @@
 
       <div class="section-head"><span class="bar"></span>
         <h2>MRSM &amp; SBP di Malaysia</h2>
-        <span class="muted">Top 10 ranking SPM 2024</span></div>
+        <span class="muted">Top 10 MRSM dan SBP berdasarkan rujukan SPM 2024/2025</span></div>
       <div class="carousel-wrap">
         <button class="cnav prev" id="cPrev" aria-label="Sebelumnya">‹</button>
         <div class="carousel" id="carousel" aria-label="Senarai sekolah MRSM dan SBP">${cards}</div>
@@ -255,17 +305,28 @@
       </div>
       <div class="cdots" id="cDots"></div>
 
-      <div class="section-head"><span class="bar"></span>
-        <h2>Topik Pembelajaran</h2>
-        <span class="muted">Subjek yang diuji dalam PKSK</span></div>
-      <div class="grid">
-        ${DATA.topics.map(t => `
-          <div class="topic static">
-            <div class="t-icon">${t.icon}</div>
-            <h3>${esc(t.title)}</h3>
-            <p>${esc(t.summary)}</p>
-          </div>`).join("")}
-      </div>
+      <section class="subject-section">
+        <div class="section-head"><span class="bar"></span>
+          <h2>Topik Pembelajaran</h2>
+          <span class="muted">Subjek yang diuji dalam PKSK</span></div>
+        <div class="subject-grid">
+          ${DATA.topics.map((t, i) => {
+            const card = SUBJECT_CARDS[i % SUBJECT_CARDS.length];
+            return `
+            <div class="subject-card ${card.color}">
+              <div class="image-wrap">
+                <span class="icon-fallback">${t.icon}</span>
+                <img src="assets/icons/${esc(card.image)}" alt="${esc(t.title)}" loading="lazy" hidden
+                  onload="this.hidden=false;this.previousElementSibling.hidden=true"
+                  onerror="this.hidden=true;this.previousElementSibling.hidden=false">
+              </div>
+              <h3>${esc(t.title)}</h3>
+              <p>${esc(t.summary)}</p>
+              <button type="button" class="subject-action" data-view="practice">${esc(card.button)} <span>→</span></button>
+            </div>`;
+          }).join("")}
+        </div>
+      </section>
 
       <div class="features">
         <div class="feature"><div class="ic">🎯</div>
@@ -279,6 +340,8 @@
 
     app.querySelector("#ctaPractice").onclick = () => go("practice");
     app.querySelector("#ctaNotes").onclick = () => go("learn");
+    app.querySelectorAll(".subject-action").forEach(btn =>
+      btn.addEventListener("click", () => go(btn.dataset.view)));
     initCarousel();
   }
 
