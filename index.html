@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portal PKSK — Pusat Pembelajaran Interaktif</title>
-  <meta name="description" content="Portal pembelajaran dan pentaksiran interaktif khas untuk PKSK." />
+  <title>Portal PKSK — Pentaksiran Kemasukan Sekolah Khusus</title>
+  <meta name="description" content="Portal pembelajaran interaktif untuk Pentaksiran Kemasukan Sekolah Khusus (PKSK)." />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -14,18 +14,16 @@
       <span class="brand-logo">🎓</span>
       <div>
         <h1 class="brand-title">Portal <span>PKSK</span></h1>
-        <p class="brand-sub">Pusat Pembelajaran &amp; Pentaksiran Interaktif</p>
+        <p class="brand-sub">Pentaksiran Kemasukan Sekolah Khusus</p>
       </div>
     </div>
+    <nav class="mainnav" id="tabbar">
+      <button class="tab active" data-view="home">Utama</button>
+      <button class="tab" data-view="practice">Latihan PKSK</button>
+      <button class="tab" data-view="learn">Nota</button>
+    </nav>
     <button id="themeToggle" class="theme-btn" title="Tukar tema" aria-label="Tukar tema">🌙</button>
   </header>
-
-  <!-- ================= NAV ================= -->
-  <nav class="tabbar" id="tabbar">
-    <button class="tab active" data-view="home">🏠 Utama</button>
-    <button class="tab" data-view="learn">📖 Nota</button>
-    <button class="tab" data-view="practice">✏️ Latihan PKSK</button>
-  </nav>
 
   <main class="container" id="app">
     <!-- Kandungan dijana oleh js/app.js -->

@@ -14,7 +14,7 @@
 const PKSK_DATA = {
   "meta": {
     "title": "Portal PKSK",
-    "subtitle": "Cabaran Kemasukan Sekolah Khusus — Uji Minda Kau!",
+    "subtitle": "Pentaksiran Kemasukan Sekolah Khusus",
     "version": "2.0"
   },
   "topics": [
