@@ -129,9 +129,10 @@
   function schoolMedia(s, i) {
     const art = schoolArt(i);
     if (!s.image) return art;
-    return `<img src="assets/sekolah/${esc(s.image)}" alt="Gambar ${esc(s.name)}" loading="lazy"
-        onerror="this.hidden=true;this.nextElementSibling.hidden=false">
-      <span class="fallback-art" hidden>${art}</span>`;
+    return `<span class="fallback-art">${art}</span>
+      <img src="assets/sekolah/${esc(s.image)}" alt="Gambar ${esc(s.name)}" loading="lazy" hidden
+        onload="this.hidden=false;this.previousElementSibling.hidden=true"
+        onerror="this.hidden=true;this.previousElementSibling.hidden=false">`;
   }
 
   // Ilustrasi hero: perisai PKSK — bersih, bercahaya, minimum elemen
