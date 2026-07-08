@@ -247,18 +247,12 @@
         <h2>Topik Pembelajaran</h2>
         <span class="muted">Subjek yang diuji dalam PKSK</span></div>
       <div class="grid">
-        ${DATA.topics.map(t => {
-          const best = progress[t.id]?.best || 0;
-          const done = best >= 80;
-          return `
+        ${DATA.topics.map(t => `
           <div class="topic static">
             <div class="t-icon">${t.icon}</div>
             <h3>${esc(t.title)}</h3>
             <p>${esc(t.summary)}</p>
-            <div class="t-meta">${t.questions.length} Soalan
-              ${best ? `<span class="badge ${done ? "done" : "todo"}">Terbaik ${best}%</span>` : ""}</div>
-          </div>`;
-        }).join("")}
+          </div>`).join("")}
       </div>
 
       <div class="features">
