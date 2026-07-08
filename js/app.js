@@ -211,6 +211,47 @@
     </g>
   </svg>`;
 
+  const HERO_ART_NEW = `<div class="pksk-hero-visual" aria-label="Visual PKSK">
+    <div class="pksk-bg-ring ring-1"></div>
+    <div class="pksk-bg-ring ring-2"></div>
+    <div class="pksk-bg-ring ring-3"></div>
+
+    <div class="floating-card chart-card">
+      <svg viewBox="0 0 80 80" aria-hidden="true">
+        <polyline points="12,54 28,36 40,45 58,18" />
+        <circle cx="58" cy="18" r="3" />
+      </svg>
+    </div>
+
+    <div class="floating-card list-card">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="pksk-shield">
+      <div class="shield-inner">
+        <div class="shield-glow"></div>
+        <h1>PKSK</h1>
+        <p>PENTAKSIRAN KEMASUKAN<br>SEKOLAH KHUSUS</p>
+        <div class="graduate-cap">
+          <div class="cap-top"></div>
+          <div class="cap-base"></div>
+          <div class="cap-string left"></div>
+          <div class="cap-string right"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="book-stack">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <div class="pksk-platform"></div>
+  </div>`;
+
   /* ---------------- Paparan: UTAMA ---------------- */
   function renderHome() {
     const cards = SCHOOLS.map((s, i) => `
@@ -241,7 +282,7 @@
               <button class="btn ghost" id="ctaNotes">📖 Nota PKSK</button>
             </div>
           </div>
-          <div class="hero-art">${HERO_ART}</div>
+          <div class="hero-art">${HERO_ART_NEW}</div>
         </div>
       </section>
       <div class="wrap">
