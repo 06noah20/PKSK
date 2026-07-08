@@ -49,24 +49,31 @@
     if (btn) go(btn.dataset.view);
   });
 
-  /* ---------------- Senarai sekolah MRSM & SBP ---------------- */
+  /* ---------------- Senarai sekolah MRSM & SBP ----------------
+   * Top 10 MRSM & Top 10 SBP berdasarkan ranking SPM 2024 (terbit 2025).
+   * img: letak foto sebenar di assets/sekolah/<fail>.jpg — ia akan
+   * dipapar secara automatik menggantikan ilustrasi. */
   const SCHOOLS = [
-    { name: "Malay College Kuala Kangsar (MCKK)", loc: "Kuala Kangsar, Perak", type: "SBP" },
-    { name: "MRSM Pengkalan Chepa", loc: "Kota Bharu, Kelantan", type: "MRSM" },
-    { name: "Kolej Tunku Kurshiah (TKC)", loc: "Nilai, Negeri Sembilan", type: "SBP" },
-    { name: "MRSM Langkawi", loc: "Langkawi, Kedah", type: "MRSM" },
-    { name: "Sekolah Tun Fatimah (STF)", loc: "Johor Bahru, Johor", type: "SBP" },
-    { name: "MRSM Kepala Batas", loc: "Kepala Batas, Pulau Pinang", type: "MRSM" },
-    { name: "Sekolah Dato' Abdul Razak (SDAR)", loc: "Seremban, Negeri Sembilan", type: "SBP" },
-    { name: "MRSM Kuantan", loc: "Kuantan, Pahang", type: "MRSM" },
-    { name: "Sekolah Sultan Alam Shah (SAS)", loc: "Putrajaya", type: "SBP" },
-    { name: "MRSM Jasin", loc: "Jasin, Melaka", type: "MRSM" },
-    { name: "Sekolah Seri Puteri (SSP)", loc: "Cyberjaya, Selangor", type: "SBP" },
-    { name: "MRSM Balik Pulau", loc: "Balik Pulau, Pulau Pinang", type: "MRSM" },
-    { name: "Sekolah Tuanku Abdul Rahman (STAR)", loc: "Ipoh, Perak", type: "SBP" },
-    { name: "MRSM Serting", loc: "Jempol, Negeri Sembilan", type: "MRSM" },
-    { name: "Sekolah Menengah Sains Selangor", loc: "Cheras, Kuala Lumpur", type: "SBP" },
-    { name: "MRSM Gerik", loc: "Gerik, Perak", type: "MRSM" }
+    { name: "MRSM Kuala Kubu Bharu", loc: "Selangor", type: "MRSM", rank: 1, img: "mrsm-kuala-kubu-bharu" },
+    { name: "SBPI Gombak", loc: "Selangor", type: "SBP", rank: 1, img: "sbpi-gombak" },
+    { name: "MRSM Kepala Batas", loc: "Pulau Pinang", type: "MRSM", rank: 2, img: "mrsm-kepala-batas" },
+    { name: "Sekolah Tun Fatimah", loc: "Johor Bahru, Johor", type: "SBP", rank: 2, img: "sekolah-tun-fatimah" },
+    { name: "MRSM Johor Bahru", loc: "Johor", type: "MRSM", rank: 3, img: "mrsm-johor-bahru" },
+    { name: "Kolej Tunku Kurshiah", loc: "Nilai, Negeri Sembilan", type: "SBP", rank: 3, img: "kolej-tunku-kurshiah" },
+    { name: "MRSM Tun Ghafar Baba", loc: "Jasin, Melaka", type: "MRSM", rank: 4, img: "mrsm-tun-ghafar-baba" },
+    { name: "SMS Tuanku Munawir", loc: "Kuala Pilah, Negeri Sembilan", type: "SBP", rank: 4, img: "sms-tuanku-munawir" },
+    { name: "MRSM Gemencheh", loc: "Negeri Sembilan", type: "MRSM", rank: 5, img: "mrsm-gemencheh" },
+    { name: "SBPI Rawang", loc: "Selangor", type: "SBP", rank: 5, img: "sbpi-rawang" },
+    { name: "MRSM Taiping", loc: "Perak", type: "MRSM", rank: 6, img: "mrsm-taiping" },
+    { name: "Sekolah Alam Shah", loc: "Putrajaya", type: "SBP", rank: 6, img: "sekolah-alam-shah" },
+    { name: "MRSM Pengkalan Chepa", loc: "Kelantan", type: "MRSM", rank: 7, img: "mrsm-pengkalan-chepa" },
+    { name: "Kolej Melayu Kuala Kangsar", loc: "Perak", type: "SBP", rank: 7, img: "kolej-melayu-kuala-kangsar" },
+    { name: "MRSM Kota Putra", loc: "Besut, Terengganu", type: "MRSM", rank: 8, img: "mrsm-kota-putra" },
+    { name: "Sekolah Seri Puteri", loc: "Cyberjaya, Selangor", type: "SBP", rank: 8, img: "sekolah-seri-puteri" },
+    { name: "MRSM Sungai Besar", loc: "Selangor", type: "MRSM", rank: 9, img: "mrsm-sungai-besar" },
+    { name: "Kolej Yayasan Saad", loc: "Melaka", type: "SBP", rank: 9, img: "kolej-yayasan-saad" },
+    { name: "MRSM Balik Pulau", loc: "Pulau Pinang", type: "MRSM", rank: 10, img: "mrsm-balik-pulau" },
+    { name: "SMS Hulu Selangor", loc: "Selangor", type: "SBP", rank: 10, img: "sms-hulu-selangor" }
   ];
 
   // Ilustrasi bangunan sekolah (SVG) — gaya senja yang konsisten & elegan.
@@ -195,7 +202,12 @@
   function renderHome() {
     const cards = SCHOOLS.map((s, i) => `
       <div class="school">
-        <div class="ph">${schoolArt(i)}</div>
+        <div class="ph">
+          ${schoolArt(i)}
+          <img src="assets/sekolah/${s.img}.jpg" alt="${esc(s.name)}"
+            loading="lazy" onerror="this.remove()">
+          <span class="rank ${s.type.toLowerCase()}">${s.type} #${s.rank}</span>
+        </div>
         <div class="caption">
           <span class="crest">${crest(s.type)}</span>
           <div>
@@ -234,8 +246,8 @@
       </div>
 
       <div class="section-head"><span class="bar"></span>
-        <h2>Sekolah Berasrama Penuh di Malaysia</h2>
-        <span class="muted">Sasaran anda selepas lulus PKSK</span></div>
+        <h2>MRSM &amp; SBP di Malaysia</h2>
+        <span class="muted">Top 10 ranking SPM 2024</span></div>
       <div class="carousel-wrap">
         <button class="cnav prev" id="cPrev" aria-label="Sebelumnya">‹</button>
         <div class="carousel" id="carousel" aria-label="Senarai sekolah MRSM dan SBP">${cards}</div>
