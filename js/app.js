@@ -262,7 +262,6 @@
           <div>
             <div class="school-rank">${esc(s.type)} #${s.rank} - GPS/GPM ${esc(s.score)}</div>
             <h4>${esc(s.name)}</h4>
-            <a class="loc" href="${esc(s.search)}" target="_blank" rel="noopener">Cari gambar rasmi / berlesen</a>
           </div>
         </div>
       </div>`).join("");
