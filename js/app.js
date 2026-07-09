@@ -192,69 +192,57 @@
       </div>`).join("");
 
     app.innerHTML = `
-      <section class="hero">
-        <div class="hero-inner">
-          <div>
-            <p class="eyebrow">Selamat Datang Ke</p>
-            <h2>Portal <b>PKSK</b></h2>
-            <p class="sub">Pentaksiran Kemasukan Sekolah Khusus</p>
-            <div class="quote"><span class="qm">&ldquo;</span>
-              <span>Kenali potensi diri, capai kecemerlangan, melangkah ke sekolah impian.&rdquo;</span></div>
-            <p class="lead">Platform interaktif untuk membantu calon PKSK bersedia dengan lebih yakin dan terarah.</p>
+      <section class="fhero">
+        <div class="fhero-inner">
+          <div class="fhero-copy">
+            <h2 class="fhero-title">Persediaan tepat,<br>langkah pertama ke<br><b>sekolah impian.</b></h2>
+            <p class="fhero-sub">Portal pembelajaran interaktif yang membantu calon <b>PKSK</b> bersedia dengan lebih yakin dan terarah menuju MRSM &amp; SBP terbaik negara.</p>
             <div class="btn-row">
-              <button class="btn" id="ctaPractice">🚀 Mula Latihan →</button>
-              <button class="btn ghost" id="ctaNotes">📖 Nota PKSK</button>
+              <button class="btn" id="ctaPractice">Mula Latihan <span class="ico">🚀</span></button>
+              <button class="btn ghost" id="ctaNotes">Nota PKSK <span class="ico">›</span></button>
             </div>
           </div>
-          <div class="hero-art">
-            <img class="hero-photo" src="assets/hero-pksk.jpg" alt="Perisai PKSK"
-              onload="this.nextElementSibling.style.display='none'"
-              onerror="this.remove()">
-            ${HERO_ART_NEW}
+          <div class="fhero-visual">
+            <span class="blob blob-1"></span>
+            <span class="blob blob-2"></span>
+            <span class="fdot fdot-1"></span><span class="fdot fdot-2"></span>
+            <span class="fdot fdot-3"></span><span class="fdot fdot-4"></span>
+            <div class="photo-frame">
+              <img class="hero-photo" src="assets/hero-students.jpg" alt="Pelajar PKSK"
+                onload="this.parentElement.classList.add('has-photo')" onerror="this.remove()">
+              <div class="photo-illus" aria-hidden="true">
+                <svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+                  <defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#fbeaef"/><stop offset="1" stop-color="#f4d9e1"/></linearGradient></defs>
+                  <rect width="300" height="260" rx="24" fill="url(#pg)"/>
+                  <circle cx="150" cy="96" r="40" fill="#e7a9bd"/>
+                  <path d="M150 60 l46 16 -46 16 -46 -16 z" fill="var(--accent)"/>
+                  <path d="M118 84 v18 c0 12 64 12 64 0 v-18" fill="none" stroke="var(--accent)" stroke-width="4"/>
+                  <rect x="70" y="150" width="160" height="70" rx="14" fill="#fff"/>
+                  <rect x="88" y="168" width="90" height="8" rx="4" fill="#f0c4d1"/>
+                  <rect x="88" y="186" width="124" height="8" rx="4" fill="#f6dbe3"/>
+                  <rect x="88" y="204" width="70" height="8" rx="4" fill="#f0c4d1"/>
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-      <div class="wrap">
-      <div class="statbar">
-        <div class="stat"><div class="ic">🎓</div>
-          <div><div class="num">${DATA.topics.length}</div><div class="lbl">Topik Pembelajaran</div></div></div>
-        <div class="stat"><div class="ic">📚</div>
-          <div><div class="num">Lebih 500+</div><div class="lbl">Soalan Tersedia</div></div></div>
-        <div class="stat"><div class="ic">✅</div>
-          <div><div class="num">20</div><div class="lbl">Set Soalan</div></div></div>
-      </div>
 
-      <div class="section-head"><span class="bar"></span>
-        <h2>MRSM &amp; SBP di Malaysia</h2>
-        <span class="muted">Top 10 MRSM dan SBP berdasarkan rujukan SPM 2024/2025</span></div>
-      <div class="carousel-wrap">
-        <button class="cnav prev" id="cPrev" aria-label="Sebelumnya">‹</button>
-        <div class="carousel" id="carousel" aria-label="Senarai sekolah MRSM dan SBP">${cards}</div>
-        <button class="cnav next" id="cNext" aria-label="Seterusnya">›</button>
-      </div>
-      <div class="cdots" id="cDots"></div>
-
-      <div class="section-head"><span class="bar"></span>
-        <h2>Topik Pembelajaran</h2>
-        <span class="muted">Subjek yang diuji dalam PKSK</span></div>
-      <div class="grid">
-        ${DATA.topics.map(t => `
-          <div class="topic static">
-            <div class="t-icon">${t.icon}</div>
-            <h3>${esc(t.title)}</h3>
-            <p>${esc(t.summary)}</p>
-          </div>`).join("")}
-      </div>
-
-      <div class="features">
-        <div class="feature"><div class="ic">🎯</div>
-          <div><h4>Pembelajaran Interaktif</h4><p>Belajar dengan soalan interaktif yang menyeronokkan.</p></div></div>
-        <div class="feature"><div class="ic">⚡</div>
-          <div><h4>Maklum Balas Serta-Merta</h4><p>Jawapan disemak terus dengan jalan kira & penerangan.</p></div></div>
-        <div class="feature"><div class="ic">💡</div>
-          <div><h4>Belajar Bila-Bila Masa</h4><p>Akses di mana-mana, pada bila-bila masa.</p></div></div>
-      </div>
-      </div>`;
+      <section class="slider-band">
+        <div class="wrap">
+          <div class="band-head">
+            <div><h2>MRSM &amp; SBP di Malaysia</h2>
+              <p>Top 10 MRSM dan SBP berdasarkan rujukan SPM 2024/2025 — sasaran anda selepas lulus PKSK.</p></div>
+          </div>
+          <div class="carousel-wrap">
+            <button class="cnav prev" id="cPrev" aria-label="Sebelumnya">‹</button>
+            <div class="carousel" id="carousel" aria-label="Senarai sekolah MRSM dan SBP">${cards}</div>
+            <button class="cnav next" id="cNext" aria-label="Seterusnya">›</button>
+          </div>
+          <div class="cdots" id="cDots"></div>
+        </div>
+      </section>`;
 
     app.querySelector("#ctaPractice").onclick = () => go("practice");
     app.querySelector("#ctaNotes").onclick = () => go("learn");
@@ -451,17 +439,9 @@
     render();
   }
 
-  /* ---------------- Tema gelap / terang ---------------- */
-  const themeBtn = document.getElementById("themeToggle");
-  function applyTheme(t) {
-    document.documentElement.setAttribute("data-theme", t);
-    themeBtn.textContent = t === "dark" ? "☀️" : "🌙";
-    localStorage.setItem("pksk_theme", t);
-  }
-  themeBtn.addEventListener("click", () =>
-    applyTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark"));
-  applyTheme(localStorage.getItem("pksk_theme") ||
-    (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+  /* ---------------- Butang CTA header ---------------- */
+  const navCta = document.getElementById("navCta");
+  if (navCta) navCta.addEventListener("click", () => go("practice"));
 
   /* ---------------- Mula ---------------- */
   go("home");

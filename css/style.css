@@ -4,23 +4,22 @@
  * ==================================================================== */
 
 :root {
-  --bg:        #f2f5fa;
-  --bg-soft:   #e9eef7;
+  --bg:        #ffffff;
+  --bg-soft:   #fbf3f5;
   --card:      #ffffff;
-  --ink:       #0b1b3a;
-  --ink-soft:  #5a6b8c;
-  --line:      #dfe7f2;
-  --navy:      #0a1f3f;   /* hero / bar gelap */
-  --navy-2:    #10315e;
-  --accent:    #2e7cf6;   /* azure utama */
-  --accent-2:  #5fa0f9;   /* azure cerah */
-  --accent-soft: #e3edfd;
+  --ink:       #2a2226;   /* teks tajuk gelap kehangatan */
+  --ink-soft:  #7d7175;
+  --line:      #f0e4e8;
+  --accent:    #a41f45;   /* maroon utama (Foodera) */
+  --accent-2:  #c33a61;   /* maroon cerah */
+  --accent-dk: #7d1533;   /* maroon gelap (notch logo) */
+  --accent-soft: #fbe7ee;
   --good:      #15803d;
   --good-bg:   #dcfce7;
   --bad:       #c02626;
   --bad-bg:    #fee2e2;
   --warn:      #b45309;
-  --shadow:    0 10px 30px rgba(11, 27, 58, .08);
+  --shadow:    0 12px 34px rgba(120, 20, 50, .10);
   --radius:    18px;
 }
 
@@ -57,33 +56,39 @@ body {
 /* ---------- Header ---------- */
 .topbar {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 26px; gap: 16px;
+  padding: 14px 40px; gap: 20px;
   position: sticky; top: 0; z-index: 20;
-  background: color-mix(in srgb, var(--card) 88%, transparent);
+  background: color-mix(in srgb, var(--card) 92%, transparent);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
-.brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
-.brand-logo {
-  width: 46px; height: 46px; display: grid; place-items: center;
-  background: var(--accent-soft); border-radius: 12px; flex: 0 0 46px;
-}
-.brand-logo svg { width: 26px; height: 26px; }
-.brand-title { margin: 0; font-size: 18px; font-weight: 800; letter-spacing: .2px; white-space: nowrap; }
-.brand-title span { color: var(--accent); }
-.brand-sub { margin: 2px 0 0; font-size: 11.5px; color: var(--ink-soft); white-space: nowrap; }
+.brand { display: flex; align-items: center; gap: 12px; min-width: 0; text-decoration: none; }
+.brand-logo { display: block; flex: 0 0 auto; }
+.brand-logo svg { width: 118px; height: 43px; display: block;
+  filter: drop-shadow(0 6px 14px rgba(124, 20, 50, .30)); }
 
-.mainnav { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.mainnav { display: flex; gap: 30px; overflow-x: auto; scrollbar-width: none; margin-left: auto; }
 .mainnav::-webkit-scrollbar { display: none; }
 .tab {
   border: none; background: none; cursor: pointer;
-  color: var(--ink-soft); font-size: 14.5px; font-weight: 600;
-  padding: 10px 14px; white-space: nowrap;
-  border-bottom: 2.5px solid transparent;
-  transition: color .15s ease, border-color .15s ease;
+  color: var(--ink); font-size: 14.5px; font-weight: 700;
+  padding: 6px 2px; white-space: nowrap; position: relative;
+  transition: color .15s ease;
 }
-.tab:hover { color: var(--ink); }
-.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab:hover { color: var(--accent); }
+.tab.active { color: var(--accent); }
+.tab.active::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -3px;
+  height: 2.5px; border-radius: 2px; background: var(--accent);
+}
+.nav-cta {
+  flex: 0 0 auto; border: none; cursor: pointer;
+  background: var(--accent); color: #fff; font-weight: 700; font-size: 14px;
+  padding: 11px 22px; border-radius: 8px; white-space: nowrap;
+  box-shadow: 0 8px 20px rgba(164, 31, 69, .28);
+  transition: transform .14s ease, background .14s ease;
+}
+.nav-cta:hover { transform: translateY(-2px); background: var(--accent-dk); }
 
 .topbar-right { display: flex; align-items: center; gap: 10px; }
 .theme-btn, .icon-btn {
@@ -453,19 +458,20 @@ body {
 /* ---------- Butang ---------- */
 .btn {
   border: none; cursor: pointer; font-weight: 700; font-size: 15px;
-  padding: 13px 24px; border-radius: 12px; color: #fff;
-  background: linear-gradient(135deg, var(--accent), #22a6f2);
-  box-shadow: 0 10px 28px rgba(46, 124, 246, .45),
-    inset 0 0 0 1px rgba(255, 255, 255, .22);
-  transition: transform .14s ease, filter .14s ease, box-shadow .14s ease;
+  padding: 13px 26px; border-radius: 10px; color: #fff;
+  display: inline-flex; align-items: center; gap: 9px;
+  background: var(--accent);
+  box-shadow: 0 10px 24px rgba(164, 31, 69, .30);
+  transition: transform .14s ease, background .14s ease, box-shadow .14s ease;
 }
-.hero .btn:hover { box-shadow: 0 12px 34px rgba(34, 166, 242, .55), inset 0 0 0 1px rgba(255, 255, 255, .3); }
-.hero .btn.ghost { background: rgba(255, 255, 255, .05); backdrop-filter: blur(8px); }
-.btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
+.btn:hover { transform: translateY(-2px); background: var(--accent-dk); }
+.btn .ico { font-size: 15px; }
 .btn.ghost {
-  background: transparent; color: #fff; box-shadow: none;
-  border: 1.5px solid rgba(255, 255, 255, .45);
+  background: #fff; color: var(--accent);
+  border: 1.5px solid #e6c9d2; box-shadow: 0 8px 20px rgba(120,20,50,.08);
 }
+.btn.ghost:hover { background: var(--accent-soft); border-color: var(--accent); transform: translateY(-2px); }
+.btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
 .card .btn.ghost { color: var(--ink); border-color: var(--line); }
 
 /* ---------- Bar statistik ---------- */
@@ -676,4 +682,92 @@ body {
   .floating-card, .shield-inner::after, .hero .eyebrow::before {
     animation: none;
   }
+}
+
+/* ======================================================================
+ * FOODERA-STYLE HOME (tema maroon terang)
+ * ==================================================================== */
+.fhero {
+  position: relative; overflow: hidden;
+  background:
+    radial-gradient(520px 360px at 92% 8%, var(--accent-soft), transparent 60%),
+    #ffffff;
+}
+.fhero-inner {
+  max-width: 1120px; margin: 0 auto; padding: 60px 40px 70px;
+  display: grid; grid-template-columns: 1fr 1.05fr; align-items: center; gap: 40px;
+}
+.fhero-copy { max-width: 460px; }
+.fhero-title {
+  margin: 0 0 20px; font-size: 46px; line-height: 1.12; font-weight: 800;
+  color: var(--ink); letter-spacing: -.5px; text-wrap: balance;
+}
+.fhero-title b { color: var(--accent); font-weight: 800; }
+.fhero-sub {
+  margin: 0 0 30px; font-size: 15.5px; line-height: 1.75; color: var(--ink-soft);
+}
+.fhero-sub b { color: var(--accent); }
+.fhero .btn-row { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* Visual kanan: foto pelajar bergabung dengan latar */
+.fhero-visual { position: relative; min-height: 420px; display: grid; place-items: center; }
+.blob { position: absolute; border-radius: 50%; filter: blur(6px); z-index: 0; }
+.blob-1 { width: 300px; height: 300px; right: 4%; top: 2%;
+  background: radial-gradient(circle, rgba(164,31,69,.16), transparent 66%); }
+.blob-2 { width: 240px; height: 240px; left: 2%; bottom: 0;
+  background: radial-gradient(circle, rgba(246,197,209,.6), transparent 66%); }
+.fdot { position: absolute; border-radius: 50%; z-index: 1; }
+.fdot-1 { width: 12px; height: 12px; background: #f0b429; left: 8%;  top: 20%; }
+.fdot-2 { width: 9px;  height: 9px;  background: var(--accent); right: 12%; top: 12%; }
+.fdot-3 { width: 14px; height: 14px; background: #f6dbe3; right: 6%;  bottom: 16%; }
+.fdot-4 { width: 8px;  height: 8px;  background: #f0b429; left: 14%; bottom: 10%; }
+
+.photo-frame {
+  position: relative; z-index: 2;
+  width: 100%; max-width: 460px; aspect-ratio: 5 / 4;
+  border-radius: 30px 30px 30px 90px; overflow: hidden;
+  box-shadow: 0 30px 60px rgba(120, 20, 50, .18);
+  background: var(--accent-soft);
+}
+.photo-frame .hero-photo,
+.photo-frame .photo-illus {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.photo-frame .photo-illus svg { width: 100%; height: 100%; }
+/* Bila foto sebenar dimuat, sorok ilustrasi & gabungkan foto dengan latar */
+.photo-frame.has-photo .photo-illus { display: none; }
+.photo-frame::after {
+  content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background:
+    linear-gradient(180deg, transparent 62%, rgba(255,255,255,.10)),
+    radial-gradient(120% 90% at 50% 0%, transparent 60%, rgba(164,31,69,.10));
+  mix-blend-mode: multiply;
+}
+
+/* ---- Jalur slider sekolah (maroon penuh) ---- */
+.slider-band {
+  background:
+    radial-gradient(600px 300px at 90% 120%, var(--accent-2), transparent 60%),
+    var(--accent);
+  color: #fff; padding: 40px 0 46px; margin-top: 6px;
+}
+.slider-band .wrap { max-width: 1120px; }
+.band-head { margin-bottom: 20px; }
+.band-head h2 { margin: 0 0 4px; font-size: 22px; font-weight: 800; }
+.band-head p { margin: 0; font-size: 13.5px; color: rgba(255,255,255,.82); max-width: 60ch; }
+.slider-band .cnav {
+  background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.30); color: #fff;
+}
+.slider-band .cnav:hover { background: rgba(255,255,255,.24); }
+.slider-band .cdots button { background: rgba(255,255,255,.35); }
+.slider-band .cdots button.active { background: #fff; }
+
+@media (max-width: 880px) {
+  .topbar { padding: 12px 18px; flex-wrap: wrap; gap: 12px; }
+  .mainnav { order: 3; width: 100%; justify-content: center; gap: 20px; }
+  .nav-cta { display: none; }
+  .fhero-inner { grid-template-columns: 1fr; padding: 36px 22px 44px; gap: 30px; }
+  .fhero-visual { order: -1; min-height: 300px; }
+  .fhero-title { font-size: 34px; }
+  .photo-frame { max-width: 380px; }
 }

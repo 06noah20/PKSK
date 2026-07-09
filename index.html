@@ -5,41 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portal PKSK — Pentaksiran Kemasukan Sekolah Khusus</title>
   <meta name="description" content="Portal pembelajaran interaktif untuk Pentaksiran Kemasukan Sekolah Khusus (PKSK)." />
-  <link rel="stylesheet" href="css/style.css?v=13" />
+  <link rel="stylesheet" href="css/style.css?v=14" />
 </head>
 <body>
   <!-- ================= HEADER ================= -->
   <header class="topbar">
-    <div class="brand">
+    <a class="brand" href="#" aria-label="Portal PKSK">
       <span class="brand-logo" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5C4.7 20 4 19.3 4 18.5v-13z" fill="#2e7cf6"/>
-          <path d="M20 5.5C20 4.7 19.3 4 18.5 4H13v16h5.5c.8 0 1.5-.7 1.5-1.5v-13z" fill="#0a1f3f"/>
-          <rect x="11" y="4" width="2" height="16" fill="#5fa0f9"/>
+        <svg viewBox="0 0 132 48" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 6 H118 a10 10 0 0 1 10 10 v16 a10 10 0 0 1 -10 10 H14 a10 10 0 0 1 -10 -10 v-16 a10 10 0 0 1 10 -10 Z" fill="var(--accent)"/>
+          <path d="M4 16 L-4 24 L4 32 Z" fill="var(--accent-dk)"/>
+          <path d="M128 16 L136 24 L128 32 Z" fill="var(--accent-dk)"/>
+          <path d="M26 15 l10 4 -10 4 -10 -4 z" fill="#fff"/>
+          <path d="M18 21 v5 c0 2 16 2 16 0 v-5" fill="none" stroke="#fff" stroke-width="1.6"/>
+          <text x="74" y="31" font-size="20" font-weight="800" fill="#fff" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" letter-spacing="2">PKSK</text>
         </svg>
       </span>
-      <div>
-        <h1 class="brand-title">Portal <span>PKSK</span></h1>
-        <p class="brand-sub">Pusat Pembelajaran &amp; Pentaksiran Interaktif</p>
-      </div>
-    </div>
+    </a>
     <nav class="mainnav" id="tabbar">
       <button class="tab active" data-view="home">Utama</button>
       <button class="tab" data-view="practice">Latihan PKSK</button>
-      <button class="tab" data-view="learn">Nota</button>
+      <button class="tab" data-view="learn">Nota PKSK</button>
     </nav>
-    <div class="topbar-right">
-      <button class="icon-btn" aria-label="Notifikasi"><span class="bell">🔔</span><span class="dot"></span></button>
-      <button id="themeToggle" class="theme-btn" title="Tukar tema" aria-label="Tukar tema">🌙</button>
-      <span class="avatar-chip"><span class="avatar">A</span>Auni <span class="chev">▾</span></span>
-    </div>
+    <button class="nav-cta" id="navCta">Mula Latihan</button>
   </header>
 
   <main class="container" id="app">
     <!-- Kandungan dijana oleh js/app.js -->
   </main>
 
-  <script src="js/questions.js?v=13"></script>
-  <script src="js/app.js?v=13"></script>
+  <script src="js/questions.js?v=14"></script>
+  <script src="js/app.js?v=14"></script>
 </body>
 </html>
