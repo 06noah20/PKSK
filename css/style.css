@@ -119,21 +119,38 @@ body {
   padding: 22px; margin-bottom: 18px;
 }
 
-/* ---------- Hero (full-bleed, lengkung bawah) ---------- */
+/* ---------- Hero (full-bleed, futuristik: bintang + aurora) ---------- */
 .hero {
   color: #fff; overflow: hidden; position: relative; margin-bottom: 26px;
   border-radius: 0 0 44px 44px;
   background:
-    radial-gradient(1000px 480px at 112% -10%, rgba(46, 124, 246, .30), transparent 55%),
-    radial-gradient(800px 520px at -12% 115%, rgba(46, 124, 246, .16), transparent 55%),
-    linear-gradient(118deg, #071730 0%, #0a2246 52%, #0e2f61 100%);
+    radial-gradient(900px 420px at 110% -8%, rgba(34, 166, 242, .16), transparent 55%),
+    linear-gradient(118deg, #050f22 0%, #081c3d 52%, #0b2a58 100%);
 }
-.hero::before, .hero::after {
-  content: ""; position: absolute; border-radius: 50%;
-  border: 1px solid rgba(95, 160, 249, .16); pointer-events: none;
+/* Lapisan bintang halus (dua saiz, berjubin) */
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    radial-gradient(1.6px 1.6px at 22px 34px, rgba(255,255,255,.55), transparent 100%),
+    radial-gradient(1.2px 1.2px at 128px 96px, rgba(160,210,255,.45), transparent 100%),
+    radial-gradient(1px 1px at 208px 22px, rgba(255,255,255,.35), transparent 100%),
+    radial-gradient(1.4px 1.4px at 66px 178px, rgba(140,200,255,.4), transparent 100%),
+    radial-gradient(1px 1px at 246px 150px, rgba(255,255,255,.3), transparent 100%);
+  background-size: 280px 220px;
+  opacity: .7;
 }
-.hero::before { width: 640px; height: 640px; right: -120px; top: -260px; }
-.hero::after  { width: 880px; height: 880px; right: -240px; top: -380px; }
+/* Aurora biru-cyan bergerak perlahan */
+.hero::after {
+  content: ""; position: absolute; pointer-events: none;
+  width: 900px; height: 900px; right: -260px; top: -420px;
+  background: conic-gradient(from 190deg,
+    transparent 0deg, rgba(34, 211, 238, .13) 70deg,
+    rgba(46, 124, 246, .20) 140deg, rgba(124, 58, 237, .10) 210deg,
+    transparent 300deg);
+  border-radius: 50%; filter: blur(46px);
+  animation: aurora 22s linear infinite;
+}
+@keyframes aurora { to { transform: rotate(360deg); } }
 
 .hero-inner {
   max-width: 1080px; margin: 0 auto; padding: 56px 22px 64px;
@@ -141,14 +158,29 @@ body {
   position: relative; z-index: 1;
 }
 .hero .eyebrow {
-  font-size: 12px; font-weight: 800; letter-spacing: .26em;
-  text-transform: uppercase; color: #8fb8f9; margin: 0 0 10px;
+  display: inline-flex; align-items: center; gap: 9px;
+  font-size: 11.5px; font-weight: 800; letter-spacing: .24em;
+  text-transform: uppercase; color: #9ed0ff; margin: 0 0 14px;
+  padding: 7px 15px; border-radius: 999px;
+  background: rgba(46, 124, 246, .10);
+  border: 1px solid rgba(95, 160, 249, .35);
+  backdrop-filter: blur(8px);
 }
+.hero .eyebrow::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%;
+  background: #22d3ee; box-shadow: 0 0 10px #22d3ee;
+  animation: pulseDot 2.2s ease-in-out infinite;
+}
+@keyframes pulseDot { 50% { opacity: .35; } }
 .hero h2 {
   margin: 0 0 8px; font-size: 54px; line-height: 1.02; letter-spacing: .01em;
   font-weight: 800; text-transform: uppercase; text-wrap: balance;
 }
-.hero h2 b { color: #4f94f8; }
+.hero h2 b {
+  background: linear-gradient(100deg, #8fd4ff 0%, #4f94f8 48%, #22d3ee 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 0 20px rgba(56, 146, 255, .45));
+}
 .hero .sub { margin: 0 0 24px; font-size: 16px; opacity: .88; }
 .hero .quote {
   display: flex; gap: 12px; font-size: 19px; font-weight: 700; line-height: 1.5;
@@ -169,6 +201,7 @@ body {
 }
 .hero-art .hero-photo ~ .pksk-hero-visual { /* disorok melalui onload */ }
 
+/* Visual terapung terus atas hero — tiada kotak, lebih lapang & futuristik */
 .pksk-hero-visual {
   position: relative;
   width: 100%;
@@ -176,32 +209,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  border-radius: 28px;
-  background:
-    radial-gradient(circle at 48% 45%, rgba(47, 122, 255, 0.35), transparent 32%),
-    radial-gradient(circle at 52% 72%, rgba(12, 83, 178, 0.42), transparent 28%),
-    linear-gradient(135deg, #08285a 0%, #061f45 45%, #041735 100%);
-}
-.pksk-hero-visual::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(96, 165, 250, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(96, 165, 250, 0.08) 1px, transparent 1px);
-  background-size: 42px 42px;
-  opacity: 0.35;
+  background: radial-gradient(circle at 50% 52%, rgba(46, 124, 246, .18), transparent 58%);
 }
 .pksk-hero-visual::after {
   content: "";
   position: absolute;
-  width: 760px;
-  height: 760px;
+  width: 560px;
+  height: 560px;
   border-radius: 50%;
-  border: 1px solid rgba(96, 165, 250, 0.22);
-  box-shadow: inset 0 0 80px rgba(59, 130, 246, 0.14);
-  animation: rotateRing 28s linear infinite;
+  border: 1px dashed rgba(125, 211, 252, 0.30);
+  box-shadow: inset 0 0 90px rgba(59, 130, 246, 0.12);
+  animation: rotateRing 30s linear infinite;
 }
 @keyframes rotateRing {
   from { transform: rotate(0deg); }
@@ -221,10 +239,16 @@ body {
   width: 74px;
   height: 74px;
   border-radius: 16px;
-  background: rgba(18, 55, 105, 0.74);
-  border: 1px solid rgba(147, 197, 253, 0.28);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2), inset 0 0 24px rgba(96, 165, 250, 0.1);
+  background: rgba(14, 44, 88, 0.45);
+  border: 1px solid rgba(147, 216, 253, 0.35);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25), inset 0 0 24px rgba(34, 211, 238, 0.10);
   backdrop-filter: blur(12px);
+  animation: cardFloat 6s ease-in-out infinite;
+}
+.list-card { animation-delay: -3s; }
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
 }
 .chart-card {
   left: 14%;
@@ -236,11 +260,11 @@ body {
   width: 48px;
   height: 48px;
   fill: none;
-  stroke: #60a5fa;
+  stroke: #4fd6f2;
   stroke-width: 5;
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.65));
+  filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.70));
 }
 .list-card {
   right: 18%;
@@ -263,13 +287,16 @@ body {
 .pksk-shield {
   position: relative;
   z-index: 5;
-  width: 230px;
-  height: 270px;
+  width: 240px;
+  height: 282px;
   clip-path: polygon(50% 0%, 92% 16%, 86% 70%, 50% 100%, 14% 70%, 8% 16%);
-  background: linear-gradient(145deg, #e5f2ff, #7db7ff 38%, #234d95 100%);
-  padding: 8px;
-  box-shadow: 0 0 35px rgba(96, 165, 250, 0.55), 0 25px 50px rgba(0, 0, 0, 0.32);
-  animation: shieldFloat 4.5s ease-in-out infinite;
+  background: conic-gradient(from 210deg,
+    #bfeaff, #4f94f8 22%, #123a77 46%, #22d3ee 58%, #4f94f8 78%, #bfeaff);
+  padding: 3px;
+  filter:
+    drop-shadow(0 0 26px rgba(34, 211, 238, .38))
+    drop-shadow(0 26px 44px rgba(0, 0, 0, .40));
+  animation: shieldFloat 5s ease-in-out infinite;
 }
 @keyframes shieldFloat {
   0%, 100% { transform: translateY(0); }
@@ -281,19 +308,34 @@ body {
   height: 100%;
   clip-path: polygon(50% 0%, 92% 16%, 86% 70%, 50% 100%, 14% 70%, 8% 16%);
   background:
-    linear-gradient(145deg, rgba(55, 108, 201, 0.98), rgba(10, 39, 91, 0.96)),
-    radial-gradient(circle at top, rgba(147, 197, 253, 0.55), transparent 45%);
+    linear-gradient(150deg, rgba(40, 84, 158, 0.92), rgba(6, 24, 56, 0.97)),
+    radial-gradient(circle at 50% 12%, rgba(147, 197, 253, 0.50), transparent 46%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 .shield-inner::before {
   content: "";
   position: absolute;
-  inset: 18px;
+  inset: 16px;
   clip-path: polygon(50% 0%, 92% 16%, 86% 70%, 50% 100%, 14% 70%, 8% 16%);
-  border: 1.7px solid rgba(191, 219, 254, 0.65);
+  border: 1.5px solid rgba(165, 224, 255, 0.55);
+}
+/* Kilauan holografik menyapu perisai */
+.shield-inner::after {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: linear-gradient(115deg,
+    transparent 42%, rgba(255, 255, 255, .18) 50%, transparent 58%);
+  transform: translateX(-70%);
+  animation: sheen 5.5s ease-in-out infinite;
+}
+@keyframes sheen {
+  0%, 55%  { transform: translateX(-70%); }
+  85%, 100% { transform: translateX(70%); }
 }
 .shield-glow {
   position: absolute;
@@ -392,8 +434,8 @@ body {
   height: 54px;
   border-radius: 50%;
   background:
-    radial-gradient(circle, rgba(96, 165, 250, 0.45), rgba(18, 55, 105, 0.8) 46%, transparent 72%);
-  box-shadow: 0 18px 26px rgba(0, 0, 0, 0.45);
+    radial-gradient(circle, rgba(34, 211, 238, 0.40), rgba(18, 55, 105, 0.8) 46%, transparent 72%);
+  box-shadow: 0 18px 26px rgba(0, 0, 0, 0.45), 0 0 40px rgba(34, 211, 238, 0.18);
 }
 .pksk-platform::after {
   content: "";
@@ -412,10 +454,13 @@ body {
 .btn {
   border: none; cursor: pointer; font-weight: 700; font-size: 15px;
   padding: 13px 24px; border-radius: 12px; color: #fff;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  box-shadow: 0 8px 22px rgba(46, 124, 246, .35);
-  transition: transform .14s ease, filter .14s ease;
+  background: linear-gradient(135deg, var(--accent), #22a6f2);
+  box-shadow: 0 10px 28px rgba(46, 124, 246, .45),
+    inset 0 0 0 1px rgba(255, 255, 255, .22);
+  transition: transform .14s ease, filter .14s ease, box-shadow .14s ease;
 }
+.hero .btn:hover { box-shadow: 0 12px 34px rgba(34, 166, 242, .55), inset 0 0 0 1px rgba(255, 255, 255, .3); }
+.hero .btn.ghost { background: rgba(255, 255, 255, .05); backdrop-filter: blur(8px); }
 .btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
 .btn.ghost {
   background: transparent; color: #fff; box-shadow: none;
@@ -623,4 +668,12 @@ body {
   .brand-sub { display: none; }
   .topbar { padding: 10px 14px; flex-wrap: wrap; }
   .mainnav { order: 3; width: 100%; justify-content: center; }
+}
+
+/* Hormati tetapan kurang gerakan */
+@media (prefers-reduced-motion: reduce) {
+  .hero::after, .pksk-hero-visual::after, .pksk-shield,
+  .floating-card, .shield-inner::after, .hero .eyebrow::before {
+    animation: none;
+  }
 }
