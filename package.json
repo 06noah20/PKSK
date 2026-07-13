@@ -1,0 +1,16 @@
+{
+  "name": "pksk-portal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portal PKSK with secure feedback API.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.16"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -5,36 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portal PKSK — Pentaksiran Kemasukan Sekolah Khusus</title>
   <meta name="description" content="Portal pembelajaran interaktif untuk Pentaksiran Kemasukan Sekolah Khusus (PKSK)." />
-  <link rel="stylesheet" href="css/style.css?v=14" />
+  <link rel="stylesheet" href="css/style.css?v=45" />
 </head>
 <body>
   <!-- ================= HEADER ================= -->
   <header class="topbar">
     <a class="brand" href="#" aria-label="Portal PKSK">
-      <span class="brand-logo" aria-hidden="true">
-        <svg viewBox="0 0 132 48" xmlns="http://www.w3.org/2000/svg">
-          <path d="M14 6 H118 a10 10 0 0 1 10 10 v16 a10 10 0 0 1 -10 10 H14 a10 10 0 0 1 -10 -10 v-16 a10 10 0 0 1 10 -10 Z" fill="var(--accent)"/>
-          <path d="M4 16 L-4 24 L4 32 Z" fill="var(--accent-dk)"/>
-          <path d="M128 16 L136 24 L128 32 Z" fill="var(--accent-dk)"/>
-          <path d="M26 15 l10 4 -10 4 -10 -4 z" fill="#fff"/>
-          <path d="M18 21 v5 c0 2 16 2 16 0 v-5" fill="none" stroke="#fff" stroke-width="1.6"/>
-          <text x="74" y="31" font-size="20" font-weight="800" fill="#fff" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" letter-spacing="2">PKSK</text>
-        </svg>
-      </span>
+      <span class="pksk-wordmark">PKSK</span>
+      <span class="brand-divider" aria-hidden="true"></span>
+      <span class="brand-title">Pentaksiran Kemasukan<br>Sekolah Khusus</span>
     </a>
-    <nav class="mainnav" id="tabbar">
-      <button class="tab active" data-view="home">Utama</button>
-      <button class="tab" data-view="practice">Latihan PKSK</button>
-      <button class="tab" data-view="learn">Nota PKSK</button>
+    <nav class="mainnav" id="tabbar" aria-label="Navigasi utama">
+      <button class="tab active" data-view="home">
+        <span class="tab-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 11.2 12 4l9 7.2v8.3a1.5 1.5 0 0 1-1.5 1.5H15v-6H9v6H4.5A1.5 1.5 0 0 1 3 19.5z"/></svg>
+        </span>
+        Utama
+      </button>
+      <button class="tab" data-view="practice">
+        <span class="tab-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 4.5h5.5A2.5 2.5 0 0 1 13 7v12.5A2.5 2.5 0 0 0 10.5 17H5z"/><path d="M19 4.5h-5.5A2.5 2.5 0 0 0 11 7v12.5a2.5 2.5 0 0 1 2.5-2.5H19z"/></svg>
+        </span>
+        Latihan
+      </button>
+      <button class="tab" data-view="learn">
+        <span class="tab-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4"/><path d="M8.5 12h7M8.5 15.5h7"/></svg>
+        </span>
+        Nota
+      </button>
+      <button class="tab" data-view="info" type="button">
+        <span class="tab-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 10.5v6M12 7.5h.01"/></svg>
+        </span>
+        Info PKSK
+      </button>
+      <button class="tab" data-view="help" type="button">
+        <span class="tab-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 13a8 8 0 0 1 16 0"/><path d="M5 13h3v5H6a2 2 0 0 1-2-2zM19 13h-3v5h2a2 2 0 0 0 2-2z"/><path d="M16 18c0 2-1.5 3-4 3"/></svg>
+        </span>
+        Bantuan/Cadangan
+      </button>
     </nav>
-    <button class="nav-cta" id="navCta">Mula Latihan</button>
+    <span class="header-separator" aria-hidden="true"></span>
+    <button class="nav-cta" id="loginBtn" type="button">
+      <span class="tab-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0z"/></svg>
+      </span>
+      Log Masuk
+    </button>
   </header>
 
   <main class="container" id="app">
     <!-- Kandungan dijana oleh js/app.js -->
   </main>
 
+  <footer class="portal-disclaimer" aria-label="Penafian portal">
+    Penafian: Portal ini hanya menyediakan bahan latihan dan pengukuhan pembelajaran untuk pelajar. Sebarang soalan yang dipaparkan bukan soalan ramalan, soalan bocor atau soalan sebenar peperiksaan daripada mana-mana sekolah.
+  </footer>
+
   <script src="js/questions.js?v=14"></script>
-  <script src="js/app.js?v=14"></script>
+  <script src="js/practice-set-questions.js?v=1"></script>
+  <script src="js/practice-general-sets.js?v=1"></script>
+  <script src="js/practice-math-sets.js?v=4"></script>
+  <script src="js/practice-math-diagram-sets.js?v=1"></script>
+  <script src="js/practice-math-additional.js?v=1"></script>
+  <script src="js/practice-science-sets.js?v=17"></script>
+  <script src="js/practice-english-sets.js?v=1"></script>
+  <script src="js/app.js?v=43"></script>
 </body>
 </html>

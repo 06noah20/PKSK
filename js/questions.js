@@ -3,7 +3,7 @@
  * =========================================================================
  * Diekstrak SEPENUHNYA daripada portal induk PORTAL-UASA/portal-pintar_8.html,
  * bahagian CABARAN "PKSK" — 4 kertas rasmi:
- *   Pengetahuan Am (30) · Matematik (30) · Sains (39) · English (20)
+ *   Pengetahuan Am (30) · Matematik (30) · Sains (40) · English (20)
  *   = 119 soalan sebenar.
  *
  * Format satu soalan:
