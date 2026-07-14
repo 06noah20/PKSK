@@ -1762,7 +1762,7 @@
       "category": "Sains",
       "level": "Konstruk 2: Manusia, Sistem Badan dan Kesihatan - KBAT - Kesihatan dan fungsi saraf",
       "explain": "Jawapan B paling tepat berdasarkan konsep Kesihatan dan fungsi saraf yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/human-response.png\" alt=\"Gambar realistik manusia\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q01.png\" alt=\"Rajah Sains Set 4 soalan 1\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-117",
@@ -1777,7 +1777,7 @@
       "category": "Sains",
       "level": "Konstruk 4: Tumbuhan, Fotosintesis dan Kemandirian Spesies - KBAT - Interaksi dan persaingan",
       "explain": "Jawapan A paling tepat berdasarkan konsep Interaksi dan persaingan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/plant-light.png\" alt=\"Gambar realistik tumbuhan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q02.png\" alt=\"Rajah Sains Set 4 soalan 2\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-167",
@@ -1806,7 +1806,7 @@
       "category": "Sains",
       "level": "Konstruk 6: Cahaya, Bunyi dan Bentuk Tenaga - KBAT - Aplikasi perambatan bunyi",
       "explain": "Jawapan D paling tepat berdasarkan konsep Aplikasi perambatan bunyi yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/earth-moon-sun.png\" alt=\"Gambar realistik Bumi Bulan Matahari\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q04.png\" alt=\"Rajah Sains Set 4 soalan 4\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-212",
@@ -1821,7 +1821,7 @@
       "category": "Sains",
       "level": "Konstruk 8: Daya, Geseran, Tekanan Udara dan Kelajuan - Asas - Geseran",
       "explain": "Jawapan B paling tepat berdasarkan konsep Geseran yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/magnet-force.png\" alt=\"Gambar realistik magnet dan daya\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q05.png\" alt=\"Rajah Sains Set 4 soalan 5\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-213",
@@ -1835,7 +1835,8 @@
       "answer": 2,
       "category": "Sains",
       "level": "Konstruk 8: Daya, Geseran, Tekanan Udara dan Kelajuan - Asas - Pengiraan kelajuan",
-      "explain": "Jawapan C paling tepat berdasarkan konsep Pengiraan kelajuan yang diuji."
+      "explain": "Jawapan C paling tepat berdasarkan konsep Pengiraan kelajuan yang diuji.",
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q06.png\" alt=\"Rajah Sains Set 4 soalan 6\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-210",
@@ -1850,7 +1851,7 @@
       "category": "Sains",
       "level": "Konstruk 7: Elektrik, Haba dan Suhu - KBAT - Menilai pengukuran suhu",
       "explain": "Jawapan C paling tepat berdasarkan konsep Menilai pengukuran suhu yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/water-temperature.png\" alt=\"Gambar realistik air dan suhu\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q07.png\" alt=\"Rajah Sains Set 4 soalan 7\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-261",
@@ -1880,7 +1881,7 @@
       "category": "Sains",
       "level": "Konstruk 5: Mikroorganisma, Interaksi Hidupan dan Pemuliharaan - KBAT - Penyelesaian masalah kesihatan awam",
       "explain": "Jawapan A paling tepat berdasarkan konsep Penyelesaian masalah kesihatan awam yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/water-temperature.png\" alt=\"Gambar realistik air dan suhu\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q09.png\" alt=\"Rajah Sains Set 4 soalan 9\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-204",
@@ -1895,7 +1896,7 @@
       "category": "Sains",
       "level": "Konstruk 7: Elektrik, Haba dan Suhu - KBAT - Menilai teknologi keselamatan",
       "explain": "Jawapan C paling tepat berdasarkan konsep Menilai teknologi keselamatan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/animal-general.png\" alt=\"Gambar realistik haiwan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q10.png\" alt=\"Rajah Sains Set 4 soalan 10\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-278",
@@ -1910,7 +1911,7 @@
       "category": "Sains",
       "level": "Konstruk 10: Kerosakan dan Pegawetan Makanan serta Pengurusan Sisa - Sederhana - Mengawal kerosakan makanan",
       "explain": "Jawapan D paling tepat berdasarkan konsep Mengawal kerosakan makanan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/materials.png\" alt=\"Gambar realistik bahan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q11.png\" alt=\"Rajah Sains Set 4 soalan 11\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-293",
@@ -1954,7 +1955,7 @@
       "category": "Sains",
       "level": "Konstruk 10: Kerosakan dan Pegawetan Makanan serta Pengurusan Sisa - KBAT - Pencemaran sisa",
       "explain": "Jawapan D paling tepat berdasarkan konsep Pencemaran sisa yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/water-temperature.png\" alt=\"Gambar realistik air dan suhu\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q14.png\" alt=\"Rajah Sains Set 4 soalan 14\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-286",
@@ -1969,7 +1970,7 @@
       "category": "Sains",
       "level": "Konstruk 10: Kerosakan dan Pegawetan Makanan serta Pengurusan Sisa - KBAT - Mentafsir eksperimen makanan",
       "explain": "Jawapan D paling tepat berdasarkan konsep Mentafsir eksperimen makanan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/human-response.png\" alt=\"Gambar realistik manusia\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q15.png\" alt=\"Rajah Sains Set 4 soalan 15\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-357",
@@ -1984,7 +1985,7 @@
       "category": "Sains",
       "level": "Konstruk 12: Mesin, Struktur, Teknologi dan Kehidupan Lestari - KBAT - Membuat keputusan teknologi",
       "explain": "Jawapan B paling tepat berdasarkan konsep Membuat keputusan teknologi yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/animal-general.png\" alt=\"Gambar realistik haiwan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q16.png\" alt=\"Rajah Sains Set 4 soalan 16\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-349",
@@ -1999,7 +2000,7 @@
       "category": "Sains",
       "level": "Konstruk 12: Mesin, Struktur, Teknologi dan Kehidupan Lestari - KBAT - Reka bentuk lestari",
       "explain": "Jawapan C paling tepat berdasarkan konsep Reka bentuk lestari yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/water-temperature.png\" alt=\"Gambar realistik air dan suhu\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q17.png\" alt=\"Rajah Sains Set 4 soalan 17\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-325",
@@ -2014,7 +2015,7 @@
       "category": "Sains",
       "level": "Konstruk 11: Bumi, Bulan, Gerhana, Buruj dan Galaksi - KBAT - Menaakul peredaran Bumi",
       "explain": "Jawapan D paling tepat berdasarkan konsep Menaakul peredaran Bumi yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/animal-turtle.png\" alt=\"Gambar realistik kura-kura\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q18.png\" alt=\"Rajah Sains Set 4 soalan 18\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-094",
@@ -2057,7 +2058,7 @@
       "category": "Sains",
       "level": "Konstruk 1: Kemahiran Proses Sains dan Reka Bentuk Eksperimen - KBAT - Menilai teknik pengukuran",
       "explain": "Jawapan B paling tepat berdasarkan konsep Menilai teknik pengukuran yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/human-response.png\" alt=\"Gambar realistik manusia\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q21.png\" alt=\"Rajah Sains Set 4 soalan 21\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-080",
@@ -2072,7 +2073,7 @@
       "category": "Sains",
       "level": "Konstruk 3: Haiwan, Adaptasi dan Hubungan Makanan - KBAT - Menilai adaptasi",
       "explain": "Jawapan C paling tepat berdasarkan konsep Menilai adaptasi yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/animal-turtle.png\" alt=\"Gambar realistik kura-kura\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q22.png\" alt=\"Rajah Sains Set 4 soalan 22\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-032",
@@ -2087,7 +2088,7 @@
       "category": "Sains",
       "level": "Konstruk 2: Manusia, Sistem Badan dan Kesihatan - Asas - Sistem rangka",
       "explain": "Jawapan B paling tepat berdasarkan konsep Sistem rangka yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/human-response.png\" alt=\"Gambar realistik manusia\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q23.png\" alt=\"Rajah Sains Set 4 soalan 23\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-023",
@@ -2102,7 +2103,7 @@
       "category": "Sains",
       "level": "Konstruk 1: Kemahiran Proses Sains dan Reka Bentuk Eksperimen - KBAT - Menjelaskan perubahan pola",
       "explain": "Jawapan D paling tepat berdasarkan konsep Menjelaskan perubahan pola yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/animal-turtle.png\" alt=\"Gambar realistik kura-kura\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q24.png\" alt=\"Rajah Sains Set 4 soalan 24\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-071",
@@ -2131,7 +2132,7 @@
       "category": "Sains",
       "level": "Konstruk 1: Kemahiran Proses Sains dan Reka Bentuk Eksperimen - Sederhana - Meramal berdasarkan pola",
       "explain": "Jawapan B paling tepat berdasarkan konsep Meramal berdasarkan pola yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/plant-light.png\" alt=\"Gambar realistik tumbuhan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q26.png\" alt=\"Rajah Sains Set 4 soalan 26\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-185",
@@ -2146,7 +2147,7 @@
       "category": "Sains",
       "level": "Konstruk 7: Elektrik, Haba dan Suhu - Asas - Litar bersiri",
       "explain": "Jawapan B paling tepat berdasarkan konsep Litar bersiri yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/circuit-electric.png\" alt=\"Gambar realistik litar elektrik\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q27.png\" alt=\"Rajah Sains Set 4 soalan 27\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-199",
@@ -2161,7 +2162,7 @@
       "category": "Sains",
       "level": "Konstruk 7: Elektrik, Haba dan Suhu - KBAT - Membuat kesimpulan eksperimen",
       "explain": "Jawapan C paling tepat berdasarkan konsep Membuat kesimpulan eksperimen yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/circuit-electric.png\" alt=\"Gambar realistik litar elektrik\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q28.png\" alt=\"Rajah Sains Set 4 soalan 28\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-139",
@@ -2176,7 +2177,7 @@
       "category": "Sains",
       "level": "Konstruk 5: Mikroorganisma, Interaksi Hidupan dan Pemuliharaan - KBAT - Menaakul pencemaran air",
       "explain": "Jawapan D paling tepat berdasarkan konsep Menaakul pencemaran air yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/animal-general.png\" alt=\"Gambar realistik haiwan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q29.png\" alt=\"Rajah Sains Set 4 soalan 29\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-120",
@@ -2191,7 +2192,7 @@
       "category": "Sains",
       "level": "Konstruk 4: Tumbuhan, Fotosintesis dan Kemandirian Spesies - KBAT - Aplikasi fototropisme",
       "explain": "Jawapan C paling tepat berdasarkan konsep Aplikasi fototropisme yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/plant-light.png\" alt=\"Gambar realistik tumbuhan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q30.png\" alt=\"Rajah Sains Set 4 soalan 30\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-158",
@@ -2206,7 +2207,7 @@
       "category": "Sains",
       "level": "Konstruk 6: Cahaya, Bunyi dan Bentuk Tenaga - Sederhana - Hubungan ruang cahaya",
       "explain": "Jawapan A paling tepat berdasarkan konsep Hubungan ruang cahaya yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/earth-moon-sun.png\" alt=\"Gambar realistik Bumi Bulan Matahari\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q31.png\" alt=\"Rajah Sains Set 4 soalan 31\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-009",
@@ -2221,7 +2222,7 @@
       "category": "Sains",
       "level": "Konstruk 1: Kemahiran Proses Sains dan Reka Bentuk Eksperimen - Sederhana - Membuat inferens",
       "explain": "Jawapan D paling tepat berdasarkan konsep Membuat inferens yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/water-temperature.png\" alt=\"Gambar realistik air dan suhu\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q32.png\" alt=\"Rajah Sains Set 4 soalan 32\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-125",
@@ -2236,7 +2237,7 @@
       "category": "Sains",
       "level": "Konstruk 5: Mikroorganisma, Interaksi Hidupan dan Pemuliharaan - Asas - Kesihatan dan kebersihan",
       "explain": "Jawapan C paling tepat berdasarkan konsep Kesihatan dan kebersihan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/human-response.png\" alt=\"Gambar realistik manusia\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q33.png\" alt=\"Rajah Sains Set 4 soalan 33\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-256",
@@ -2251,7 +2252,7 @@
       "category": "Sains",
       "level": "Konstruk 9: Bahan, Pengaratan, Jirim dan Kitaran Air - KBAT - Mentafsir eksperimen pengaratan",
       "explain": "Jawapan D paling tepat berdasarkan konsep Mentafsir eksperimen pengaratan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/water-temperature.png\" alt=\"Gambar realistik air dan suhu\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q34.png\" alt=\"Rajah Sains Set 4 soalan 34\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-235",
@@ -2266,7 +2267,7 @@
       "category": "Sains",
       "level": "Konstruk 8: Daya, Geseran, Tekanan Udara dan Kelajuan - KBAT - Daya seimbang",
       "explain": "Jawapan D paling tepat berdasarkan konsep Daya seimbang yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/magnet-force.png\" alt=\"Gambar realistik magnet dan daya\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q35.png\" alt=\"Rajah Sains Set 4 soalan 35\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-246",
@@ -2281,7 +2282,7 @@
       "category": "Sains",
       "level": "Konstruk 9: Bahan, Pengaratan, Jirim dan Kitaran Air - Asas - Sifat bahan",
       "explain": "Jawapan D paling tepat berdasarkan konsep Sifat bahan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/materials.png\" alt=\"Gambar realistik bahan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q36.png\" alt=\"Rajah Sains Set 4 soalan 36\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-301",
@@ -2296,7 +2297,7 @@
       "category": "Sains",
       "level": "Konstruk 11: Bumi, Bulan, Gerhana, Buruj dan Galaksi - Asas - Graviti Bumi",
       "explain": "Jawapan C paling tepat berdasarkan konsep Graviti Bumi yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/magnet-force.png\" alt=\"Gambar realistik magnet dan daya\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q37.png\" alt=\"Rajah Sains Set 4 soalan 37\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-303",
@@ -2311,7 +2312,7 @@
       "category": "Sains",
       "level": "Konstruk 11: Bumi, Bulan, Gerhana, Buruj dan Galaksi - Asas - Peredaran Bumi",
       "explain": "Jawapan C paling tepat berdasarkan konsep Peredaran Bumi yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/earth-moon-sun.png\" alt=\"Gambar realistik Bumi Bulan Matahari\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q38.png\" alt=\"Rajah Sains Set 4 soalan 38\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-044",
@@ -2326,7 +2327,7 @@
       "category": "Sains",
       "level": "Konstruk 2: Manusia, Sistem Badan dan Kesihatan - Sederhana - Menaakul proses pernafasan",
       "explain": "Jawapan A paling tepat berdasarkan konsep Menaakul proses pernafasan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/human-response.png\" alt=\"Gambar realistik manusia\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q39.png\" alt=\"Rajah Sains Set 4 soalan 39\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-068",
@@ -2341,7 +2342,7 @@
       "category": "Sains",
       "level": "Konstruk 3: Haiwan, Adaptasi dan Hubungan Makanan - Sederhana - Meramal perubahan rantai makanan",
       "explain": "Jawapan C paling tepat berdasarkan konsep Meramal perubahan rantai makanan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/animal-general.png\" alt=\"Gambar realistik haiwan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q40.png\" alt=\"Rajah Sains Set 4 soalan 40\" loading=\"lazy\">"
     }
   ],
   "5": [

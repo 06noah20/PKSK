@@ -228,6 +228,16 @@ function set2PhotoFigure(index) {
   return `<img class="science-question-image science-raster-image science-photo-image" src="assets/science-set2/${file}" alt="Rajah Sains Set 2 soalan ${index}" loading="lazy">`;
 }
 
+function set4PhotoFigure(index) {
+  const uploadedImageIndexes = new Set([
+    1, 2, 4, 5, 6, 7, 9, 10, 11, 14, 15, 16, 17, 18, 21, 22, 23, 24,
+    26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+  ]);
+  if (!uploadedImageIndexes.has(index)) return "";
+  const file = `q${String(index).padStart(2, "0")}.png`;
+  return `<img class="science-question-image science-raster-image science-photo-image" src="assets/science-set4/${file}" alt="Rajah Sains Set 4 soalan ${index}" loading="lazy">`;
+}
+
 function figureBox(content) {
   return `<div class="science-auto-figure" style="max-width:880px;margin:0 auto;padding:18px;border-radius:18px;background:#fff8fb;border:1px solid rgba(138,21,56,.16);box-shadow:0 12px 28px rgba(31,41,55,.08);">${content}</div>`;
 }
@@ -763,6 +773,7 @@ function normalizeQuestion(question, setNo, index) {
     (setNo === 2 && SET2_NO_FIG.has(index));
   const set1Figure = suppressFigure ? "" : setNo === 1 ? set1PhotoFigure(index) : "";
   const set2Figure = suppressFigure ? "" : setNo === 2 ? set2PhotoFigure(index) : "";
+  const set4Figure = suppressFigure ? "" : setNo === 4 ? set4PhotoFigure(index) : "";
   const autoFigure = suppressFigure ? "" : image && !isVectorFigure ? "" : directFigure && !isVectorFigure ? "" : autoScienceFigure(q, setNo, index);
 
   if (!q) throw new Error(`Set ${setNo} soalan ${index}: teks soalan kosong.`);
@@ -786,6 +797,8 @@ function normalizeQuestion(question, setNo, index) {
       fig: set1Figure,
     } : set2Figure ? {
       fig: set2Figure,
+    } : set4Figure ? {
+      fig: set4Figure,
     } : image && !isVectorFigure ? {
       fig: `<img class="science-question-image" src="${escapeAttr(image)}" alt="Rajah soalan Sains">`,
     } : directFigure && !isVectorFigure ? {
