@@ -1835,8 +1835,7 @@
       "answer": 2,
       "category": "Sains",
       "level": "Konstruk 8: Daya, Geseran, Tekanan Udara dan Kelajuan - Asas - Pengiraan kelajuan",
-      "explain": "Jawapan C paling tepat berdasarkan konsep Pengiraan kelajuan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q06.png\" alt=\"Rajah Sains Set 4 soalan 6\" loading=\"lazy\">"
+      "explain": "Jawapan C paling tepat berdasarkan konsep Pengiraan kelajuan yang diuji."
     },
     {
       "sourceId": "BANK-SCI-210",
@@ -1851,7 +1850,7 @@
       "category": "Sains",
       "level": "Konstruk 7: Elektrik, Haba dan Suhu - KBAT - Menilai pengukuran suhu",
       "explain": "Jawapan C paling tepat berdasarkan konsep Menilai pengukuran suhu yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/q07.png\" alt=\"Rajah Sains Set 4 soalan 7\" loading=\"lazy\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/SOALAN 7.png\" alt=\"Rajah Sains Set 4 soalan 7\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-261",
@@ -1866,7 +1865,7 @@
       "category": "Sains",
       "level": "Konstruk 9: Bahan, Pengaratan, Jirim dan Kitaran Air - KBAT - Reka bentuk bahan",
       "explain": "Jawapan C paling tepat berdasarkan konsep Reka bentuk bahan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/human-response.png\" alt=\"Gambar realistik manusia\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set4/SOALAN 8.png\" alt=\"Rajah Sains Set 4 soalan 8\" loading=\"lazy\">"
     },
     {
       "sourceId": "BANK-SCI-145",
