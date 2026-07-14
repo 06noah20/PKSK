@@ -2955,3 +2955,57 @@ body {
     padding: 12px 17px;
   }
 }
+
+/* ---------- Modal Log Masuk / Daftar (Supabase) ---------- */
+.auth-overlay {
+  position: fixed; inset: 0; z-index: 60; display: grid; place-items: center;
+  background: rgba(42, 20, 30, .45); backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none; transition: opacity .18s ease;
+}
+.auth-overlay.show { opacity: 1; pointer-events: auto; }
+.auth-modal {
+  position: relative; width: min(400px, calc(100vw - 36px));
+  background: #fff; border-radius: 18px; padding: 28px 26px 22px;
+  box-shadow: 0 30px 70px rgba(60, 10, 25, .35);
+}
+.auth-close {
+  position: absolute; top: 10px; right: 12px; border: none; background: none;
+  font-size: 26px; line-height: 1; color: #a89aa0; cursor: pointer;
+}
+.auth-close:hover { color: var(--accent); }
+.auth-title { margin: 0 0 16px; font-size: 20px; text-align: center; }
+.auth-title b { color: var(--accent); }
+.auth-tabs {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+  background: var(--bg-soft); border-radius: 10px; padding: 5px; margin-bottom: 18px;
+}
+.auth-tab {
+  border: none; background: none; cursor: pointer; padding: 9px 0;
+  font-weight: 700; font-size: 13.5px; color: var(--ink-soft); border-radius: 8px;
+}
+.auth-tab.active { background: #fff; color: var(--accent); box-shadow: 0 3px 10px rgba(120,20,50,.12); }
+.auth-field { display: block; margin-bottom: 13px; }
+.auth-field span { display: block; font-size: 12.5px; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+.auth-field input {
+  width: 100%; padding: 11px 13px; border-radius: 9px; font-size: 14px;
+  border: 1.5px solid var(--line); background: #fff; color: var(--ink);
+}
+.auth-field input:focus { outline: none; border-color: var(--accent); }
+.auth-msg {
+  font-size: 13px; padding: 9px 12px; border-radius: 8px; margin-bottom: 12px;
+  background: var(--bad-bg); color: var(--bad);
+}
+.auth-msg.ok { background: var(--good-bg); color: var(--good); }
+.auth-submit {
+  width: 100%; border: none; cursor: pointer; font-weight: 700; font-size: 15px;
+  padding: 12px; border-radius: 10px; color: #fff; background: var(--accent);
+  box-shadow: 0 8px 20px rgba(164, 31, 69, .28);
+}
+.auth-submit:hover { background: var(--accent-dk); }
+.auth-submit:disabled { opacity: .6; cursor: wait; }
+.auth-note { margin: 12px 0 0; font-size: 11.5px; color: var(--ink-soft); text-align: center; line-height: 1.6; }
+.badge-premium {
+  font-size: 9.5px; font-weight: 800; letter-spacing: .08em;
+  background: #f0b429; color: #5c4300; border-radius: 999px; padding: 2px 7px; margin-left: 6px;
+}
+.auth-field[hidden] { display: none; }
