@@ -264,5 +264,85 @@ create policy subscriptions_admin_write on public.subscriptions
   for all using (public.is_admin()) with check (public.is_admin());
 
 -- =====================================================================
+-- 6. PERMINTAAN NAIK TARAF (bayaran QR manual + kelulusan admin)
+-- =====================================================================
+
+create table if not exists public.payment_requests (
+  id          uuid primary key default gen_random_uuid(),
+  user_id     uuid not null references auth.users (id) on delete cascade,
+  full_name   text,
+  email       text,
+  amount      numeric,
+  reference   text,   -- rujukan bank / nama pembayar
+  note        text,
+  status      text not null default 'pending'
+                check (status in ('pending', 'approved', 'rejected')),
+  created_at  timestamptz not null default now(),
+  reviewed_at timestamptz,
+  reviewed_by uuid references auth.users (id)
+);
+create index if not exists idx_payreq_status on public.payment_requests (status);
+create index if not exists idx_payreq_user   on public.payment_requests (user_id);
+
+alter table public.payment_requests enable row level security;
+
+-- Pengguna hantar permintaan sendiri; admin lihat/urus semua.
+drop policy if exists payreq_insert on public.payment_requests;
+create policy payreq_insert on public.payment_requests
+  for insert with check (user_id = auth.uid());
+
+drop policy if exists payreq_select on public.payment_requests;
+create policy payreq_select on public.payment_requests
+  for select using (user_id = auth.uid() or public.is_admin());
+
+drop policy if exists payreq_admin_update on public.payment_requests;
+create policy payreq_admin_update on public.payment_requests
+  for update using (public.is_admin()) with check (public.is_admin());
+
+-- Luluskan: jadikan pengguna premium + rekod langganan + tanda diluluskan.
+create or replace function public.approve_premium(p_request uuid, p_months int default 12)
+returns void
+language plpgsql security definer set search_path = public
+as $$
+declare v_user uuid;
+begin
+  if not public.is_admin() then
+    raise exception 'Tidak dibenarkan';
+  end if;
+  select user_id into v_user from public.payment_requests where id = p_request;
+  if v_user is null then
+    raise exception 'Permintaan tidak dijumpai';
+  end if;
+
+  update public.profiles set access_level = 'premium' where id = v_user;
+
+  insert into public.subscriptions (user_id, status, plan_name, started_at, expires_at)
+  values (v_user, 'active', 'premium', now(), now() + make_interval(months => p_months));
+
+  update public.payment_requests
+    set status = 'approved', reviewed_at = now(), reviewed_by = auth.uid()
+    where id = p_request;
+end;
+$$;
+
+-- Tolak permintaan.
+create or replace function public.reject_payment(p_request uuid)
+returns void
+language plpgsql security definer set search_path = public
+as $$
+begin
+  if not public.is_admin() then
+    raise exception 'Tidak dibenarkan';
+  end if;
+  update public.payment_requests
+    set status = 'rejected', reviewed_at = now(), reviewed_by = auth.uid()
+    where id = p_request;
+end;
+$$;
+
+grant execute on function public.approve_premium(uuid, int) to authenticated;
+grant execute on function public.reject_payment(uuid) to authenticated;
+
+-- =====================================================================
 -- SELESAI
 -- =====================================================================

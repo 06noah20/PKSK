@@ -1006,7 +1006,7 @@
             : "Sila <b>log masuk</b> atau daftar akaun untuk meneruskan. Set Latihan 1 percuma; set selebihnya memerlukan akaun premium."}
         </p>
         <button type="button" class="auth-submit" id="lockedCta">
-          ${loggedIn ? "Baik, faham" : "Log Masuk / Daftar"}</button>
+          ${loggedIn ? "Naik Taraf Premium" : "Log Masuk / Daftar"}</button>
       </div>`;
     document.body.appendChild(wrap);
     const closeIt = () => wrap.remove();
@@ -1014,7 +1014,8 @@
     wrap.querySelector(".auth-close").addEventListener("click", closeIt);
     wrap.querySelector("#lockedCta").addEventListener("click", () => {
       closeIt();
-      if (!loggedIn) window.pkskAuthUI?.open?.("login");
+      if (loggedIn) window.pkskPremium?.openUpgrade?.();
+      else window.pkskAuthUI?.open?.("login");
     });
   }
   // Segarkan senarai set bila status log masuk berubah
