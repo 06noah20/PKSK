@@ -979,6 +979,49 @@
         runSession(DATA.topics.find(x => x.id === el.dataset.topic))));
   }
 
+  /* ---------------- Akses premium (Supabase) ----------------
+   * Set 1 percuma untuk semua; Set 2+ memerlukan akaun premium/admin.
+   * Jika Supabase belum dikonfigurasi, semua set kekal terbuka. */
+  const FREE_SET = 1;
+  function currentAccess() {
+    return window.pkskAuth?.state?.().access || "anon";
+  }
+  function canAccessSet(setNo) {
+    if (!window.pkskAuth?.configured?.()) return true; // belum diaktifkan: semua terbuka
+    if (setNo === FREE_SET) return true;
+    const a = currentAccess();
+    return a === "premium" || a === "admin";
+  }
+  function showLockedNotice(setNo) {
+    const loggedIn = currentAccess() !== "anon";
+    const wrap = document.createElement("div");
+    wrap.className = "auth-overlay show";
+    wrap.innerHTML = `
+      <div class="auth-modal" role="dialog" aria-modal="true">
+        <button class="auth-close" aria-label="Tutup">×</button>
+        <h3 class="auth-title">🔒 Set Latihan ${setNo} <b>Premium</b></h3>
+        <p class="auth-note" style="font-size:13.5px">
+          ${loggedIn
+            ? "Akaun anda kini <b>percuma</b> — Set Latihan 1 sahaja. Naik taraf ke <b>premium</b> untuk membuka semua set latihan."
+            : "Sila <b>log masuk</b> atau daftar akaun untuk meneruskan. Set Latihan 1 percuma; set selebihnya memerlukan akaun premium."}
+        </p>
+        <button type="button" class="auth-submit" id="lockedCta">
+          ${loggedIn ? "Baik, faham" : "Log Masuk / Daftar"}</button>
+      </div>`;
+    document.body.appendChild(wrap);
+    const closeIt = () => wrap.remove();
+    wrap.addEventListener("click", (e) => { if (e.target === wrap) closeIt(); });
+    wrap.querySelector(".auth-close").addEventListener("click", closeIt);
+    wrap.querySelector("#lockedCta").addEventListener("click", () => {
+      closeIt();
+      if (!loggedIn) window.pkskAuthUI?.open?.("login");
+    });
+  }
+  // Segarkan senarai set bila status log masuk berubah
+  document.addEventListener("pksk-auth-changed", () => {
+    if (document.querySelector(".practice-set-grid")) renderTopicPicker();
+  });
+
   /* ---------------- Paparan: LATIHAN SET (override) ---------------- */
   function renderTopicPicker() {
     const sets = Array.from({ length: 10 }, (_, i) => i + 1);
@@ -1004,7 +1047,11 @@
     </section>`;
 
     app.querySelectorAll(".practice-set-card").forEach(card =>
-      card.addEventListener("click", () => renderPracticeSetDetail(+card.dataset.set)));
+      card.addEventListener("click", () => {
+        const setNo = +card.dataset.set;
+        if (!canAccessSet(setNo)) return showLockedNotice(setNo);
+        renderPracticeSetDetail(setNo);
+      }));
   }
 
   function practiceSetInfo(setNo, setProgress = loadSetProgress()) {
@@ -1018,7 +1065,9 @@
 
   function practiceSetCard(setNo, setProgress) {
     const padded = String(setNo).padStart(2, "0");
-    return `<button class="practice-set-card" data-set="${setNo}" type="button">
+    const locked = !canAccessSet(setNo);
+    return `<button class="practice-set-card${locked ? " locked" : ""}" data-set="${setNo}" type="button">
+      ${locked ? `<span class="set-lock" aria-label="Set premium">🔒 PREMIUM</span>` : ""}
       <span class="practice-set-top">
         <span class="practice-set-number">${padded}</span>
         <span class="practice-set-art">
@@ -1040,6 +1089,7 @@
   }
 
   function renderPracticeSetDetail(setNo) {
+    if (!canAccessSet(setNo)) { showLockedNotice(setNo); return renderTopicPicker(); }
     const padded = String(setNo).padStart(2, "0");
     app.innerHTML = `<section class="practice-page">
       <div class="practice-detail-header">

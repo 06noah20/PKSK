@@ -162,6 +162,9 @@
     }
   });
 
+  /* API awam untuk modul lain (cth. kunci set premium) */
+  window.pkskAuthUI = { open, close };
+
   /* ---------------- Mula ---------------- */
   if (window.pkskAuth) {
     window.pkskAuth.onChange(refreshButton);
