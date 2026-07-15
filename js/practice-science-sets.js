@@ -1183,7 +1183,7 @@
       "category": "Sains",
       "level": "Konstruk 11: Bumi, Bulan, Gerhana, Buruj dan Galaksi - Sederhana - Graviti dan orbit",
       "explain": "Jawapan B paling tepat berdasarkan konsep Graviti dan orbit yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/magnet-force.png\" alt=\"Gambar realistik magnet dan daya\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q02.png\" alt=\"Angkasawan terapung dalam orbit — graviti dan jatuh bebas\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-202",
@@ -1198,7 +1198,7 @@
       "category": "Sains",
       "level": "Konstruk 7: Elektrik, Haba dan Suhu - KBAT - Keselamatan bateri",
       "explain": "Jawapan C paling tepat berdasarkan konsep Keselamatan bateri yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/circuit-electric.png\" alt=\"Gambar realistik litar elektrik\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q03.png\" alt=\"Bateri dibuang ke dalam api — bahaya keselamatan bateri\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-276",
@@ -1227,7 +1227,7 @@
       "category": "Sains",
       "level": "Konstruk 8: Daya, Geseran, Tekanan Udara dan Kelajuan - Asas - Konsep daya",
       "explain": "Jawapan B paling tepat berdasarkan konsep Konsep daya yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/magnet-force.png\" alt=\"Gambar realistik magnet dan daya\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q05.png\" alt=\"Budak menolak kotak — konsep daya\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-208",
@@ -1242,7 +1242,7 @@
       "category": "Sains",
       "level": "Konstruk 7: Elektrik, Haba dan Suhu - KBAT - Mentafsir data penggunaan tenaga",
       "explain": "Jawapan C paling tepat berdasarkan konsep Mentafsir data penggunaan tenaga yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/circuit-electric.png\" alt=\"Gambar realistik litar elektrik\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q06.png\" alt=\"Carta pai penggunaan tenaga elektrik di sekolah\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-279",
@@ -1257,7 +1257,7 @@
       "category": "Sains",
       "level": "Konstruk 10: Kerosakan dan Pegawetan Makanan serta Pengurusan Sisa - Sederhana - Keselamatan makanan",
       "explain": "Jawapan C paling tepat berdasarkan konsep Keselamatan makanan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/magnet-force.png\" alt=\"Gambar realistik magnet dan daya\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q07.png\" alt=\"Semak tarikh luput dan keadaan bungkusan makanan\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-298",
