@@ -57,16 +57,27 @@
     function users() { return rd(K.users, {}); }
     function setUsers(u) { wr(K.users, u); }
 
+    // Akaun admin siap-sedia: id "pkskmy", kata laluan "pkskmy@2026".
+    function seedAdmin() {
+      const u = users();
+      if (!u["pkskmy"]) {
+        u["pkskmy"] = {
+          id: "admin_pkskmy", email: "pkskmy", password: "pkskmy@2026",
+          full_name: "Pentadbir PKSK", role: "admin", access_level: "premium"
+        };
+        setUsers(u);
+      }
+    }
+
     async function signUp(email, password, fullName) {
       email = email.toLowerCase();
       const u = users();
       if (u[email]) throw new Error("E-mel ini sudah didaftarkan — sila log masuk.");
-      const first = Object.keys(u).length === 0; // akaun pertama = admin
+      // Akaun baharu: wujud tetapi menunggu kelulusan admin (access free).
       u[email] = {
         id: uid(), email, password,
         full_name: fullName || email.split("@")[0],
-        role: first ? "admin" : "user",
-        access_level: "free"
+        role: "user", access_level: "free"
       };
       setUsers(u);
       wr(K.sess, email);
@@ -91,6 +102,7 @@
       emit();
     }
     function restore() {
+      seedAdmin();
       const email = rd(K.sess, null);
       if (email && users()[email]) apply(email);
     }
@@ -127,7 +139,7 @@
       const r = reqs.find(x => x.id === id); if (r) { r.status = "rejected"; r.reviewed_at = new Date().toISOString(); wr(K.req, reqs); }
       return Promise.resolve();
     }
-    return { signUp, signIn, signOut, restore, submitPayment, listRequests, approve, reject };
+    return { seedAdmin, signUp, signIn, signOut, restore, submitPayment, listRequests, approve, reject };
   })();
 
   function fileToDataUrl(file) {

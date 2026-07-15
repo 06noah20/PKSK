@@ -75,7 +75,11 @@
     overlay.addEventListener("click", (e) => { if (e.target === overlay) close(); });
     overlay.querySelector(".auth-close").addEventListener("click", close);
     overlay.querySelectorAll(".auth-tab").forEach(t =>
-      t.addEventListener("click", () => setMode(t.dataset.mode)));
+      t.addEventListener("click", () => {
+        // "Daftar Akaun" = aliran sama seperti klik set premium (daftar + QR + resit)
+        if (t.dataset.mode === "signup") { close(); window.pkskPremium?.openUpgrade?.(); return; }
+        setMode(t.dataset.mode);
+      }));
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -165,11 +169,29 @@
   /* API awam untuk modul lain (cth. kunci set premium) */
   window.pkskAuthUI = { open, close };
 
+  /* ---------------- Notifikasi kelulusan ---------------- */
+  function notifyApproval(st) {
+    if (!st?.user) return;
+    const key = "pksk_notified_" + st.user.id;
+    if (st.access === "premium") {
+      if (!localStorage.getItem(key)) {
+        localStorage.setItem(key, "1");
+        toast("🎉 Tahniah! Akaun anda telah diluluskan — semua set latihan kini terbuka.");
+      }
+    } else {
+      localStorage.removeItem(key); // set semula jika belum premium
+    }
+  }
+  function toast(text) {
+    let t = document.getElementById("pkskToast");
+    if (!t) { t = document.createElement("div"); t.id = "pkskToast"; t.className = "pksk-toast"; document.body.appendChild(t); }
+    t.textContent = text; t.classList.add("show");
+    clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 6000);
+  }
+
   /* ---------------- Mula ---------------- */
   if (window.pkskAuth) {
-    window.pkskAuth.onChange(refreshButton);
-    if (window.pkskAuth.configured()) {
-      window.pkskAuth.init().then(refreshButton).catch(() => {});
-    }
+    window.pkskAuth.onChange((st) => { refreshButton(st); notifyApproval(st); });
+    window.pkskAuth.init().then(() => { const s = window.pkskAuth.state(); refreshButton(s); notifyApproval(s); }).catch(() => {});
   }
 })();
