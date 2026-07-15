@@ -1183,7 +1183,7 @@
       "category": "Sains",
       "level": "Konstruk 11: Bumi, Bulan, Gerhana, Buruj dan Galaksi - Sederhana - Graviti dan orbit",
       "explain": "Jawapan B paling tepat berdasarkan konsep Graviti dan orbit yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q02.png\" alt=\"Angkasawan terapung dalam orbit — graviti dan jatuh bebas\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q02.png\" alt=\"Gambar Sains Set 3 soalan 2\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-202",
@@ -1198,7 +1198,7 @@
       "category": "Sains",
       "level": "Konstruk 7: Elektrik, Haba dan Suhu - KBAT - Keselamatan bateri",
       "explain": "Jawapan C paling tepat berdasarkan konsep Keselamatan bateri yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q03.png\" alt=\"Bateri dibuang ke dalam api — bahaya keselamatan bateri\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q03.png\" alt=\"Gambar Sains Set 3 soalan 3\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-276",
@@ -1227,7 +1227,7 @@
       "category": "Sains",
       "level": "Konstruk 8: Daya, Geseran, Tekanan Udara dan Kelajuan - Asas - Konsep daya",
       "explain": "Jawapan B paling tepat berdasarkan konsep Konsep daya yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q05.png\" alt=\"Budak menolak kotak — konsep daya\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q05.png\" alt=\"Gambar Sains Set 3 soalan 5\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-208",
@@ -1242,7 +1242,7 @@
       "category": "Sains",
       "level": "Konstruk 7: Elektrik, Haba dan Suhu - KBAT - Mentafsir data penggunaan tenaga",
       "explain": "Jawapan C paling tepat berdasarkan konsep Mentafsir data penggunaan tenaga yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q06.png\" alt=\"Carta pai penggunaan tenaga elektrik di sekolah\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q06.png\" alt=\"Gambar Sains Set 3 soalan 6\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-279",
@@ -1257,7 +1257,7 @@
       "category": "Sains",
       "level": "Konstruk 10: Kerosakan dan Pegawetan Makanan serta Pengurusan Sisa - Sederhana - Keselamatan makanan",
       "explain": "Jawapan C paling tepat berdasarkan konsep Keselamatan makanan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q07.png\" alt=\"Semak tarikh luput dan keadaan bungkusan makanan\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q07.png\" alt=\"Gambar Sains Set 3 soalan 7\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-298",
@@ -1314,7 +1314,7 @@
       "category": "Sains",
       "level": "Konstruk 5: Mikroorganisma, Interaksi Hidupan dan Pemuliharaan - KBAT - Keselamatan makanan",
       "explain": "Jawapan A paling tepat berdasarkan konsep Keselamatan makanan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/water-temperature.png\" alt=\"Gambar realistik air dan suhu\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q11.png\" alt=\"Gambar Sains Set 3 soalan 11\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-006",
@@ -1329,7 +1329,7 @@
       "category": "Sains",
       "level": "Konstruk 1: Kemahiran Proses Sains dan Reka Bentuk Eksperimen - Asas - Mengelas",
       "explain": "Jawapan C paling tepat berdasarkan konsep Mengelas yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/human-response.png\" alt=\"Gambar realistik manusia\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q12.png\" alt=\"Gambar Sains Set 3 soalan 12\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-109",
@@ -1344,7 +1344,7 @@
       "category": "Sains",
       "level": "Konstruk 4: Tumbuhan, Fotosintesis dan Kemandirian Spesies - KBAT - Membandingkan ciri penyebaran",
       "explain": "Jawapan A paling tepat berdasarkan konsep Membandingkan ciri penyebaran yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/plant-light.png\" alt=\"Gambar realistik tumbuhan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q13.png\" alt=\"Gambar Sains Set 3 soalan 13\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-008",
@@ -1359,7 +1359,7 @@
       "category": "Sains",
       "level": "Konstruk 1: Kemahiran Proses Sains dan Reka Bentuk Eksperimen - Sederhana - Mendefinisi secara operasi",
       "explain": "Jawapan C paling tepat berdasarkan konsep Mendefinisi secara operasi yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/human-response.png\" alt=\"Gambar realistik manusia\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q14.png\" alt=\"Gambar Sains Set 3 soalan 14\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-113",
@@ -1374,7 +1374,7 @@
       "category": "Sains",
       "level": "Konstruk 4: Tumbuhan, Fotosintesis dan Kemandirian Spesies - KBAT - Adaptasi struktur",
       "explain": "Jawapan D paling tepat berdasarkan konsep Adaptasi struktur yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/plant-light.png\" alt=\"Gambar realistik tumbuhan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q15.png\" alt=\"Gambar Sains Set 3 soalan 15\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-142",
@@ -1389,7 +1389,7 @@
       "category": "Sains",
       "level": "Konstruk 5: Mikroorganisma, Interaksi Hidupan dan Pemuliharaan - KBAT - Keselamatan sains",
       "explain": "Jawapan D paling tepat berdasarkan konsep Keselamatan sains yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/human-response.png\" alt=\"Gambar realistik manusia\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q16.png\" alt=\"Gambar Sains Set 3 soalan 16\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-060",
@@ -1417,7 +1417,8 @@
       "answer": 0,
       "category": "Sains",
       "level": "Konstruk 1: Kemahiran Proses Sains dan Reka Bentuk Eksperimen - KBAT - Menilai kebolehpercayaan data",
-      "explain": "Jawapan A paling tepat berdasarkan konsep Menilai kebolehpercayaan data yang diuji."
+      "explain": "Jawapan A paling tepat berdasarkan konsep Menilai kebolehpercayaan data yang diuji.",
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q18.png\" alt=\"Gambar Sains Set 3 soalan 18\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-076",
@@ -1432,7 +1433,7 @@
       "category": "Sains",
       "level": "Konstruk 3: Haiwan, Adaptasi dan Hubungan Makanan - KBAT - Menilai adaptasi",
       "explain": "Jawapan A paling tepat berdasarkan konsep Menilai adaptasi yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/animal-general.png\" alt=\"Gambar realistik haiwan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q19.png\" alt=\"Gambar Sains Set 3 soalan 19\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-088",
@@ -1447,7 +1448,7 @@
       "category": "Sains",
       "level": "Konstruk 3: Haiwan, Adaptasi dan Hubungan Makanan - KBAT - Menilai strategi pemuliharaan",
       "explain": "Jawapan C paling tepat berdasarkan konsep Menilai strategi pemuliharaan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/animal-general.png\" alt=\"Gambar realistik haiwan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q20.png\" alt=\"Gambar Sains Set 3 soalan 20\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-105",
@@ -1462,7 +1463,7 @@
       "category": "Sains",
       "level": "Konstruk 4: Tumbuhan, Fotosintesis dan Kemandirian Spesies - Sederhana - Pendebungaan",
       "explain": "Jawapan C paling tepat berdasarkan konsep Pendebungaan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/animal-turtle.png\" alt=\"Gambar realistik kura-kura\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q21.png\" alt=\"Gambar Sains Set 3 soalan 21\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-015",
@@ -1477,7 +1478,7 @@
       "category": "Sains",
       "level": "Konstruk 1: Kemahiran Proses Sains dan Reka Bentuk Eksperimen - Sederhana - Membuat hubungan",
       "explain": "Jawapan C paling tepat berdasarkan konsep Membuat hubungan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/plant-light.png\" alt=\"Gambar realistik tumbuhan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q22.png\" alt=\"Gambar Sains Set 3 soalan 22\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-078",
@@ -1492,7 +1493,7 @@
       "category": "Sains",
       "level": "Konstruk 3: Haiwan, Adaptasi dan Hubungan Makanan - KBAT - Menilai kawalan biologi",
       "explain": "Jawapan B paling tepat berdasarkan konsep Menilai kawalan biologi yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/animal-general.png\" alt=\"Gambar realistik haiwan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q23.png\" alt=\"Gambar Sains Set 3 soalan 23\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-338",
@@ -1507,7 +1508,7 @@
       "category": "Sains",
       "level": "Konstruk 12: Mesin, Struktur, Teknologi dan Kehidupan Lestari - Sederhana - Kestabilan",
       "explain": "Jawapan A paling tepat berdasarkan konsep Kestabilan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/animal-turtle.png\" alt=\"Gambar realistik kura-kura\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q24.png\" alt=\"Gambar Sains Set 3 soalan 24\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-306",
@@ -1550,7 +1551,7 @@
       "category": "Sains",
       "level": "Konstruk 9: Bahan, Pengaratan, Jirim dan Kitaran Air - KBAT - Menaakul penyejatan",
       "explain": "Jawapan C paling tepat berdasarkan konsep Menaakul penyejatan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/water-temperature.png\" alt=\"Gambar realistik air dan suhu\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q27.png\" alt=\"Gambar Sains Set 3 soalan 27\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-251",
@@ -1565,7 +1566,7 @@
       "category": "Sains",
       "level": "Konstruk 9: Bahan, Pengaratan, Jirim dan Kitaran Air - Sederhana - Perubahan fizikal",
       "explain": "Jawapan B paling tepat berdasarkan konsep Perubahan fizikal yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/water-temperature.png\" alt=\"Gambar realistik air dan suhu\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q28.png\" alt=\"Gambar Sains Set 3 soalan 28\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-229",
@@ -1580,7 +1581,7 @@
       "category": "Sains",
       "level": "Konstruk 8: Daya, Geseran, Tekanan Udara dan Kelajuan - KBAT - Kesan daya",
       "explain": "Jawapan A paling tepat berdasarkan konsep Kesan daya yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/magnet-force.png\" alt=\"Gambar realistik magnet dan daya\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q29.png\" alt=\"Gambar Sains Set 3 soalan 29\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-253",
@@ -1595,7 +1596,7 @@
       "category": "Sains",
       "level": "Konstruk 9: Bahan, Pengaratan, Jirim dan Kitaran Air - Sederhana - Sifat bahan dan fungsi",
       "explain": "Jawapan B paling tepat berdasarkan konsep Sifat bahan dan fungsi yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/materials.png\" alt=\"Gambar realistik bahan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q30.png\" alt=\"Gambar Sains Set 3 soalan 30\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-181",
@@ -1610,7 +1611,7 @@
       "category": "Sains",
       "level": "Konstruk 7: Elektrik, Haba dan Suhu - Asas - Litar elektrik",
       "explain": "Jawapan A paling tepat berdasarkan konsep Litar elektrik yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/circuit-electric.png\" alt=\"Gambar realistik litar elektrik\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q31.png\" alt=\"Gambar Sains Set 3 soalan 31\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-220",
@@ -1625,7 +1626,7 @@
       "category": "Sains",
       "level": "Konstruk 8: Daya, Geseran, Tekanan Udara dan Kelajuan - Sederhana - Tekanan pada pepejal",
       "explain": "Jawapan C paling tepat berdasarkan konsep Tekanan pada pepejal yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/magnet-force.png\" alt=\"Gambar realistik magnet dan daya\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q32.png\" alt=\"Gambar Sains Set 3 soalan 32\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-156",
@@ -1640,7 +1641,7 @@
       "category": "Sains",
       "level": "Konstruk 6: Cahaya, Bunyi dan Bentuk Tenaga - Asas - Sifat bahan terhadap cahaya",
       "explain": "Jawapan A paling tepat berdasarkan konsep Sifat bahan terhadap cahaya yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/earth-moon-sun.png\" alt=\"Gambar realistik Bumi Bulan Matahari\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q33.png\" alt=\"Gambar Sains Set 3 soalan 33\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-189",
@@ -1655,7 +1656,7 @@
       "category": "Sains",
       "level": "Konstruk 7: Elektrik, Haba dan Suhu - Sederhana - Konduksi haba",
       "explain": "Jawapan A paling tepat berdasarkan konsep Konduksi haba yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/materials.png\" alt=\"Gambar realistik bahan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q34.png\" alt=\"Gambar Sains Set 3 soalan 34\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-038",
@@ -1670,7 +1671,7 @@
       "category": "Sains",
       "level": "Konstruk 2: Manusia, Sistem Badan dan Kesihatan - Sederhana - Aplikasi kesihatan",
       "explain": "Jawapan A paling tepat berdasarkan konsep Aplikasi kesihatan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/animal-turtle.png\" alt=\"Gambar realistik kura-kura\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q35.png\" alt=\"Gambar Sains Set 3 soalan 35\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-171",
@@ -1685,7 +1686,7 @@
       "category": "Sains",
       "level": "Konstruk 6: Cahaya, Bunyi dan Bentuk Tenaga - KBAT - Menilai eksperimen cahaya",
       "explain": "Jawapan C paling tepat berdasarkan konsep Menilai eksperimen cahaya yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/human-response.png\" alt=\"Gambar realistik manusia\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q36.png\" alt=\"Gambar Sains Set 3 soalan 36\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-172",
@@ -1700,7 +1701,7 @@
       "category": "Sains",
       "level": "Konstruk 6: Cahaya, Bunyi dan Bentuk Tenaga - KBAT - Reka bentuk teknologi bantu",
       "explain": "Jawapan D paling tepat berdasarkan konsep Reka bentuk teknologi bantu yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/animal-turtle.png\" alt=\"Gambar realistik kura-kura\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q37.png\" alt=\"Gambar Sains Set 3 soalan 37\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-097",
@@ -1715,7 +1716,7 @@
       "category": "Sains",
       "level": "Konstruk 4: Tumbuhan, Fotosintesis dan Kemandirian Spesies - Sederhana - Keperluan fotosintesis",
       "explain": "Jawapan A paling tepat berdasarkan konsep Keperluan fotosintesis yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/plant-light.png\" alt=\"Gambar realistik tumbuhan\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q38.png\" alt=\"Gambar Sains Set 3 soalan 38\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-036",
@@ -1730,7 +1731,7 @@
       "category": "Sains",
       "level": "Konstruk 2: Manusia, Sistem Badan dan Kesihatan - Asas - Kesihatan",
       "explain": "Jawapan D paling tepat berdasarkan konsep Kesihatan yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/earth-moon-sun.png\" alt=\"Gambar realistik Bumi Bulan Matahari\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q39.png\" alt=\"Gambar Sains Set 3 soalan 39\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     },
     {
       "sourceId": "BANK-SCI-319",
@@ -1745,7 +1746,7 @@
       "category": "Sains",
       "level": "Konstruk 11: Bumi, Bulan, Gerhana, Buruj dan Galaksi - KBAT - Keselamatan astronomi",
       "explain": "Jawapan C paling tepat berdasarkan konsep Keselamatan astronomi yang diuji.",
-      "fig": "<img class=\"science-question-image science-raster-image\" src=\"assets/science-realistic/earth-moon-sun.png\" alt=\"Gambar realistik Bumi Bulan Matahari\">"
+      "fig": "<img class=\"science-question-image science-raster-image science-photo-image\" src=\"assets/science-set3/q40.png\" alt=\"Gambar Sains Set 3 soalan 40\" loading=\"lazy\" onerror=\"this.style.display='none'\">"
     }
   ],
   "4": [
