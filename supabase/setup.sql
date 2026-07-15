@@ -274,6 +274,7 @@ create table if not exists public.payment_requests (
   email       text,
   amount      numeric,
   reference   text,   -- rujukan bank / nama pembayar
+  receipt_url text,   -- pautan resit (Supabase Storage: bucket 'receipts')
   note        text,
   status      text not null default 'pending'
                 check (status in ('pending', 'approved', 'rejected')),
@@ -342,6 +343,22 @@ $$;
 
 grant execute on function public.approve_premium(uuid, int) to authenticated;
 grant execute on function public.reject_payment(uuid) to authenticated;
+
+-- ---------------------------------------------------------------------
+-- STORAGE: bucket untuk resit bayaran (jalankan sekali)
+-- Dashboard -> Storage -> New bucket -> nama 'receipts' -> Public.
+-- Polisi cadangan: pengguna log masuk boleh upload; sesiapa boleh baca
+-- (kerana pautan resit ditunjuk dalam panel admin).
+insert into storage.buckets (id, name, public)
+  values ('receipts','receipts', true)
+  on conflict (id) do nothing;
+
+drop policy if exists receipts_upload on storage.objects;
+create policy receipts_upload on storage.objects
+  for insert to authenticated with check (bucket_id = 'receipts');
+drop policy if exists receipts_read on storage.objects;
+create policy receipts_read on storage.objects
+  for select using (bucket_id = 'receipts');
 
 -- =====================================================================
 -- SELESAI

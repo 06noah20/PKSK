@@ -987,36 +987,15 @@
     return window.pkskAuth?.state?.().access || "anon";
   }
   function canAccessSet(setNo) {
-    if (!window.pkskAuth?.configured?.()) return true; // belum diaktifkan: semua terbuka
     if (setNo === FREE_SET) return true;
     const a = currentAccess();
     return a === "premium" || a === "admin";
   }
+  // Set berkunci diklik: terus buka aliran Daftar + Bayar (QR + resit).
+  // openUpgrade() menyesuaikan diri untuk pengunjung (papar borang daftar)
+  // atau pengguna free (terus ke QR + resit).
   function showLockedNotice(setNo) {
-    const loggedIn = currentAccess() !== "anon";
-    const wrap = document.createElement("div");
-    wrap.className = "auth-overlay show";
-    wrap.innerHTML = `
-      <div class="auth-modal" role="dialog" aria-modal="true">
-        <button class="auth-close" aria-label="Tutup">×</button>
-        <h3 class="auth-title">🔒 Set Latihan ${setNo} <b>Premium</b></h3>
-        <p class="auth-note" style="font-size:13.5px">
-          ${loggedIn
-            ? "Akaun anda kini <b>percuma</b> — Set Latihan 1 sahaja. Naik taraf ke <b>premium</b> untuk membuka semua set latihan."
-            : "Sila <b>log masuk</b> atau daftar akaun untuk meneruskan. Set Latihan 1 percuma; set selebihnya memerlukan akaun premium."}
-        </p>
-        <button type="button" class="auth-submit" id="lockedCta">
-          ${loggedIn ? "Naik Taraf Premium" : "Log Masuk / Daftar"}</button>
-      </div>`;
-    document.body.appendChild(wrap);
-    const closeIt = () => wrap.remove();
-    wrap.addEventListener("click", (e) => { if (e.target === wrap) closeIt(); });
-    wrap.querySelector(".auth-close").addEventListener("click", closeIt);
-    wrap.querySelector("#lockedCta").addEventListener("click", () => {
-      closeIt();
-      if (loggedIn) window.pkskPremium?.openUpgrade?.();
-      else window.pkskAuthUI?.open?.("login");
-    });
+    window.pkskPremium?.openUpgrade?.();
   }
   // Segarkan senarai set bila status log masuk berubah
   document.addEventListener("pksk-auth-changed", () => {
