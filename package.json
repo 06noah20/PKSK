@@ -5,7 +5,8 @@
   "description": "Portal PKSK with secure feedback API.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test:auth": "node scripts/test-auth-approval-flow.js"
   },
   "dependencies": {
     "nodemailer": "^6.9.16"

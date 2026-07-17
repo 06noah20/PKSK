@@ -1,95 +1,90 @@
-# 📋 Panduan Setup Portal PKSK — Supabase & Langganan Premium
+# Panduan Akaun & Kelulusan Portal PKSK
 
-Ikut langkah ini satu per satu. Tanda ✅ setiap kali selesai.
-Semua **kod sudah siap** — ini hanya konfigurasi (sekali sahaja).
+Portal menggunakan satu aliran pendaftaran dan pembayaran:
 
-> Portal tetap berfungsi walaupun langkah ini belum dibuat. Log masuk &
-> kunci premium hanya "hidup" selepas Bahagian A + B disiapkan.
+1. Pengguna daftar melalui **Log Masuk / Daftar** atau dengan menekan Set Latihan 2–10.
+2. Pengguna mengimbas QR, mengisi rujukan bayaran dan memuat naik gambar resit.
+3. Akaun terus diwujudkan dengan status **Menunggu kelulusan admin**.
+4. Pengguna masih boleh log masuk dan membuka Set Latihan 1.
+5. Admin menyemak resit dan meluluskan akaun dalam **Panel Admin**.
+6. Set Latihan 2–10 dibuka dan notifikasi kelulusan muncul dalam paparan akaun pengguna.
 
----
+## Mod lokal/demo
 
-## ✅ BAHAGIAN A — Pangkalan Data Supabase
+Selagi `SUPABASE_URL` dan `SUPABASE_ANON_KEY` dalam `js/supabase-client.js` kosong, portal menggunakan `localStorage` pelayar.
 
-- [ ] **A1.** Daftar di <https://supabase.com> → **New Project**
-      (pilih region Singapore, simpan kata laluan DB).
-- [ ] **A2.** Buka **SQL Editor** → **New query**.
-- [ ] **A3.** Buka fail `supabase/setup.sql` dalam repo → salin **semua** →
-      tampal → **Run**. Patut nampak "Success".
-- [ ] **A4.** Pergi **Settings → API**, salin dua nilai:
-      - **Project URL** (cth. `https://abcd.supabase.co`)
-      - **anon public** key (`eyJ...`)
+Akaun admin lokal telah disediakan:
 
-## ✅ BAHAGIAN B — Sambungkan Portal
+- ID pengguna: `pkskmy`
+- Kata laluan: `pkskmy@2026`
 
-- [ ] **B1.** Buka `js/supabase-client.js` (boleh edit terus di GitHub web).
-- [ ] **B2.** Isi dua baris di atas:
-      ```js
-      const SUPABASE_URL = "https://abcd.supabase.co";   // dari A4
-      const SUPABASE_ANON_KEY = "eyJ...";                // dari A4
-      ```
-- [ ] **B3.** Commit. Tunggu ~2 minit → buka `www.pkskmy.com` (incognito)
-      → butang **Log Masuk** kini berfungsi. Cuba **Daftar Akaun**.
+Data mod lokal hanya wujud pada pelayar dan peranti yang sama. Gunakan mod ini untuk ujian, bukan sebagai sistem akaun produksi.
 
-> anon key memang selamat didedahkan — data dilindungi oleh RLS.
+## Ujian aliran lokal
 
-## ✅ BAHAGIAN C — Jadikan Diri Anda Admin
+1. Buka portal, daftar satu akaun pengguna dan hantar bukti bayaran mockup.
+2. Paparan akaun mesti menunjukkan **Menunggu kelulusan admin**.
+3. Log keluar dan log masuk menggunakan akaun `pkskmy`.
+4. Pilih pengguna dalam **Panel Admin**, kemudian tekan **Luluskan**.
+5. Log masuk semula sebagai pengguna tadi.
+6. Notifikasi kelulusan mesti dipaparkan dan Set Latihan 2–10 tidak lagi berkunci.
 
-- [ ] **C1.** Daftar satu akaun di portal guna e-mel anda (Bahagian B3).
-- [ ] **C2.** Supabase → **Table Editor → profiles** → cari baris anda.
-- [ ] **C3.** Tukar `role` kepada `admin` → Save.
-- [ ] **C4.** Refresh portal → butang **🛡️ Admin** muncul di header.
+## Mengurus soalan tanpa GitHub
 
-## ✅ BAHAGIAN D — Butiran Bank & QR (Langganan)
+Log masuk sebagai admin dan buka **Panel Admin → Urus Soalan**. Admin boleh:
 
-- [ ] **D1.** Buka `js/premium.js` → isi objek `BANK`:
-      ```js
-      const BANK = {
-        payTo:   "NAMA ANDA",
-        bank:    "Maybank",
-        account: "1234 5678 9012",
-        amount:  "RM30",
-        plan:    "Premium (12 bulan)",
-        qr:      "assets/bank-qr.png"
-      };
-      ```
-- [ ] **D2.** Muat naik gambar **kod QR bank** anda ke `assets/bank-qr.png`
-      (GitHub → folder `assets` → Add file → Upload files).
-- [ ] **D3.** Commit. Uji: log masuk sebagai pengguna biasa → cuba buka
-      **Set Latihan 2** → skrin Naik Taraf papar QR anda.
+- memilih Set 1–10 dan subjek;
+- menambah, mengemas kini atau memadam satu soalan serta memuat naik gambar rajah;
+- mengimport satu fail JSON untuk menggantikan bank soalan pilihan;
+- mengeksport bank soalan sebagai salinan keselamatan;
+- memulihkan soalan asal.
 
-## ✅ BAHAGIAN E — Notifikasi E-mel (Pilihan)
+Dalam mod lokal, perubahan disimpan dalam `localStorage`. Dalam mod Supabase,
+perubahan disimpan dalam jadual `question_overrides` dan digunakan oleh semua pengguna.
+Gambar rajah produksi disimpan dalam bucket Supabase `question-images`.
 
-Ikut fail berasingan: **`supabase/README-NOTIFIKASI.md`**
-(ringkas: daftar Resend → deploy `notify-payment` → sambung Database Webhook).
+Ujian automatik yang sama boleh dijalankan dengan:
 
-- [ ] **E1.** Daftar <https://resend.com> → dapat API key.
-- [ ] **E2.** Deploy Edge Function + set secret (lihat README).
-- [ ] **E3.** Database → Webhooks → picu INSERT `payment_requests`.
-- [ ] **E4.** Uji hantar bayaran → e-mel tiba di inbox anda.
+```sh
+npm run test:auth
+```
 
----
+## Sambungan Supabase untuk produksi
 
-## 🔄 Aliran Harian (selepas semua siap)
+Projek ini telah disambungkan kepada Supabase `erwmjhohjadwcrrvqack`.
 
-1. Pengguna daftar → akaun **free** (Set 1 sahaja).
-2. Pengguna cuba Set 2 → skrin **Naik Taraf** → bayar guna QR → hantar borang.
-3. Anda dapat **e-mel notifikasi** (jika Bahagian E dibuat).
-4. Anda log masuk → **🛡️ Admin** → **Luluskan** → pengguna jadi **premium**.
+1. Buka **SQL Editor** dan jalankan keseluruhan fail
+   `supabase/migrate-live-admin-storage.sql`.
+2. Dalam **Authentication → Users**, tambah pengguna berikut dan aktifkan
+   pilihan auto-confirm:
 
-## 🧾 Nilai yang perlu diisi (ringkasan)
+```text
+Email: admin@pkskmy.com
+Password: pkskmy@2026
+```
 
-| Tempat | Nilai |
-|--------|-------|
-| `js/supabase-client.js` | `SUPABASE_URL`, `SUPABASE_ANON_KEY` |
-| `js/premium.js` | butiran `BANK` |
-| `assets/bank-qr.png` | gambar QR bank |
-| Supabase secrets (Bhg E) | `RESEND_API_KEY`, `ADMIN_EMAIL`, `MAIL_FROM` |
+3. Jalankan semula `supabase/migrate-live-admin-storage.sql` supaya profil
+   pengguna itu dinaik taraf kepada admin.
+4. Portal membenarkan admin log masuk menggunakan alias berikut:
 
-## 🛟 Masalah biasa
+```text
+ID pengguna: pkskmy
+Password: pkskmy@2026
+```
 
-- **Butang Log Masuk kata "belum diaktifkan"** → Bahagian B belum diisi/commit.
-- **Perubahan tak muncul** → tunggu 1–2 min (GitHub Pages) + refresh
-  `Ctrl+Shift+R` atau guna incognito.
-- **Butang Admin tak muncul** → `role` belum `admin` (Bahagian C) / belum
-  log keluar-masuk semula.
-- **QR tak nampak** → fail bukan `assets/bank-qr.png` tepat, atau belum commit.
+Nilai sambungan berada dalam `js/supabase-client.js`:
+
+```js
+const SUPABASE_URL = "https://erwmjhohjadwcrrvqack.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_...";
+```
+
+Publishable key selamat digunakan pada frontend; jangan letakkan service-role key
+atau kata laluan pangkalan data dalam fail JavaScript.
+
+## Masalah biasa
+
+- **Pengguna masih melihat MENUNGGU** — admin belum menekan Luluskan, atau pengguna perlu log masuk semula.
+- **Panel Admin tidak muncul** — akaun semasa bukan `role = admin`.
+- **Set 2 masih berkunci selepas diluluskan** — buka semula paparan Latihan atau muat semula halaman.
+- **Data pengguna hilang pada pelayar lain** — ini normal dalam mod lokal; sambungkan Supabase untuk data merentas peranti.

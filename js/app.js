@@ -270,6 +270,7 @@
   };
 
   function go(view) {
+    document.getElementById("adminBtn")?.classList.remove("active");
     document.querySelectorAll(".tab").forEach(b =>
       b.classList.toggle("active", b.dataset.view === view));
     (views[view] || renderHome)();
@@ -979,9 +980,9 @@
         runSession(DATA.topics.find(x => x.id === el.dataset.topic))));
   }
 
-  /* ---------------- Akses premium (Supabase) ----------------
-   * Set 1 percuma untuk semua; Set 2+ memerlukan akaun premium/admin.
-   * Jika Supabase belum dikonfigurasi, semua set kekal terbuka. */
+  /* ---------------- Akses akaun yang diluluskan ----------------
+   * Set 1 percuma untuk semua. Set 2+ dibuka selepas pendaftaran
+   * pengguna diluluskan oleh admin, atau untuk akaun admin. */
   const FREE_SET = 1;
   function currentAccess() {
     return window.pkskAuth?.state?.().access || "anon";
@@ -991,9 +992,8 @@
     const a = currentAccess();
     return a === "premium" || a === "admin";
   }
-  // Set berkunci diklik: terus buka aliran Daftar + Bayar (QR + resit).
-  // openUpgrade() menyesuaikan diri untuk pengunjung (papar borang daftar)
-  // atau pengguna free (terus ke QR + resit).
+  // Set berkunci menggunakan aliran daftar + pembayaran + bukti resit yang
+  // sama seperti pilihan Daftar Akaun di header.
   function showLockedNotice(setNo) {
     window.pkskPremium?.openUpgrade?.();
   }
@@ -1001,24 +1001,21 @@
   document.addEventListener("pksk-auth-changed", () => {
     if (document.querySelector(".practice-set-grid")) renderTopicPicker();
   });
+  document.addEventListener("pksk-questions-changed", () => {
+    if (document.querySelector(".practice-set-grid")) renderTopicPicker();
+  });
 
   /* ---------------- Paparan: LATIHAN SET (override) ---------------- */
   function renderTopicPicker() {
     const sets = Array.from({ length: 10 }, (_, i) => i + 1);
     const setProgress = loadSetProgress();
-    const totalDone = sets.reduce((sum, setNo) => sum + practiceSetInfo(setNo, setProgress).completed, 0);
-
     app.innerHTML = `<section class="practice-page">
       <div class="practice-hero-panel">
         <div>
           <p class="practice-eyebrow">Pilih Set Latihan</p>
-          <h1>Latihan PKSK</h1>
+          <h1>Latihan PKSK (Bahagian B)</h1>
           <p>Pilih set latihan terlebih dahulu, kemudian pilih kategori subjek untuk mula menjawab soalan.</p>
         </div>
-        <aside class="practice-summary-card">
-          <strong>${totalDone}</strong>
-          <span>kategori selesai daripada ${sets.length * DATA.topics.length}</span>
-        </aside>
       </div>
 
       <div class="practice-set-grid">
@@ -1047,7 +1044,7 @@
     const padded = String(setNo).padStart(2, "0");
     const locked = !canAccessSet(setNo);
     return `<button class="practice-set-card${locked ? " locked" : ""}" data-set="${setNo}" type="button">
-      ${locked ? `<span class="set-lock" aria-label="Set premium">🔒 PREMIUM</span>` : ""}
+      ${locked ? `<span class="set-lock" aria-label="Perlu kelulusan akaun">🔒 PERLU KELULUSAN</span>` : ""}
       <span class="practice-set-top">
         <span class="practice-set-number">${padded}</span>
         <span class="practice-set-art">
@@ -1115,6 +1112,29 @@
     let idx = 0, answered = false;
     const total = topic.questions.length;
     const answers = Array(total).fill(null);
+    const showQuestionNavigator = Boolean(setNo);
+
+    function questionNavigatorMarkup() {
+      const answeredCount = answers.filter(answer => answer !== null).length;
+      return `<aside class="question-palette" aria-label="Navigasi nombor soalan">
+        <div class="question-palette-head">
+          <div><span>Set Latihan ${setNo} · ${esc(topic.title)}</span><strong>Navigasi Soalan</strong></div>
+          <b>${answeredCount}/${total}</b>
+        </div>
+        <div class="question-number-grid">
+          ${topic.questions.map((_, questionIndex) => {
+            const isAnswered = answers[questionIndex] !== null;
+            const stateClass = questionIndex === idx ? " is-current" : isAnswered ? " is-answered" : "";
+            return `<button class="question-number-btn${stateClass}" type="button" data-question-index="${questionIndex}" aria-label="Buka soalan ${questionIndex + 1}"${questionIndex === idx ? ' aria-current="true"' : ""}>${questionIndex + 1}</button>`;
+          }).join("")}
+        </div>
+        <div class="question-palette-legend" aria-hidden="true">
+          <span><i class="current"></i>Semasa</span>
+          <span><i class="answered"></i>Dijawab</span>
+          <span><i></i>Belum</span>
+        </div>
+      </aside>`;
+    }
 
     function currentScore() {
       return answers.reduce((sum, chosen, i) =>
@@ -1170,8 +1190,7 @@
       const qn = topic.questions[idx];
       const selected = answers[idx];
       const pct = Math.round((idx / total) * 100);
-      app.innerHTML = `<div class="wrap view">
-        <div class="card">
+      const questionCard = `<div class="card">
           <div class="qhead">
             <span class="qcount">${esc(topic.title)} - Latihan PKSK</span>
             <span class="qcount">Soalan ${idx + 1} / ${total}</span>
@@ -1187,10 +1206,20 @@
           </div>
           <div id="explainBox">${selected !== null ? `<div class="explain"><b>${selected === qn.answer ? "Betul!" : "Kurang tepat."}</b>${qn.explain ? " " + esc(qn.explain) : ""}</div>` : ""}</div>
           <div id="navBox"></div>
-        </div></div>`;
+        </div>`;
+      app.innerHTML = `<div class="wrap view${showQuestionNavigator ? " quiz-navigator-wrap" : ""}">
+        ${showQuestionNavigator
+          ? `<div class="quiz-session-layout">${questionCard}${questionNavigatorMarkup()}</div>`
+          : questionCard}
+      </div>`;
 
       app.querySelectorAll("#opts .opt").forEach(btn =>
         btn.addEventListener("click", () => reveal(+btn.dataset.i)));
+      app.querySelectorAll("[data-question-index]").forEach(button =>
+        button.addEventListener("click", () => {
+          idx = +button.dataset.questionIndex;
+          render();
+        }));
       renderQuestionNav();
     }
 

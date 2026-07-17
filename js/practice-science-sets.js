@@ -5883,6 +5883,75 @@
   ]
 };
 
+  // Gambar Sains Set 4 disimpan terus dalam folder aset projek. Nama fail
+  // mengikuti nombor soalan yang dibekalkan dalam folder assets/science-set4.
+  const scienceSet4ImageFiles = {
+    1: "q01.png", 2: "q02.png", 4: "q04.png", 5: "q05.png",
+    7: "q7.png", 8: "q8.png", 9: "q09.png", 10: "q10.png",
+    11: "q11.png", 14: "q14.png", 15: "q15.png", 16: "q16.png",
+    17: "q17.png", 18: "q18.png", 21: "q21.png", 22: "q22.png",
+    23: "q23.png", 24: "q24.png", 26: "q26.png", 27: "q27.png",
+    28: "q28.png", 29: "q29.png", 30: "q30.png", 31: "q31.png",
+    32: "q32.png", 33: "q33.png", 34: "q34.png", 35: "q35.png",
+    36: "q36.png", 37: "q37.png", 38: "q38.png", 39: "q39.png",
+    40: "q40.png",
+  };
+  const applyScienceSet4Images = (questions) => Object.entries(scienceSet4ImageFiles).forEach(([questionNo, fileName]) => {
+    const question = questions?.[Number(questionNo) - 1];
+    if (question) question.fig = `<img class="science-question-image science-raster-image science-photo-image" src="assets/science-set4/${fileName}" alt="Gambar Sains Set 4 soalan ${questionNo}" loading="lazy">`;
+  });
+  applyScienceSet4Images(scienceSets["4"]);
+
+  // Gambar Sains Set 5 disimpan terus dalam folder aset projek. Nama fail
+  // mengikuti nombor soalan supaya portal boleh dibuka terus melalui index.html.
+  const scienceSet5ImageQuestions = [2, 3, 5, 6, 8, 10, 11, 13, 14, 15, 16, 17, 18, 21, 22, 23, 24, 30, 31, 32, 34, 37, 38, 39, 40];
+  const applyScienceSet5Images = (questions) => scienceSet5ImageQuestions.forEach((questionNo) => {
+    const question = questions?.[questionNo - 1];
+    if (question) question.fig = `<img class="science-question-image science-raster-image science-photo-image" src="assets/science-set5/${questionNo}.png" alt="Gambar Sains Set 5 soalan ${questionNo}" loading="lazy">`;
+  });
+  applyScienceSet5Images(scienceSets["5"]);
+
+  // Gambar Sains Set 6 menggunakan nombor fail yang sama dengan nombor soalan.
+  const scienceSet6ImageQuestions = Array.from({ length: 40 }, (_, index) => index + 1);
+  const applyScienceSet6Images = (questions) => scienceSet6ImageQuestions.forEach((questionNo) => {
+    const question = questions?.[questionNo - 1];
+    if (question) question.fig = `<img class="science-question-image science-raster-image science-photo-image" src="assets/science-set6/${questionNo}.png" alt="Gambar Sains Set 6 soalan ${questionNo}" loading="lazy">`;
+  });
+  applyScienceSet6Images(scienceSets["6"]);
+
+  // Gambar Sains Set 7 menggunakan nombor fail yang sama dengan nombor soalan.
+  const scienceSet7ImageQuestions = Array.from({ length: 40 }, (_, index) => index + 1);
+  const applyScienceSet7Images = (questions) => scienceSet7ImageQuestions.forEach((questionNo) => {
+    const question = questions?.[questionNo - 1];
+    const imageVersion = questionNo === 1 ? "?v=20260716-2" : "";
+    if (question) question.fig = `<img class="science-question-image science-raster-image science-photo-image" src="assets/science-set7/${questionNo}.png${imageVersion}" alt="Gambar Sains Set 7 soalan ${questionNo}" loading="lazy">`;
+  });
+  applyScienceSet7Images(scienceSets["7"]);
+
+  // Gambar Sains Set 8 menggunakan nombor fail yang sama dengan nombor soalan.
+  const scienceSet8ImageQuestions = Array.from({ length: 40 }, (_, index) => index + 1);
+  const applyScienceSet8Images = (questions) => scienceSet8ImageQuestions.forEach((questionNo) => {
+    const question = questions?.[questionNo - 1];
+    if (question) question.fig = `<img class="science-question-image science-raster-image science-photo-image" src="assets/science-set8/${questionNo}.png" alt="Gambar Sains Set 8 soalan ${questionNo}" loading="lazy">`;
+  });
+  applyScienceSet8Images(scienceSets["8"]);
+
+  // Gambar Sains Set 9 yang dibekalkan menggunakan nombor fail 1 hingga 40.
+  const scienceSet9ImageQuestions = Array.from({ length: 40 }, (_, index) => index + 1);
+  const applyScienceSet9Images = (questions) => scienceSet9ImageQuestions.forEach((questionNo) => {
+    const question = questions?.[questionNo - 1];
+    if (question) question.fig = `<img class="science-question-image science-raster-image science-photo-image science-set9-image" src="assets/science-set9/${questionNo}.png" alt="Gambar Sains Set 9 soalan ${questionNo}" loading="lazy">`;
+  });
+  applyScienceSet9Images(scienceSets["9"]);
+
+  // Gambar Sains Set 10 menggunakan nombor fail yang sama dengan nombor soalan.
+  const scienceSet10ImageQuestions = Array.from({ length: 40 }, (_, index) => index + 1);
+  const applyScienceSet10Images = (questions) => scienceSet10ImageQuestions.forEach((questionNo) => {
+    const question = questions?.[questionNo - 1];
+    if (question) question.fig = `<img class="science-question-image science-raster-image science-photo-image" src="assets/science-set10/${questionNo}.png" alt="Gambar Sains Set 10 soalan ${questionNo}" loading="lazy">`;
+  });
+  applyScienceSet10Images(scienceSets["10"]);
+
   window.PKSK_SET_QUESTIONS = window.PKSK_SET_QUESTIONS || {};
   Object.entries(scienceSets).forEach(([setNo, questions]) => {
     window.PKSK_SET_QUESTIONS[setNo] = {
@@ -5890,4 +5959,18 @@
       sains: questions,
     };
   });
+  window.PKSK_APPLY_LOCAL_SCIENCE_SET4_IMAGES = () =>
+    applyScienceSet4Images(window.PKSK_SET_QUESTIONS?.[4]?.sains);
+  window.PKSK_APPLY_LOCAL_SCIENCE_SET5_IMAGES = () =>
+    applyScienceSet5Images(window.PKSK_SET_QUESTIONS?.[5]?.sains);
+  window.PKSK_APPLY_LOCAL_SCIENCE_SET6_IMAGES = () =>
+    applyScienceSet6Images(window.PKSK_SET_QUESTIONS?.[6]?.sains);
+  window.PKSK_APPLY_LOCAL_SCIENCE_SET7_IMAGES = () =>
+    applyScienceSet7Images(window.PKSK_SET_QUESTIONS?.[7]?.sains);
+  window.PKSK_APPLY_LOCAL_SCIENCE_SET8_IMAGES = () =>
+    applyScienceSet8Images(window.PKSK_SET_QUESTIONS?.[8]?.sains);
+  window.PKSK_APPLY_LOCAL_SCIENCE_SET9_IMAGES = () =>
+    applyScienceSet9Images(window.PKSK_SET_QUESTIONS?.[9]?.sains);
+  window.PKSK_APPLY_LOCAL_SCIENCE_SET10_IMAGES = () =>
+    applyScienceSet10Images(window.PKSK_SET_QUESTIONS?.[10]?.sains);
 })();

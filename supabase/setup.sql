@@ -19,11 +19,28 @@ create extension if not exists "pgcrypto";
 create table if not exists public.profiles (
   id           uuid primary key references auth.users (id) on delete cascade,
   full_name    text,
+  email        text,
   role         text not null default 'user'  check (role in ('user', 'admin')),
   access_level text not null default 'free'  check (access_level in ('free', 'premium')),
+  approval_status text not null default 'pending'
+                   check (approval_status in ('pending', 'approved', 'rejected')),
+  approval_notified boolean not null default true,
+  reviewed_at  timestamptz,
+  reviewed_by  uuid references auth.users (id) on delete set null,
   is_active    boolean not null default true,
   created_at   timestamptz not null default now()
 );
+
+-- Naik taraf selamat jika jadual profiles sudah wujud daripada versi lama.
+alter table public.profiles add column if not exists email text;
+alter table public.profiles add column if not exists approval_status text not null default 'pending';
+alter table public.profiles add column if not exists approval_notified boolean not null default true;
+alter table public.profiles add column if not exists reviewed_at timestamptz;
+alter table public.profiles add column if not exists reviewed_by uuid references auth.users (id) on delete set null;
+
+update public.profiles
+set approval_status = 'approved', access_level = 'premium', approval_notified = true
+where role = 'admin';
 
 -- 1.2 practice_sets ----------------------------------------------------
 create table if not exists public.practice_sets (
@@ -68,7 +85,19 @@ create table if not exists public.notes (
   created_at   timestamptz not null default now()
 );
 
--- 1.5 subscriptions ----------------------------------------------------
+-- 1.5 question_overrides ----------------------------------------------
+-- Menyimpan satu senarai JSON bagi setiap kombinasi set + subjek supaya
+-- admin boleh mengurus soalan tanpa mengubah fail GitHub.
+create table if not exists public.question_overrides (
+  set_number int not null check (set_number between 1 and 10),
+  subject text not null check (subject in ('pengetahuan', 'matematik', 'sains', 'english')),
+  questions jsonb not null default '[]'::jsonb,
+  updated_at timestamptz not null default now(),
+  updated_by uuid references auth.users (id) on delete set null,
+  primary key (set_number, subject)
+);
+
+-- 1.6 subscriptions ----------------------------------------------------
 create table if not exists public.subscriptions (
   id                uuid primary key default gen_random_uuid(),
   user_id           uuid not null references auth.users (id) on delete cascade,
@@ -116,8 +145,14 @@ returns trigger
 language plpgsql security definer set search_path = public
 as $$
 begin
-  insert into public.profiles (id, full_name)
-  values (new.id, coalesce(new.raw_user_meta_data ->> 'full_name', new.email))
+  insert into public.profiles (id, full_name, email, approval_status, approval_notified)
+  values (
+    new.id,
+    coalesce(new.raw_user_meta_data ->> 'full_name', new.email),
+    new.email,
+    'pending',
+    true
+  )
   on conflict (id) do nothing;
   return new;
 end;
@@ -140,6 +175,9 @@ begin
   end if;
   new.role         := old.role;
   new.access_level := old.access_level;
+  new.approval_status := old.approval_status;
+  new.reviewed_at  := old.reviewed_at;
+  new.reviewed_by  := old.reviewed_by;
   new.is_active    := old.is_active;
   return new;
 end;
@@ -157,6 +195,7 @@ alter table public.profiles      enable row level security;
 alter table public.practice_sets enable row level security;
 alter table public.questions     enable row level security;
 alter table public.notes         enable row level security;
+alter table public.question_overrides enable row level security;
 alter table public.subscriptions enable row level security;
 
 -- =====================================================================
@@ -251,7 +290,18 @@ drop policy if exists notes_admin_write on public.notes;
 create policy notes_admin_write on public.notes
   for all using (public.is_admin()) with check (public.is_admin());
 
--- ---- 5.5 subscriptions ----------------------------------------------
+-- ---- 5.5 question_overrides -----------------------------------------
+-- Semua pelawat boleh membaca soalan terbitan admin; admin sahaja boleh
+-- menambah, mengemas kini atau memadam rekod override.
+drop policy if exists question_overrides_select on public.question_overrides;
+create policy question_overrides_select on public.question_overrides
+  for select using (true);
+
+drop policy if exists question_overrides_admin_write on public.question_overrides;
+create policy question_overrides_admin_write on public.question_overrides
+  for all using (public.is_admin()) with check (public.is_admin());
+
+-- ---- 5.6 subscriptions ----------------------------------------------
 -- Pengguna hanya boleh melihat langganan sendiri; admin lihat semua.
 drop policy if exists subscriptions_select on public.subscriptions;
 create policy subscriptions_select on public.subscriptions
@@ -344,6 +394,72 @@ $$;
 grant execute on function public.approve_premium(uuid, int) to authenticated;
 grant execute on function public.reject_payment(uuid) to authenticated;
 
+-- =====================================================================
+-- 7. KELULUSAN PENDAFTARAN AKAUN
+-- =====================================================================
+
+-- Admin meluluskan akaun: akses Set 2+ dibuka dan notifikasi diwujudkan.
+create or replace function public.approve_registration(p_user uuid)
+returns void
+language plpgsql security definer set search_path = public
+as $$
+begin
+  if not public.is_admin() then
+    raise exception 'Tidak dibenarkan';
+  end if;
+
+  update public.profiles
+  set approval_status = 'approved',
+      access_level = 'premium',
+      approval_notified = false,
+      reviewed_at = now(),
+      reviewed_by = auth.uid()
+  where id = p_user and role <> 'admin';
+
+  if not found then
+    raise exception 'Akaun pengguna tidak dijumpai';
+  end if;
+end;
+$$;
+
+-- Admin menolak pendaftaran; akaun masih wujud dan pengguna boleh log masuk.
+create or replace function public.reject_registration(p_user uuid)
+returns void
+language plpgsql security definer set search_path = public
+as $$
+begin
+  if not public.is_admin() then
+    raise exception 'Tidak dibenarkan';
+  end if;
+
+  update public.profiles
+  set approval_status = 'rejected',
+      access_level = 'free',
+      approval_notified = false,
+      reviewed_at = now(),
+      reviewed_by = auth.uid()
+  where id = p_user and role <> 'admin';
+
+  if not found then
+    raise exception 'Akaun pengguna tidak dijumpai';
+  end if;
+end;
+$$;
+
+-- Pengguna menandakan notifikasi kelulusan/penolakan sudah dibaca.
+create or replace function public.mark_approval_notification_read()
+returns void
+language sql security definer set search_path = public
+as $$
+  update public.profiles
+  set approval_notified = true
+  where id = auth.uid();
+$$;
+
+grant execute on function public.approve_registration(uuid) to authenticated;
+grant execute on function public.reject_registration(uuid) to authenticated;
+grant execute on function public.mark_approval_notification_read() to authenticated;
+
 -- ---------------------------------------------------------------------
 -- STORAGE: bucket untuk resit bayaran (jalankan sekali)
 -- Dashboard -> Storage -> New bucket -> nama 'receipts' -> Public.
@@ -359,6 +475,25 @@ create policy receipts_upload on storage.objects
 drop policy if exists receipts_read on storage.objects;
 create policy receipts_read on storage.objects
   for select using (bucket_id = 'receipts');
+
+-- Bucket gambar rajah yang dimuat naik melalui Panel Admin.
+insert into storage.buckets (id, name, public)
+  values ('question-images','question-images', true)
+  on conflict (id) do nothing;
+
+drop policy if exists question_images_read on storage.objects;
+create policy question_images_read on storage.objects
+  for select using (bucket_id = 'question-images');
+
+drop policy if exists question_images_admin_upload on storage.objects;
+create policy question_images_admin_upload on storage.objects
+  for insert to authenticated
+  with check (bucket_id = 'question-images' and public.is_admin());
+
+drop policy if exists question_images_admin_delete on storage.objects;
+create policy question_images_admin_delete on storage.objects
+  for delete to authenticated
+  using (bucket_id = 'question-images' and public.is_admin());
 
 -- =====================================================================
 -- SELESAI
