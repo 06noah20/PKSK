@@ -24,7 +24,15 @@
       <button class="auth-close" type="button" aria-label="Tutup">×</button>${content}</div>`;
     document.body.appendChild(overlay);
     const close = () => overlay.remove();
-    overlay.addEventListener("click", event => { if (event.target === overlay) close(); });
+    let pressedOnBackdrop = false;
+    overlay.addEventListener("pointerdown", event => {
+      pressedOnBackdrop = event.target === overlay;
+    });
+    overlay.addEventListener("pointerup", event => {
+      if (pressedOnBackdrop && event.target === overlay) close();
+      pressedOnBackdrop = false;
+    });
+    overlay.addEventListener("pointercancel", () => { pressedOnBackdrop = false; });
     overlay.querySelector(".auth-close").addEventListener("click", close);
     return { overlay, close };
   }
