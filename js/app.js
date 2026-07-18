@@ -266,6 +266,7 @@
     learn: renderLearnList,
     practice: renderTopicPicker,
     info: renderInfoPage,
+    bicara: () => window.pkskArticles.renderHub(),
     help: renderHelpPage
   };
 

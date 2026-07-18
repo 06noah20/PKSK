@@ -3412,3 +3412,368 @@ body {
   .question-admin-row { grid-template-columns: 26px minmax(0, 1fr) auto; }
   .question-admin-row button.danger { grid-column: 3; }
 }
+
+@media (min-width: 901px) and (max-width: 1450px) {
+  .topbar { gap: 14px; }
+  .mainnav { gap: 14px; }
+}
+
+/* ---------- Bicara Ilmu ---------- */
+.bicara-page {
+  width: min(1320px, 100%);
+  margin: 0 auto;
+  padding: 38px 24px 72px;
+}
+.bicara-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 236px;
+  padding: 42px 48px;
+  overflow: hidden;
+  border: 1px solid rgba(164, 31, 69, .18);
+  border-radius: 28px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 88% 20%, rgba(240, 180, 41, .28), transparent 28%),
+    linear-gradient(128deg, #4a0d22 0%, #7c1432 55%, #a41f45 100%);
+  box-shadow: 0 24px 58px rgba(96, 14, 42, .18);
+}
+.bicara-hero::after {
+  content: "";
+  position: absolute;
+  right: -80px;
+  bottom: -120px;
+  width: 360px;
+  height: 360px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 50%;
+  box-shadow: 0 0 0 38px rgba(255, 255, 255, .04), 0 0 0 76px rgba(255, 255, 255, .025);
+}
+.bicara-hero > div { position: relative; z-index: 1; max-width: 760px; }
+.bicara-eyebrow {
+  margin: 0 0 8px;
+  color: #f5c655;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.bicara-hero h1 {
+  margin: 0;
+  font-size: clamp(38px, 5vw, 62px);
+  line-height: 1.04;
+  letter-spacing: -.035em;
+}
+.bicara-hero p:last-child {
+  max-width: 690px;
+  margin: 17px 0 0;
+  color: rgba(255, 255, 255, .82);
+  font-size: 16px;
+  line-height: 1.72;
+}
+.bicara-hero-mark {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  flex: 0 0 112px;
+  width: 112px;
+  height: 112px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, .24);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, .10);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18);
+  transform: rotate(3deg);
+}
+.bicara-hero-mark svg {
+  width: 68px;
+  fill: none;
+  stroke: #f5c655;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.8;
+}
+.bicara-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 42px 0 20px;
+}
+.bicara-section-head p {
+  margin: 0 0 4px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.bicara-section-head h2 { margin: 0; font-size: clamp(22px, 3vw, 31px); letter-spacing: -.02em; }
+.bicara-section-head > span {
+  flex: 0 0 auto;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  background: var(--card);
+  font-size: 12px;
+  font-weight: 800;
+}
+.bicara-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+}
+.bicara-card {
+  display: flex;
+  min-width: 0;
+  min-height: 100%;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  color: var(--ink);
+  background: var(--card);
+  box-shadow: 0 10px 26px rgba(54, 22, 34, .07);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+.bicara-card:hover {
+  border-color: rgba(164, 31, 69, .38);
+  box-shadow: 0 20px 38px rgba(91, 18, 43, .15);
+  transform: translateY(-8px) scale(1.012);
+}
+.bicara-card:focus-visible { outline: 3px solid rgba(164, 31, 69, .28); outline-offset: 3px; }
+.bicara-card-cover {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f4ecef;
+}
+.bicara-card-cover img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: 50% 10%;
+  transition: transform .35s ease, filter .35s ease;
+}
+.bicara-card:hover .bicara-card-cover img { filter: saturate(1.05); transform: scale(1.055); }
+.bicara-card-category {
+  position: absolute;
+  left: 9px;
+  bottom: 9px;
+  padding: 5px 8px;
+  border: 1px solid rgba(255, 255, 255, .4);
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(74, 13, 34, .9);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .16);
+  font-size: 9.5px;
+  font-weight: 900;
+  letter-spacing: .02em;
+}
+.bicara-card-body { display: flex; flex: 1; flex-direction: column; padding: 14px 13px 15px; }
+.bicara-card-meta { color: var(--ink-soft); font-size: 9.5px; font-weight: 700; line-height: 1.45; }
+.bicara-card-body strong {
+  display: -webkit-box;
+  margin-top: 8px;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.38;
+  letter-spacing: -.01em;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+.bicara-card-excerpt {
+  display: -webkit-box;
+  margin-top: 8px;
+  overflow: hidden;
+  color: var(--ink-soft);
+  font-size: 11px;
+  line-height: 1.55;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+.bicara-card-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 14px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 900;
+}
+.bicara-card-link span { font-size: 17px; transition: transform .2s ease; }
+.bicara-card:hover .bicara-card-link span { transform: translateX(4px); }
+
+/* ---------- Pembaca artikel ---------- */
+.article-page {
+  width: min(1040px, 100%);
+  margin: 0 auto;
+  padding: 30px 24px 80px;
+}
+.article-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 9px 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--accent);
+  background: var(--card);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 900;
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.article-back:hover { border-color: rgba(164, 31, 69, .35); box-shadow: 0 8px 18px rgba(91, 18, 43, .09); transform: translateX(-3px); }
+.article-reader {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: var(--card);
+  box-shadow: 0 26px 64px rgba(54, 22, 34, .11);
+}
+.article-cover {
+  display: grid;
+  min-height: 320px;
+  place-items: center;
+  padding: 22px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(145deg, #f5eef0, #fff);
+}
+.article-cover img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 720px;
+  border-radius: 18px;
+  box-shadow: 0 18px 42px rgba(46, 26, 34, .12);
+}
+.article-reader-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px 24px 0;
+  color: var(--ink-soft);
+  font-size: 11px;
+  font-weight: 750;
+}
+.article-reader-meta > * + *::before { content: "•"; margin-right: 10px; color: #cbb7be; }
+.article-reader-meta span:first-child {
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  font-weight: 900;
+}
+.article-reader-meta span:first-child::before { content: none; }
+.article-prose {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 28px 48px 62px;
+  color: #2c2528;
+  font-size: 17px;
+  line-height: 1.86;
+}
+.article-prose h1 {
+  margin: 4px 0 18px;
+  color: #35111e;
+  font-size: clamp(30px, 5vw, 46px);
+  line-height: 1.13;
+  letter-spacing: -.035em;
+}
+.article-prose h2 {
+  margin: 42px 0 13px;
+  color: #541126;
+  font-size: clamp(22px, 3vw, 29px);
+  line-height: 1.24;
+  letter-spacing: -.02em;
+}
+.article-prose h3 { margin: 32px 0 10px; color: #541126; font-size: 20px; }
+.article-prose p { margin: 0 0 21px; }
+.article-prose > p:first-of-type { color: #705d64; font-size: 18px; line-height: 1.72; }
+.article-prose strong { color: #5f1129; }
+.article-prose em { color: #6d5960; }
+.article-prose hr { width: 72px; height: 3px; margin: 30px 0 35px; border: 0; border-radius: 3px; background: linear-gradient(90deg, var(--accent), #e0ae37); }
+.article-prose blockquote {
+  margin: 25px 0;
+  padding: 18px 22px;
+  border-left: 4px solid var(--accent);
+  border-radius: 0 14px 14px 0;
+  color: #5d4850;
+  background: var(--accent-soft);
+}
+.article-prose ul, .article-prose ol { margin: 0 0 22px; padding-left: 25px; }
+.article-prose li { margin-bottom: 8px; }
+.article-prose code { padding: 2px 5px; border-radius: 5px; background: #f3ecef; font-size: .9em; }
+.article-loading { display: grid; min-height: 220px; place-items: center; align-content: center; color: var(--ink-soft); }
+.article-loading span {
+  width: 34px;
+  height: 34px;
+  border: 3px solid #eadde2;
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: article-spin .8s linear infinite;
+}
+.article-loading p { margin: 12px 0 0; font-size: 12px; font-weight: 800; }
+.article-error { padding: 34px; border-radius: 16px; text-align: center; background: #fff4f4; }
+.article-error strong { color: var(--bad); }
+.article-error p { margin: 8px 0 18px; color: var(--ink-soft); font-size: 13px; }
+.article-error button { padding: 9px 14px; border: 0; border-radius: 9px; color: #fff; background: var(--accent); cursor: pointer; font-weight: 850; }
+@keyframes article-spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 1180px) {
+  .bicara-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 880px) {
+  .bicara-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .bicara-hero { padding: 36px 34px; }
+  .bicara-hero-mark { flex-basis: 88px; width: 88px; height: 88px; border-radius: 24px; }
+  .bicara-hero-mark svg { width: 55px; }
+}
+@media (max-width: 680px) {
+  .bicara-page { padding: 22px 16px 54px; }
+  .bicara-hero { min-height: 0; padding: 30px 24px; border-radius: 22px; }
+  .bicara-hero-mark { display: none; }
+  .bicara-hero p:last-child { font-size: 14px; }
+  .bicara-section-head { align-items: flex-start; margin-top: 32px; }
+  .bicara-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+  .bicara-card-body { padding: 12px 11px 13px; }
+  .bicara-card-body strong { font-size: 13px; }
+  .bicara-card-excerpt { display: none; }
+  .article-page { padding: 20px 12px 54px; }
+  .article-reader { border-radius: 20px; }
+  .article-cover { min-height: 220px; padding: 12px; }
+  .article-cover img { border-radius: 13px; }
+  .article-reader-meta { flex-wrap: wrap; padding: 16px 17px 0; }
+  .article-prose { padding: 24px 23px 45px; font-size: 15.5px; line-height: 1.8; }
+  .article-prose > p:first-of-type { font-size: 16px; }
+}
+@media (max-width: 420px) {
+  .bicara-grid { grid-template-columns: 1fr; }
+  .bicara-card { display: grid; grid-template-columns: 122px minmax(0, 1fr); }
+  .bicara-card-cover { height: 100%; min-height: 178px; aspect-ratio: auto; }
+  .bicara-card-link { padding-top: 10px; }
+  .bicara-section-head > span { display: none; }
+  .article-reader-meta { justify-content: flex-start; }
+  .article-reader-meta > * + *::before { margin-right: 7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bicara-card, .bicara-card-cover img, .bicara-card-link span, .article-back { transition: none; }
+  .bicara-card:hover, .article-back:hover { transform: none; }
+  .article-loading span { animation: none; }
+}
