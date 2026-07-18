@@ -15,7 +15,7 @@
       "category": "Luas",
       "level": "KBAT",
       "explain": "Luas = 240 + 1/2(240) = 360 cm^2",
-      "fig": "<div class=\"math-diagram-area\"><svg width=\"430\" height=\"210\" viewBox=\"0 0 430 210\" role=\"img\" aria-label=\"Rajah segi empat tepat dan segi tiga\">\n    <rect x=\"40\" y=\"55\" width=\"210\" height=\"105\" rx=\"8\" fill=\"#fff8ec\" stroke=\"#6f1028\" stroke-width=\"3\" />\n    <polygon points=\"250,55 365,160 250,160\" fill=\"#f8e6ee\" stroke=\"#6f1028\" stroke-width=\"3\" />\n    <text x=\"145\" y=\"112\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"900\" fill=\"#1f2937\">Segi empat tepat</text>\n    <text x=\"145\" y=\"138\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#6f1028\">24 cm x 10 cm</text>\n    <text x=\"300\" y=\"134\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"800\" fill=\"#6f1028\">Segi tiga</text>\n    <text x=\"300\" y=\"154\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#1f2937\">1/2 luas segi empat</text>\n  </svg></div>"
+      "fig": "<img class=\"math-question-image\" src=\"assets/math-set1/q1.png\" alt=\"Rajah Matematik Set 1 soalan 1\" loading=\"lazy\">"
     },
     {
       "sourceId": "M132",
@@ -226,7 +226,7 @@
       "category": "Luas",
       "level": "KBAT",
       "explain": "Luas = 120 + 2/3(120) = 200 cm^2",
-      "fig": "<div class=\"math-diagram-area\"><svg width=\"430\" height=\"210\" viewBox=\"0 0 430 210\" role=\"img\" aria-label=\"Rajah segi empat tepat dan segi tiga\">\n    <rect x=\"40\" y=\"55\" width=\"210\" height=\"105\" rx=\"8\" fill=\"#fff8ec\" stroke=\"#6f1028\" stroke-width=\"3\" />\n    <polygon points=\"250,55 365,160 250,160\" fill=\"#f8e6ee\" stroke=\"#6f1028\" stroke-width=\"3\" />\n    <text x=\"145\" y=\"112\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"900\" fill=\"#1f2937\">Segi empat tepat</text>\n    <text x=\"145\" y=\"138\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#6f1028\">15 cm x 8 cm</text>\n    <text x=\"300\" y=\"134\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"800\" fill=\"#6f1028\">Segi tiga</text>\n    <text x=\"300\" y=\"154\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#1f2937\">2/3 luas segi empat</text>\n  </svg></div>"
+      "fig": "<img class=\"math-question-image\" src=\"assets/math-set1/q16.png\" alt=\"Rajah Matematik Set 1 soalan 16\" loading=\"lazy\">"
     },
     {
       "sourceId": "M052",
@@ -355,7 +355,8 @@
       "answer": 3,
       "category": "Isi padu cecair",
       "level": "Rendah",
-      "explain": "3/10 L = 300 mL; jumlah = 2 750 mL"
+      "explain": "3/10 L = 300 mL; jumlah = 2 750 mL",
+      "fig": "<img class=\"math-question-image\" src=\"assets/math-set1/q25.png\" alt=\"Rajah Matematik Set 1 soalan 25\" loading=\"lazy\">"
     },
     {
       "sourceId": "M093",
