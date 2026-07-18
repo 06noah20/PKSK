@@ -3418,6 +3418,53 @@ body {
   .mainnav { gap: 14px; }
 }
 
+@media (min-width: 721px) and (max-width: 1450px) {
+  /* Pastikan semua menu kekal kelihatan apabila Panel Admin dipaparkan. */
+  .topbar:has(#adminBtn) {
+    gap: 10px;
+    padding-inline: 18px;
+  }
+  .topbar:has(#adminBtn) .brand { gap: 14px; }
+  .topbar:has(#adminBtn) .pksk-wordmark { font-size: 30px; }
+  .topbar:has(#adminBtn) .brand-divider { height: 36px; }
+  .topbar:has(#adminBtn) .brand-title {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+  .topbar:has(#adminBtn) .mainnav {
+    gap: 10px;
+    min-width: 0;
+    overflow: visible;
+  }
+  .topbar:has(#adminBtn) .tab {
+    gap: 6px;
+    font-size: 13px;
+  }
+  .topbar:has(#adminBtn) .tab-ico,
+  .topbar:has(#adminBtn) .tab-ico svg {
+    width: 17px;
+    height: 17px;
+  }
+  .topbar:has(#adminBtn) .tab-ico { flex-basis: 17px; }
+  .topbar:has(#adminBtn) .nav-cta {
+    gap: 6px;
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1180px) {
+  .topbar:has(#adminBtn) { flex-wrap: wrap; }
+  .topbar:has(#adminBtn) .mainnav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    margin-left: 0;
+  }
+  .topbar:has(#adminBtn) .tab { padding-block: 10px 14px; }
+  .topbar:has(#adminBtn) .tab.active::after { bottom: 5px; }
+}
+
 /* ---------- Bicara Ilmu ---------- */
 .bicara-page {
   width: min(1320px, 100%);
