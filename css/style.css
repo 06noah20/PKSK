@@ -3961,3 +3961,99 @@ body.article-lightbox-open { overflow: hidden; }
   .article-loading span { animation: none; }
   .article-image-lightbox { animation: none; }
 }
+
+/* ---------- Bicara Ilmu: susun atur berita ---------- */
+.container:has(.bicara-news-page) { background: #f3f3f3; }
+.bicara-news-page {
+  width: min(1280px, 100%);
+  padding: 28px 38px 76px;
+}
+.bicara-news-head {
+  margin: 0 0 18px;
+  padding: 0;
+}
+.bicara-news-head h1 {
+  margin: 0;
+  color: #151515;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.18;
+}
+.bicara-news-head p {
+  margin: 5px 0 0;
+  color: #5c5c5c;
+  font-size: 13px;
+}
+.bicara-news-page .bicara-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+.bicara-news-page .bicara-card {
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: none;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.bicara-news-page .bicara-card:hover {
+  border-color: transparent;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
+  transform: translateY(-4px);
+}
+.bicara-news-page .bicara-card-cover { aspect-ratio: 3 / 2; }
+.bicara-news-page .bicara-card-cover img {
+  object-position: 50% 14%;
+  transition: transform .3s ease, filter .3s ease;
+}
+.bicara-news-page .bicara-card:hover .bicara-card-cover img { transform: scale(1.035); }
+.bicara-news-page .bicara-card-body { padding: 12px 10px 15px; }
+.bicara-news-page .bicara-card-body strong {
+  margin: 0;
+  color: #111;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.35;
+  -webkit-line-clamp: 3;
+}
+.bicara-news-page .bicara-card-excerpt {
+  margin-top: 10px;
+  color: #3d3d3d;
+  font-size: 13.5px;
+  line-height: 1.55;
+  -webkit-line-clamp: 3;
+}
+.bicara-card-byline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 8px;
+  margin-top: auto;
+  padding-top: 15px;
+  font-size: 10.5px;
+  line-height: 1.4;
+}
+.bicara-card-byline > span { color: #075fa8; }
+.bicara-card-byline time { color: #555; }
+
+@media (max-width: 1100px) {
+  .bicara-news-page .bicara-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 780px) {
+  .bicara-news-page { padding: 24px 20px 58px; }
+  .bicara-news-page .bicara-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
+}
+@media (max-width: 520px) {
+  .bicara-news-page { padding-inline: 15px; }
+  .bicara-news-head h1 { font-size: 29px; }
+  .bicara-news-page .bicara-grid { grid-template-columns: 1fr; }
+  .bicara-news-page .bicara-card { display: flex; grid-template-columns: none; }
+  .bicara-news-page .bicara-card-cover { height: auto; min-height: 0; aspect-ratio: 3 / 2; }
+  .bicara-news-page .bicara-card-excerpt { display: -webkit-box; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bicara-news-page .bicara-card,
+  .bicara-news-page .bicara-card-cover img { transition: none; }
+  .bicara-news-page .bicara-card:hover,
+  .bicara-news-page .bicara-card:hover .bicara-card-cover img { transform: none; }
+}

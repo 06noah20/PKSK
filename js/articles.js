@@ -7,10 +7,22 @@
 
   const ARTICLES = [
     {
+      slug: "5-sistem-pendidikan-terbaik-dunia",
+      title: "Lima Gergasi Pendidikan Dunia: Sistem yang Membentuk Generasi Masa Depan",
+      excerpt: "Perbandingan mendalam sistem pendidikan Finland, Singapura, Jepun, Korea Selatan dan Estonia serta pengajaran yang boleh dimanfaatkan.",
+      category: "Pendidikan Dunia",
+      author: "Editorial PKSKMY",
+      date: "19 Julai 2026",
+      readTime: "12 minit bacaan",
+      image: "assets/articles/5-sistem-pendidikan-terbaik-dunia.png",
+      source: "articles/artikel-5-sistem-pendidikan-terbaik-dunia.md"
+    },
+    {
       slug: "tahap-penguasaan-pbd",
       title: "Di Sebalik Angka 1 hingga 6: Menilai Semula Tafsiran Tahap Penguasaan dalam PBD",
       excerpt: "Tinjauan kritis terhadap tafsiran TP1 hingga TP6 — kekuatan, kelemahan dan cadangan untuk pentaksiran yang lebih adil.",
       category: "Pentaksiran & PBD",
+      author: "Editorial PKSKMY",
       date: "18 Julai 2026",
       readTime: "8 minit bacaan",
       image: "assets/articles/tahap-penguasaan-pbd.png",
@@ -253,13 +265,14 @@
       aria-label="Baca artikel: ${escapeHtml(article.title)}">
       <span class="bicara-card-cover">
         <img src="${escapeHtml(article.image)}" alt="" loading="lazy">
-        <span class="bicara-card-category">${escapeHtml(article.category)}</span>
       </span>
       <span class="bicara-card-body">
-        <span class="bicara-card-meta">${escapeHtml(article.date)} · ${escapeHtml(article.readTime)}</span>
         <strong>${escapeHtml(article.title)}</strong>
         <span class="bicara-card-excerpt">${escapeHtml(article.excerpt)}</span>
-        <span class="bicara-card-link">Baca artikel <span aria-hidden="true">→</span></span>
+        <span class="bicara-card-byline">
+          <span>Oleh ${escapeHtml(article.author || "PKSKMY")}</span>
+          <time>${escapeHtml(article.date)}</time>
+        </span>
       </span>
     </button>`;
   }
@@ -270,23 +283,11 @@
     const app = document.getElementById("app");
     if (!app) return;
 
-    app.innerHTML = `<section class="bicara-page">
-      <header class="bicara-hero">
-        <div>
-          <p class="bicara-eyebrow">Wacana Pendidikan</p>
-          <h1>Bicara Ilmu</h1>
-          <p>Himpunan artikel, pandangan dan analisis yang membantu ibu bapa, guru dan murid memahami dunia pendidikan dengan lebih mendalam.</p>
-        </div>
-        <span class="bicara-hero-mark" aria-hidden="true">
-          <svg viewBox="0 0 64 64"><path d="M12 12h27a9 9 0 0 1 9 9v29H21a9 9 0 0 0-9 9z"/><path d="M52 12H39a9 9 0 0 0-9 9v29h13a9 9 0 0 1 9 9z"/><path d="M20 24h8M20 31h8M38 24h7M38 31h7"/></svg>
-        </span>
+    app.innerHTML = `<section class="bicara-page bicara-news-page">
+      <header class="bicara-news-head">
+        <h1>Bicara Ilmu</h1>
+        <p>Artikel, pandangan dan analisis terkini berkaitan pendidikan.</p>
       </header>
-
-      <div class="bicara-section-head">
-        <div><p>Artikel Terkini</p><h2>Teroka idea dan perspektif baharu</h2></div>
-        <span>${ARTICLES.length} artikel</span>
-      </div>
-
       <div class="bicara-grid">
         ${ARTICLES.map(articleCard).join("")}
       </div>
