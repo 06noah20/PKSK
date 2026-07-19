@@ -73,7 +73,7 @@
         markdown: String(meta.markdown || ""),
         published: meta.published !== false,
         managed: true,
-        createdAt: row.created_at || meta.createdAt || ""
+        createdAt: meta.createdAt || ""
       };
     } catch (_) { return null; }
   }
@@ -98,10 +98,9 @@
       const client = window.pkskAuth?.client;
       if (!client) throw new Error("Sambungan pangkalan data tidak tersedia.");
       const { data, error } = await client.from("notes")
-        .select("id, title, content, image_url, created_at")
+        .select("id, title, content, image_url")
         .eq("subject", "bicara-ilmu")
-        .eq("is_published", true)
-        .order("created_at", { ascending: false });
+        .eq("is_published", true);
       if (error) throw error;
       managedRows = (data || []).map(parseManagedRow).filter(Boolean);
     }
