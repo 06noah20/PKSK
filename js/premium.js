@@ -157,15 +157,17 @@
       <div class="admin-page-shell">
         <div class="admin-panel-head">
           <div><p class="practice-eyebrow">Pentadbiran Portal</p><h1>Panel Admin PKSK</h1>
-            <p>Urus pendaftaran pengguna dan bank soalan portal dari satu halaman.</p></div>
+            <p>Urus pendaftaran pengguna, bank soalan dan artikel portal dari satu halaman.</p></div>
           <span class="admin-mode-badge">ADMIN</span>
         </div>
         <nav class="admin-nav" aria-label="Navigasi panel admin">
           <button type="button" class="active" data-admin-view="accounts">Pengesahan Akaun <span id="pendingNavCount">0</span></button>
           <button type="button" data-admin-view="questions">Urus Soalan</button>
+          <button type="button" data-admin-view="articles">Urus Artikel</button>
         </nav>
         <section id="adminAccountsView"></section>
         <section id="adminQuestionsView" hidden></section>
+        <section id="adminArticlesView" hidden></section>
       </div>
     </section>`;
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -173,17 +175,23 @@
     const panel = app.querySelector(".admin-page");
     const accountsView = panel.querySelector("#adminAccountsView");
     const questionsView = panel.querySelector("#adminQuestionsView");
+    const articlesView = panel.querySelector("#adminArticlesView");
     await renderAccounts(accountsView, panel.querySelector("#pendingNavCount"));
 
     panel.querySelectorAll("[data-admin-view]").forEach(button =>
       button.addEventListener("click", async () => {
-        const questions = button.dataset.adminView === "questions";
+        const view = button.dataset.adminView;
         panel.querySelectorAll("[data-admin-view]").forEach(item => item.classList.toggle("active", item === button));
-        accountsView.hidden = questions;
-        questionsView.hidden = !questions;
-        if (questions && !questionsView.dataset.ready) {
+        accountsView.hidden = view !== "accounts";
+        questionsView.hidden = view !== "questions";
+        articlesView.hidden = view !== "articles";
+        if (view === "questions" && !questionsView.dataset.ready) {
           questionsView.dataset.ready = "true";
           await renderQuestionManager(questionsView);
+        }
+        if (view === "articles" && !articlesView.dataset.ready) {
+          articlesView.dataset.ready = "true";
+          await renderArticleManager(articlesView);
         }
       }));
   }
@@ -417,6 +425,184 @@
       drawList();
     });
     drawList();
+  }
+
+  async function renderArticleManager(host) {
+    const api = window.pkskArticles;
+    await api.ready;
+    host.innerHTML = `
+      <div class="article-admin-toolbar">
+        <div><strong>Pengurusan Bicara Ilmu</strong><span>Tambah, kemas kini dan terbitkan artikel tanpa mengubah kod portal.</span></div>
+        <button type="button" class="admin-primary" id="addArticle">+ Artikel Baharu</button>
+      </div>
+      <div id="articleAdminEditor" hidden></div>
+      <div class="article-admin-list" id="articleAdminList"><p class="auth-note">Memuatkan artikel…</p></div>`;
+
+    const editor = host.querySelector("#articleAdminEditor");
+    const list = host.querySelector("#articleAdminList");
+
+    function statusLabel(article) {
+      return article.published === false ? "Disembunyikan" : "Diterbitkan";
+    }
+
+    async function drawList() {
+      const articles = await api.listAdminArticles();
+      list.innerHTML = articles.length ? articles.map(article => `
+        <article class="article-admin-row ${article.published === false ? "is-hidden" : ""}">
+          <img src="${escapeHtml(article.image)}" alt="" loading="lazy">
+          <div class="article-admin-main">
+            <strong>${escapeHtml(article.title)}</strong>
+            <span>${escapeHtml(article.category)} · ${escapeHtml(article.date)} · ${escapeHtml(article.readTime)}</span>
+            <small>${article.managed ? "Disimpan melalui Panel Admin" : "Artikel asal portal"}</small>
+          </div>
+          <span class="article-admin-status">${statusLabel(article)}</span>
+          <div class="article-admin-actions">
+            ${article.published !== false ? `<button type="button" data-preview="${escapeHtml(article.slug)}">Lihat</button>` : ""}
+            <button type="button" data-edit-article="${escapeHtml(article.slug)}">Edit</button>
+            ${article.published !== false
+              ? `<button type="button" class="danger" data-hide-article="${escapeHtml(article.slug)}">Padam</button>`
+              : `<button type="button" data-restore-article="${escapeHtml(article.slug)}">Terbitkan Semula</button>`}
+          </div>
+        </article>`).join("") : '<p class="admin-empty">Belum ada artikel.</p>';
+
+      list.querySelectorAll("[data-preview]").forEach(button => button.addEventListener("click", () => {
+        api.renderArticle(button.dataset.preview);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }));
+      list.querySelectorAll("[data-edit-article]").forEach(button =>
+        button.addEventListener("click", () => openEditor(button.dataset.editArticle)));
+      list.querySelectorAll("[data-hide-article]").forEach(button => button.addEventListener("click", async () => {
+        if (!confirm("Padam artikel ini daripada paparan Bicara Ilmu?")) return;
+        button.disabled = true;
+        try { await api.hideManagedArticle(button.dataset.hideArticle); await drawList(); }
+        catch (error) { alert("Artikel tidak dapat dipadam: " + (error?.message || error)); button.disabled = false; }
+      }));
+      list.querySelectorAll("[data-restore-article]").forEach(button => button.addEventListener("click", async () => {
+        button.disabled = true;
+        try {
+          const article = await api.getAdminArticle(button.dataset.restoreArticle);
+          await api.saveManagedArticle({ ...article, published: true });
+          await drawList();
+        } catch (error) { alert("Artikel tidak dapat diterbitkan: " + (error?.message || error)); button.disabled = false; }
+      }));
+    }
+
+    async function openEditor(slug = "") {
+      const article = slug ? await api.getAdminArticle(slug) : null;
+      editor.hidden = false;
+      editor.innerHTML = `<form class="article-editor-form">
+        <div class="question-editor-head">
+          <strong>${article ? "Edit Artikel" : "Artikel Baharu"}</strong>
+          <button type="button" data-close-article-editor>×</button>
+        </div>
+        <div class="article-editor-grid">
+          <label class="article-field-wide"><span>Tajuk artikel</span>
+            <input name="title" required value="${escapeHtml(article?.title || "")}" placeholder="Tajuk artikel"></label>
+          <label><span>Pautan ringkas (slug)</span>
+            <input name="slug" value="${escapeHtml(article?.slug || "")}" placeholder="dijana daripada tajuk" ${article ? "readonly" : ""}></label>
+          <label><span>Kategori</span>
+            <input name="category" value="${escapeHtml(article?.category || "Pendidikan")}" required></label>
+          <label><span>Penulis</span>
+            <input name="author" value="${escapeHtml(article?.author || "Editorial PKSKMY")}" required></label>
+          <label><span>Tarikh paparan</span>
+            <input name="date" value="${escapeHtml(article?.date || "")}" placeholder="contoh: 20 Julai 2026"></label>
+          <label><span>Masa bacaan</span>
+            <input name="readTime" value="${escapeHtml(article?.readTime || "")}" placeholder="dijana secara automatik"></label>
+          <label class="article-field-wide"><span>Ringkasan kad</span>
+            <textarea name="excerpt" rows="3" placeholder="Ringkasan pendek artikel">${escapeHtml(article?.excerpt || "")}</textarea></label>
+          <label class="article-field-wide"><span>Muat naik fail artikel (.md)</span>
+            <input name="markdownFile" type="file" accept="text/markdown,.md,text/plain"></label>
+          <label class="article-field-wide"><span>Kandungan Markdown</span>
+            <textarea name="markdown" rows="18" required placeholder="# Tajuk artikel…">${escapeHtml(article?.markdown || "")}</textarea></label>
+          <label class="article-field-wide"><span>Muat naik poster (PNG, JPG atau WebP)</span>
+            <input name="poster" type="file" accept="image/png,image/jpeg,image/webp"></label>
+        </div>
+        <div class="article-poster-preview ${article?.image ? "has-image" : ""}">
+          ${article?.image ? `<img src="${escapeHtml(article.image)}" alt="Pratonton poster">` : ""}
+          <span>${article?.image ? "Poster semasa" : "Poster belum dipilih"}</span>
+        </div>
+        <label class="article-publish-toggle"><input name="published" type="checkbox" ${article?.published === false ? "" : "checked"}> Paparkan artikel kepada pengguna</label>
+        <div class="auth-msg" role="status" hidden></div>
+        <div class="question-editor-buttons">
+          <button type="button" data-close-article-editor>Batal</button>
+          <button type="submit" class="admin-primary">Simpan Artikel</button>
+        </div>
+      </form>`;
+      editor.scrollIntoView({ behavior: "smooth", block: "start" });
+
+      const form = editor.querySelector("form");
+      const title = form.elements.title;
+      const slugInput = form.elements.slug;
+      const markdown = form.elements.markdown;
+      const excerpt = form.elements.excerpt;
+      const preview = form.querySelector(".article-poster-preview");
+      let posterPreviewUrl = "";
+
+      editor.querySelectorAll("[data-close-article-editor]").forEach(button => button.addEventListener("click", () => {
+        if (posterPreviewUrl) URL.revokeObjectURL(posterPreviewUrl);
+        editor.hidden = true;
+      }));
+      title.addEventListener("input", () => {
+        if (!article && !slugInput.dataset.manual) slugInput.value = api.slugify(title.value);
+      });
+      slugInput.addEventListener("input", () => { slugInput.dataset.manual = "true"; });
+      form.elements.markdownFile.addEventListener("change", async event => {
+        const file = event.target.files[0];
+        if (!file) return;
+        const text = await file.text();
+        markdown.value = text;
+        const heading = /^#\s+(.+)$/m.exec(text)?.[1]?.trim();
+        if (!title.value.trim() && heading) {
+          title.value = heading;
+          slugInput.value = api.slugify(heading);
+        }
+        if (!excerpt.value.trim()) {
+          excerpt.value = text.replace(/^#{1,6}\s+.*$/gm, "").replace(/[*_>`#\[\]()!-]/g, " ").replace(/\s+/g, " ").trim().slice(0, 210);
+        }
+      });
+      form.elements.poster.addEventListener("change", event => {
+        const file = event.target.files[0];
+        if (!file) return;
+        if (posterPreviewUrl) URL.revokeObjectURL(posterPreviewUrl);
+        posterPreviewUrl = URL.createObjectURL(file);
+        preview.classList.add("has-image");
+        preview.innerHTML = `<img src="${escapeHtml(posterPreviewUrl)}" alt="Pratonton poster baharu"><span>Poster baharu</span>`;
+      });
+      form.addEventListener("submit", async event => {
+        event.preventDefault();
+        const submit = form.querySelector('[type="submit"]');
+        const message = form.querySelector(".auth-msg");
+        submit.disabled = true;
+        submit.textContent = "Menyimpan…";
+        message.hidden = true;
+        try {
+          await api.saveManagedArticle({
+            id: article?.id || null,
+            image: article?.image || "",
+            title: title.value,
+            slug: slugInput.value,
+            category: form.elements.category.value,
+            author: form.elements.author.value,
+            date: form.elements.date.value,
+            readTime: form.elements.readTime.value,
+            excerpt: excerpt.value,
+            markdown: markdown.value,
+            published: form.elements.published.checked
+          }, form.elements.poster.files[0] || null);
+          if (posterPreviewUrl) URL.revokeObjectURL(posterPreviewUrl);
+          editor.hidden = true;
+          await drawList();
+        } catch (error) {
+          message.hidden = false;
+          message.textContent = error?.message || error;
+          submit.disabled = false;
+          submit.textContent = "Simpan Artikel";
+        }
+      });
+    }
+
+    host.querySelector("#addArticle").addEventListener("click", () => openEditor());
+    await drawList();
   }
 
   function syncAdminButton(nextState) {

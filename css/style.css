@@ -4057,3 +4057,131 @@ body.article-lightbox-open { overflow: hidden; }
   .bicara-news-page .bicara-card:hover,
   .bicara-news-page .bicara-card:hover .bicara-card-cover img { transform: none; }
 }
+
+/* ---------- Panel Admin: pengurusan artikel ---------- */
+.article-admin-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 15px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--bg-soft);
+}
+.article-admin-toolbar > div { display: flex; min-width: 0; flex-direction: column; gap: 3px; }
+.article-admin-toolbar strong { color: #4f1427; font-size: 17px; }
+.article-admin-toolbar span { color: var(--ink-soft); font-size: 11.5px; }
+.article-admin-list { display: grid; gap: 9px; }
+.article-admin-row {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 13px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+}
+.article-admin-row.is-hidden { opacity: .68; background: #f7f4f5; }
+.article-admin-row > img {
+  width: 92px;
+  height: 66px;
+  object-fit: cover;
+  object-position: 50% 14%;
+  border-radius: 8px;
+  background: #eee;
+}
+.article-admin-main { display: flex; min-width: 0; flex-direction: column; gap: 3px; }
+.article-admin-main strong { overflow: hidden; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.article-admin-main span { color: var(--ink-soft); font-size: 10.5px; }
+.article-admin-main small { color: #8b6c77; font-size: 9.5px; }
+.article-admin-status {
+  align-self: start;
+  padding: 5px 8px;
+  border-radius: 999px;
+  color: #157347;
+  background: #e8f6ee;
+  font-size: 9.5px;
+  font-weight: 850;
+}
+.article-admin-row.is-hidden .article-admin-status { color: #765b00; background: #fff3cd; }
+.article-admin-actions {
+  grid-column: 2 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.article-admin-actions button {
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  color: var(--ink);
+  background: #fff;
+  cursor: pointer;
+  font-size: 10.5px;
+  font-weight: 750;
+}
+.article-admin-actions button:hover { border-color: var(--accent); color: var(--accent); }
+.article-admin-actions button.danger { color: var(--bad); }
+#articleAdminEditor {
+  margin: 0 0 16px;
+  scroll-margin-top: 105px;
+}
+.article-editor-form {
+  padding: 18px;
+  border: 1px solid rgba(164, 31, 69, .22);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 12px 34px rgba(78, 20, 40, .08);
+}
+.article-editor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+.article-editor-grid label { display: flex; min-width: 0; flex-direction: column; gap: 5px; }
+.article-editor-grid label > span { color: #5e3d49; font-size: 10.5px; font-weight: 800; }
+.article-editor-grid input,
+.article-editor-grid textarea {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  background: #fff;
+  font: inherit;
+  font-size: 12px;
+}
+.article-editor-grid textarea { resize: vertical; line-height: 1.55; }
+.article-editor-grid input:focus,
+.article-editor-grid textarea:focus { border-color: var(--accent); outline: 3px solid rgba(164, 31, 69, .09); }
+.article-editor-grid input[readonly] { color: var(--ink-soft); background: #f5f2f3; }
+.article-field-wide { grid-column: 1 / -1; }
+.article-poster-preview {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 58px;
+  margin-top: 12px;
+  padding: 9px;
+  border: 1px dashed #ccb8bf;
+  border-radius: 10px;
+  color: var(--ink-soft);
+  background: #faf8f9;
+  font-size: 10.5px;
+}
+.article-poster-preview img { width: 76px; height: 54px; object-fit: cover; object-position: 50% 14%; border-radius: 7px; }
+.article-publish-toggle { display: flex; align-items: center; gap: 7px; margin: 13px 0; font-size: 11.5px; font-weight: 750; }
+
+@media (max-width: 680px) {
+  .article-admin-toolbar { align-items: stretch; flex-direction: column; }
+  .article-admin-toolbar .admin-primary { width: 100%; }
+  .article-admin-row { grid-template-columns: 76px minmax(0, 1fr); }
+  .article-admin-row > img { width: 76px; height: 58px; }
+  .article-admin-status { grid-column: 2; }
+  .article-admin-actions { grid-column: 1 / -1; flex-wrap: wrap; }
+  .article-editor-grid { grid-template-columns: 1fr; }
+  .article-field-wide { grid-column: auto; }
+}

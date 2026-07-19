@@ -5,7 +5,7 @@
 (function () {
   "use strict";
 
-  const ARTICLES = [
+  const BUILTIN_ARTICLES = [
     {
       slug: "5-sistem-pendidikan-terbaik-dunia",
       title: "Lima Gergasi Pendidikan Dunia: Sistem yang Membentuk Generasi Masa Depan",
@@ -15,7 +15,9 @@
       date: "19 Julai 2026",
       readTime: "12 minit bacaan",
       image: "assets/articles/5-sistem-pendidikan-terbaik-dunia.png",
-      source: "articles/artikel-5-sistem-pendidikan-terbaik-dunia.md"
+      source: "articles/artikel-5-sistem-pendidikan-terbaik-dunia.md",
+      builtin: true,
+      published: true
     },
     {
       slug: "tahap-penguasaan-pbd",
@@ -26,16 +28,217 @@
       date: "18 Julai 2026",
       readTime: "8 minit bacaan",
       image: "assets/articles/tahap-penguasaan-pbd.png",
-      source: "articles/artikel-tahap-penguasaan-pbd.md"
+      source: "articles/artikel-tahap-penguasaan-pbd.md",
+      builtin: true,
+      published: true
     }
   ];
 
   const articleCache = new Map();
+  const MANAGED_KEY = "pksk_managed_articles_v1";
+  let ARTICLES = BUILTIN_ARTICLES.map(article => ({ ...article }));
+  let managedRows = [];
   let activeLightbox = null;
 
   function escapeHtml(value) {
     return String(value == null ? "" : value).replace(/[&<>"']/g, char =>
       ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
+  }
+
+  function readDemoRows() {
+    try {
+      const rows = JSON.parse(localStorage.getItem(MANAGED_KEY));
+      return Array.isArray(rows) ? rows : [];
+    } catch (_) { return []; }
+  }
+
+  function writeDemoRows(rows) {
+    localStorage.setItem(MANAGED_KEY, JSON.stringify(rows));
+  }
+
+  function parseManagedRow(row) {
+    try {
+      const meta = JSON.parse(row.content || "{}");
+      if (!meta.slug || !meta.markdown) return null;
+      return {
+        id: row.id,
+        slug: String(meta.slug),
+        title: String(row.title || meta.title || "Artikel"),
+        excerpt: String(meta.excerpt || ""),
+        category: String(meta.category || "Pendidikan"),
+        author: String(meta.author || "Editorial PKSKMY"),
+        date: String(meta.date || ""),
+        readTime: String(meta.readTime || ""),
+        image: String(row.image_url || meta.image || ""),
+        markdown: String(meta.markdown || ""),
+        published: meta.published !== false,
+        managed: true,
+        createdAt: row.created_at || meta.createdAt || ""
+      };
+    } catch (_) { return null; }
+  }
+
+  function rebuildArticles() {
+    const overrides = new Map(managedRows.map(article => [article.slug, article]));
+    const managed = managedRows
+      .filter(article => article.published)
+      .slice()
+      .sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
+    const builtins = BUILTIN_ARTICLES
+      .filter(article => !overrides.has(article.slug))
+      .map(article => ({ ...article }));
+    ARTICLES = [...managed, ...builtins];
+  }
+
+  async function refreshManagedArticles() {
+    await window.pkskAuth?.init?.();
+    if (window.pkskAuth?.isDemo?.()) {
+      managedRows = readDemoRows().map(parseManagedRow).filter(Boolean);
+    } else {
+      const client = window.pkskAuth?.client;
+      if (!client) throw new Error("Sambungan pangkalan data tidak tersedia.");
+      const { data, error } = await client.from("notes")
+        .select("id, title, content, image_url, created_at")
+        .eq("subject", "bicara-ilmu")
+        .eq("is_published", true)
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      managedRows = (data || []).map(parseManagedRow).filter(Boolean);
+    }
+    articleCache.clear();
+    rebuildArticles();
+    return ARTICLES.slice();
+  }
+
+  const articlesReady = refreshManagedArticles().catch(error => {
+    console.error("PKSK managed articles:", error);
+    rebuildArticles();
+    return ARTICLES.slice();
+  });
+
+  function slugify(value) {
+    return String(value || "")
+      .normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase().replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "").slice(0, 90);
+  }
+
+  function defaultDate() {
+    return new Date().toLocaleDateString("ms-MY", { day: "numeric", month: "long", year: "numeric" });
+  }
+
+  function estimateReadTime(markdown) {
+    const words = String(markdown || "").trim().split(/\s+/).filter(Boolean).length;
+    return `${Math.max(1, Math.ceil(words / 200))} minit bacaan`;
+  }
+
+  function deriveExcerpt(markdown) {
+    return String(markdown || "")
+      .replace(/^#{1,6}\s+.*$/gm, "")
+      .replace(/[*_>`#\[\]()!-]/g, " ")
+      .replace(/\s+/g, " ").trim().slice(0, 210);
+  }
+
+  function optimizePoster(file) {
+    if (!file) return Promise.resolve("");
+    if (!/^image\/(?:png|jpeg|webp)$/i.test(file.type)) throw new Error("Poster mesti dalam format PNG, JPG atau WebP.");
+    if (file.size > 8 * 1024 * 1024) throw new Error("Saiz poster melebihi 8 MB.");
+    return new Promise((resolve, reject) => {
+      const image = new Image();
+      const url = URL.createObjectURL(file);
+      image.onload = () => {
+        URL.revokeObjectURL(url);
+        const scale = Math.min(1, 1600 / Math.max(image.naturalWidth, image.naturalHeight));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+        canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+        canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL("image/webp", .86));
+      };
+      image.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Poster tidak dapat dibaca.")); };
+      image.src = url;
+    });
+  }
+
+  async function listAdminArticles() {
+    await articlesReady;
+    const overrides = new Map(managedRows.map(article => [article.slug, article]));
+    const builtins = BUILTIN_ARTICLES.map(article => overrides.get(article.slug) || ({ ...article }));
+    const extra = managedRows.filter(article => !BUILTIN_ARTICLES.some(item => item.slug === article.slug));
+    return [...extra, ...builtins].map(article => ({ ...article }));
+  }
+
+  async function getAdminArticle(slug) {
+    await articlesReady;
+    const managed = managedRows.find(article => article.slug === slug);
+    const article = managed || BUILTIN_ARTICLES.find(item => item.slug === slug);
+    if (!article) return null;
+    const markdown = article.markdown != null ? article.markdown : await loadArticle(article);
+    return { ...article, markdown };
+  }
+
+  async function saveManagedArticle(input, posterFile = null) {
+    await articlesReady;
+    if (window.pkskAuth?.state?.().access !== "admin") throw new Error("Akses pentadbir diperlukan.");
+    const title = String(input.title || "").trim();
+    const markdown = String(input.markdown || "").trim();
+    const slug = slugify(input.slug || title);
+    if (!title || !markdown || !slug) throw new Error("Tajuk dan kandungan artikel wajib diisi.");
+
+    const previous = input.id
+      ? managedRows.find(article => article.id === input.id)
+      : managedRows.find(article => article.slug === slug);
+    const image = posterFile ? await optimizePoster(posterFile) : String(input.image || previous?.image || "");
+    if (!image) throw new Error("Sila muat naik poster artikel.");
+    const now = new Date().toISOString();
+    const meta = {
+      slug,
+      excerpt: String(input.excerpt || "").trim() || deriveExcerpt(markdown),
+      category: String(input.category || "Pendidikan").trim(),
+      author: String(input.author || "Editorial PKSKMY").trim(),
+      date: String(input.date || "").trim() || defaultDate(),
+      readTime: String(input.readTime || "").trim() || estimateReadTime(markdown),
+      markdown,
+      published: input.published !== false,
+      createdAt: previous?.createdAt || now
+    };
+    const row = {
+      id: previous?.id || input.id || `article_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+      title,
+      content: JSON.stringify(meta),
+      image_url: image,
+      created_at: previous?.createdAt || now
+    };
+
+    if (window.pkskAuth?.isDemo?.()) {
+      const rows = readDemoRows();
+      const index = rows.findIndex(item => item.id === row.id || parseManagedRow(item)?.slug === slug);
+      if (index >= 0) rows[index] = row; else rows.unshift(row);
+      writeDemoRows(rows);
+    } else {
+      const client = window.pkskAuth?.client;
+      const payload = {
+        subject: "bicara-ilmu",
+        title,
+        content: row.content,
+        image_url: image,
+        access_level: "free",
+        is_published: true
+      };
+      const query = previous?.id
+        ? client.from("notes").update(payload).eq("id", previous.id)
+        : client.from("notes").insert(payload);
+      const { error } = await query;
+      if (error) throw error;
+    }
+    await refreshManagedArticles();
+    return getAdminArticle(slug);
+  }
+
+  async function hideManagedArticle(slug) {
+    const article = await getAdminArticle(slug);
+    if (!article) throw new Error("Artikel tidak ditemui.");
+    return saveManagedArticle({ ...article, published: false }, null);
   }
 
   function inlineMarkdown(value) {
@@ -141,6 +344,10 @@
 
   async function loadArticle(article) {
     if (articleCache.has(article.slug)) return articleCache.get(article.slug);
+    if (article.markdown != null) {
+      articleCache.set(article.slug, article.markdown);
+      return article.markdown;
+    }
     const response = await fetch(article.source, { cache: "no-cache" });
     if (!response.ok) throw new Error(`Artikel tidak dapat dimuatkan (${response.status}).`);
     const markdown = await response.text();
@@ -277,11 +484,12 @@
     </button>`;
   }
 
-  function renderHub() {
+  async function renderHub() {
     closeImageLightbox();
     clearSharedArticleHash();
     const app = document.getElementById("app");
     if (!app) return;
+    await articlesReady;
 
     app.innerHTML = `<section class="bicara-page bicara-news-page">
       <header class="bicara-news-head">
@@ -303,6 +511,7 @@
   async function renderArticle(slug) {
     closeImageLightbox();
     const app = document.getElementById("app");
+    await articlesReady;
     const article = ARTICLES.find(item => item.slug === slug);
     if (!app || !article) return renderHub();
 
@@ -367,7 +576,13 @@
   window.pkskArticles = {
     renderHub,
     renderArticle,
-    articles: ARTICLES.slice()
+    ready: articlesReady,
+    listArticles: () => ARTICLES.map(article => ({ ...article })),
+    listAdminArticles,
+    getAdminArticle,
+    saveManagedArticle,
+    hideManagedArticle,
+    slugify
   };
 
   document.getElementById("tabbar")?.addEventListener("click", event => {
@@ -375,7 +590,8 @@
     if (tab && tab.dataset.view !== "bicara") clearSharedArticleHash();
   });
 
-  window.addEventListener("DOMContentLoaded", () => {
+  window.addEventListener("DOMContentLoaded", async () => {
+    await articlesReady;
     const slug = sharedArticleSlug();
     if (!ARTICLES.some(article => article.slug === slug)) return;
     document.querySelectorAll("#tabbar .tab").forEach(tab =>
