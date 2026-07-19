@@ -36,6 +36,9 @@
 
   const articleCache = new Map();
   const MANAGED_KEY = "pksk_managed_articles_v1";
+  const LEGACY_DUPLICATE_PREFERENCES = Object.freeze({
+    "tahap-penguasaan-pbd": "3"
+  });
   let ARTICLES = BUILTIN_ARTICLES.map(article => ({ ...article }));
   let managedRows = [];
   let activeLightbox = null;
@@ -73,9 +76,71 @@
         markdown: String(meta.markdown || ""),
         published: meta.published !== false,
         managed: true,
-        createdAt: meta.createdAt || ""
+        createdAt: meta.createdAt || "",
+        updatedAt: meta.updatedAt || ""
       };
     } catch (_) { return null; }
+  }
+
+  function sameId(left, right) {
+    return left != null && right != null && String(left) === String(right);
+  }
+
+  function articleTime(value) {
+    const time = Date.parse(String(value || ""));
+    return Number.isFinite(time) ? time : 0;
+  }
+
+  function preferManagedArticle(current, candidate) {
+    const currentUpdated = articleTime(current.updatedAt);
+    const candidateUpdated = articleTime(candidate.updatedAt);
+    if (currentUpdated !== candidateUpdated) return candidateUpdated > currentUpdated;
+
+    const preferredId = LEGACY_DUPLICATE_PREFERENCES[candidate.slug];
+    if (preferredId) {
+      const currentPreferred = String(current.id) === preferredId;
+      const candidatePreferred = String(candidate.id) === preferredId;
+      if (currentPreferred !== candidatePreferred) return candidatePreferred;
+    }
+
+    const currentCreated = articleTime(current.createdAt);
+    const candidateCreated = articleTime(candidate.createdAt);
+    if (currentCreated !== candidateCreated) return candidateCreated > currentCreated;
+    return String(candidate.id).localeCompare(String(current.id), undefined, { numeric: true }) > 0;
+  }
+
+  function consolidateManagedArticles(rows) {
+    const unique = new Map();
+    const duplicates = [];
+    rows.forEach(article => {
+      const current = unique.get(article.slug);
+      if (!current) {
+        unique.set(article.slug, article);
+      } else if (preferManagedArticle(current, article)) {
+        duplicates.push(current);
+        unique.set(article.slug, article);
+      } else {
+        duplicates.push(article);
+      }
+    });
+    return { articles: [...unique.values()], duplicates };
+  }
+
+  async function fetchManagedRows(client) {
+    const { data, error } = await client.from("notes")
+      .select("id, title, content, image_url")
+      .eq("subject", "bicara-ilmu")
+      .eq("is_published", true);
+    if (error) throw error;
+    return (data || []).map(parseManagedRow).filter(Boolean);
+  }
+
+  async function retireDuplicateRows(client, duplicates) {
+    if (window.pkskAuth?.state?.().access !== "admin") return;
+    const ids = [...new Set(duplicates.map(article => article.id).filter(id => id != null))];
+    if (!ids.length) return;
+    const { error } = await client.from("notes").update({ is_published: false }).in("id", ids);
+    if (error) console.warn("PKSK duplicate articles:", error);
   }
 
   function rebuildArticles() {
@@ -93,16 +158,13 @@
   async function refreshManagedArticles() {
     await window.pkskAuth?.init?.();
     if (window.pkskAuth?.isDemo?.()) {
-      managedRows = readDemoRows().map(parseManagedRow).filter(Boolean);
+      managedRows = consolidateManagedArticles(readDemoRows().map(parseManagedRow).filter(Boolean)).articles;
     } else {
       const client = window.pkskAuth?.client;
       if (!client) throw new Error("Sambungan pangkalan data tidak tersedia.");
-      const { data, error } = await client.from("notes")
-        .select("id, title, content, image_url")
-        .eq("subject", "bicara-ilmu")
-        .eq("is_published", true);
-      if (error) throw error;
-      managedRows = (data || []).map(parseManagedRow).filter(Boolean);
+      const consolidated = consolidateManagedArticles(await fetchManagedRows(client));
+      managedRows = consolidated.articles;
+      await retireDuplicateRows(client, consolidated.duplicates);
     }
     articleCache.clear();
     rebuildArticles();
@@ -184,9 +246,15 @@
     const slug = slugify(input.slug || title);
     if (!title || !markdown || !slug) throw new Error("Tajuk dan kandungan artikel wajib diisi.");
 
-    const previous = input.id
-      ? managedRows.find(article => article.id === input.id)
+    let previous = input.id
+      ? managedRows.find(article => sameId(article.id, input.id))
       : managedRows.find(article => article.slug === slug);
+    if (!window.pkskAuth?.isDemo?.() && !previous) {
+      const current = consolidateManagedArticles(await fetchManagedRows(window.pkskAuth.client));
+      previous = input.id
+        ? current.articles.find(article => sameId(article.id, input.id))
+        : current.articles.find(article => article.slug === slug);
+    }
     const image = posterFile ? await optimizePoster(posterFile) : String(input.image || previous?.image || "");
     if (!image) throw new Error("Sila muat naik poster artikel.");
     const now = new Date().toISOString();
@@ -199,7 +267,8 @@
       readTime: String(input.readTime || "").trim() || estimateReadTime(markdown),
       markdown,
       published: input.published !== false,
-      createdAt: previous?.createdAt || now
+      createdAt: previous?.createdAt || now,
+      updatedAt: now
     };
     const row = {
       id: previous?.id || input.id || `article_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
