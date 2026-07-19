@@ -157,17 +157,19 @@
       <div class="admin-page-shell">
         <div class="admin-panel-head">
           <div><p class="practice-eyebrow">Pentadbiran Portal</p><h1>Panel Admin PKSK</h1>
-            <p>Urus pendaftaran pengguna, bank soalan dan artikel portal dari satu halaman.</p></div>
+            <p>Urus pengguna, kandungan dan analitik portal dari satu halaman.</p></div>
           <span class="admin-mode-badge">ADMIN</span>
         </div>
         <nav class="admin-nav" aria-label="Navigasi panel admin">
           <button type="button" class="active" data-admin-view="accounts">Pengesahan Akaun <span id="pendingNavCount">0</span></button>
           <button type="button" data-admin-view="questions">Urus Soalan</button>
           <button type="button" data-admin-view="articles">Urus Artikel</button>
+          <button type="button" data-admin-view="analytics">Analitik Pelawat</button>
         </nav>
         <section id="adminAccountsView"></section>
         <section id="adminQuestionsView" hidden></section>
         <section id="adminArticlesView" hidden></section>
+        <section id="adminAnalyticsView" hidden></section>
       </div>
     </section>`;
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -176,6 +178,7 @@
     const accountsView = panel.querySelector("#adminAccountsView");
     const questionsView = panel.querySelector("#adminQuestionsView");
     const articlesView = panel.querySelector("#adminArticlesView");
+    const analyticsView = panel.querySelector("#adminAnalyticsView");
     await renderAccounts(accountsView, panel.querySelector("#pendingNavCount"));
 
     panel.querySelectorAll("[data-admin-view]").forEach(button =>
@@ -185,6 +188,7 @@
         accountsView.hidden = view !== "accounts";
         questionsView.hidden = view !== "questions";
         articlesView.hidden = view !== "articles";
+        analyticsView.hidden = view !== "analytics";
         if (view === "questions" && !questionsView.dataset.ready) {
           questionsView.dataset.ready = "true";
           await renderQuestionManager(questionsView);
@@ -192,6 +196,12 @@
         if (view === "articles" && !articlesView.dataset.ready) {
           articlesView.dataset.ready = "true";
           await renderArticleManager(articlesView);
+        }
+        if (view === "analytics" && !analyticsView.dataset.ready) {
+          analyticsView.dataset.ready = "true";
+          if (window.pkskAuth?.state?.().access !== "admin") return;
+          if (window.pkskAdminAnalytics?.render) await window.pkskAdminAnalytics.render(analyticsView);
+          else analyticsView.innerHTML = '<p class="admin-empty">Modul Analitik Pelawat tidak dapat dimuatkan.</p>';
         }
       }));
   }
