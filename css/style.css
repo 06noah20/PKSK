@@ -2310,6 +2310,14 @@ body {
   line-height: 1.72;
 }
 .fhero-sub b { color: #a41f45; }
+.fhero-tagline {
+  margin: 0 0 26px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #a41f45;
+}
 .fhero .btn-row { gap: 12px; }
 .fhero .btn {
   border-radius: 999px;
