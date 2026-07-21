@@ -4254,3 +4254,21 @@ body.article-lightbox-open { overflow: hidden; }
 
 /* Perenggan ringkasan hero dalam italik */
 .fhero-sub { font-style: italic; }
+
+/* Lencana "Akan Datang" berkelip untuk menarik perhatian pengguna */
+@keyframes comingBadgeBlink {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 10px 24px rgba(26, 6, 16, .14), 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+  50% {
+    opacity: .4;
+    box-shadow: 0 10px 24px rgba(26, 6, 16, .14), 0 0 16px 4px rgba(255, 255, 255, .6);
+  }
+}
+.coming-badge {
+  animation: comingBadgeBlink 1.3s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .coming-badge { animation: none; }
+}
