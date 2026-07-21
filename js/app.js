@@ -264,7 +264,7 @@
   const views = {
     home: renderHome,
     learn: renderLearnList,
-    practice: renderTopicPicker,
+    practice: renderPracticeLanding,
     info: renderInfoPage,
     bicara: () => window.pkskArticles.renderHub(),
     help: renderHelpPage
@@ -1010,6 +1010,137 @@
   });
 
   /* ---------------- Paparan: LATIHAN SET (override) ---------------- */
+  /* ---------------- Ikon & ilustrasi kategori latihan ---------------- */
+  const CATEGORY_ICON_PKSK = `<svg viewBox="0 0 48 48" fill="none" stroke="#a41f45" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M4 18 24 9l20 9-20 9z"/><path d="M12 22v9c0 2.5 5.4 5 12 5s12-2.5 12-5v-9"/><path d="M44 18v11"/></svg>`;
+  const CATEGORY_ICON_UASA = `<svg viewBox="0 0 48 48" fill="none" stroke="#a41f45" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="10" y="16" width="28" height="22" rx="6"/><circle cx="24" cy="7" r="2.2"/><path d="M24 9v7"/><circle cx="19" cy="26" r="2.4" fill="#a41f45" stroke="none"/><circle cx="29" cy="26" r="2.4" fill="#a41f45" stroke="none"/><path d="M19 32h10M6 24v6M42 24v6"/></svg>`;
+
+  // Ilustrasi robot sedang membaiki mesin (paparan "Sedang dikemaskini").
+  const ROBOT_REPAIR_SVG = `<svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Robot sedang membaiki mesin">
+    <defs>
+      <linearGradient id="uHead" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d3dcee"/><stop offset="1" stop-color="#a6b6d2"/></linearGradient>
+      <linearGradient id="uBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b5254e"/><stop offset="1" stop-color="#7d1533"/></linearGradient>
+      <linearGradient id="uPanel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3f6fc"/><stop offset="1" stop-color="#e2e9f5"/></linearGradient>
+    </defs>
+
+    <ellipse cx="240" cy="330" rx="188" ry="20" fill="rgba(8,26,51,.09)"/>
+
+    <!-- MESIN -->
+    <g>
+      <rect x="286" y="150" width="156" height="156" rx="18" fill="url(#uPanel)" stroke="#cdd7ea" stroke-width="3"/>
+      <rect x="308" y="176" width="112" height="66" rx="10" fill="#0f1e3d"/>
+      <rect x="320" y="196" width="52" height="9" rx="4.5" fill="#f6c85f"/>
+      <rect x="320" y="214" width="82" height="9" rx="4.5" fill="#4f8ef7"/>
+      <circle cx="404" cy="262" r="10" fill="#b5254e"/>
+      <rect x="308" y="286" width="120" height="12" rx="6" fill="#0f1e3d" opacity=".12"/>
+      <!-- jalur amaran -->
+      <rect x="300" y="294" width="128" height="8" rx="4" fill="#f6c85f"/>
+      <rect x="300" y="294" width="128" height="8" fill="none"/>
+    </g>
+
+    <!-- GEAR (berputar) -->
+    <g>
+      <g>
+        <circle cx="330" cy="150" r="30" fill="none" stroke="#8a1538" stroke-width="14" stroke-dasharray="11 8"/>
+        <circle cx="330" cy="150" r="13" fill="#fff" stroke="#8a1538" stroke-width="4"/>
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 330 150" to="360 330 150" dur="7s" repeatCount="indefinite"/>
+      </g>
+      <g>
+        <circle cx="392" cy="142" r="22" fill="none" stroke="#e2a63c" stroke-width="11" stroke-dasharray="9 7"/>
+        <circle cx="392" cy="142" r="9" fill="#fff" stroke="#e2a63c" stroke-width="3.5"/>
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="360 392 142" to="0 392 142" dur="5s" repeatCount="indefinite"/>
+      </g>
+    </g>
+
+    <!-- ROBOT -->
+    <g>
+      <!-- kaki -->
+      <rect x="118" y="256" width="20" height="40" rx="8" fill="#8fa0bd"/>
+      <rect x="158" y="256" width="20" height="40" rx="8" fill="#8fa0bd"/>
+      <!-- badan -->
+      <rect x="102" y="186" width="92" height="80" rx="20" fill="url(#uBody)"/>
+      <rect x="122" y="206" width="52" height="34" rx="9" fill="rgba(255,255,255,.18)"/>
+      <circle cx="134" cy="223" r="4.5" fill="#f6c85f"/>
+      <circle cx="150" cy="223" r="4.5" fill="#ffd9a0"/>
+      <circle cx="166" cy="223" r="4.5" fill="#8fa0bd"/>
+      <!-- kepala -->
+      <rect x="98" y="98" width="100" height="82" rx="26" fill="url(#uHead)" stroke="#8fa0bd" stroke-width="2"/>
+      <line x1="148" y1="98" x2="148" y2="78" stroke="#8fa0bd" stroke-width="4"/>
+      <circle cx="148" cy="72" r="6" fill="#b5254e"/>
+      <rect x="118" y="124" width="60" height="34" rx="14" fill="#0f1e3d"/>
+      <circle cx="136" cy="141" r="6.5" fill="#7fb0fa"/>
+      <circle cx="160" cy="141" r="6.5" fill="#7fb0fa"/>
+      <circle cx="137.5" cy="139" r="2" fill="#fff"/>
+      <circle cx="161.5" cy="139" r="2" fill="#fff"/>
+      <!-- lengan + spanar -->
+      <path d="M190 214 Q244 210 280 190" fill="none" stroke="url(#uHead)" stroke-width="16" stroke-linecap="round"/>
+      <g transform="rotate(-34 286 184)">
+        <rect x="278" y="150" width="15" height="42" rx="6" fill="#c3ccdd"/>
+        <path d="M270 150h31v-9a9 9 0 0 0-9-9h-3v11h-7v-11h-3a9 9 0 0 0-9 9z" fill="#dbe2ee"/>
+      </g>
+    </g>
+
+    <!-- kilauan alat -->
+    <g fill="#f6c85f">
+      <circle cx="258" cy="120" r="3"/><circle cx="272" cy="108" r="2"/><circle cx="248" cy="104" r="2"/>
+    </g>
+  </svg>`;
+
+  /* ---------------- Paparan: Pilih kategori latihan (dua kotak) ---------------- */
+  function renderPracticeLanding() {
+    app.innerHTML = `<section class="practice-page practice-landing">
+      <div class="practice-hero-panel">
+        <div>
+          <p class="practice-eyebrow">Pilih Kategori Latihan</p>
+          <h1>Latihan</h1>
+          <p>Pilih kategori latihan untuk mula. Latihan PKSK tersedia sekarang, manakala Latihan UASA akan datang.</p>
+        </div>
+      </div>
+
+      <div class="practice-category-grid">
+        <button class="practice-category-card is-pksk" data-category="pksk" type="button">
+          <span class="practice-category-icon">${CATEGORY_ICON_PKSK}</span>
+          <h2>Latihan PKSK</h2>
+          <p>Set latihan Bahagian B mengikut subjek: Pengetahuan Am, Matematik, Sains dan English.</p>
+          <span class="practice-open-btn">Buka Latihan PKSK &rarr;</span>
+        </button>
+
+        <button class="practice-category-card is-uasa" data-category="uasa" type="button">
+          <span class="practice-category-badge">Akan Datang</span>
+          <span class="practice-category-icon">${CATEGORY_ICON_UASA}</span>
+          <h2>Latihan UASA</h2>
+          <p>Latihan Ujian Akhir Sesi Akademik untuk pengukuhan pembelajaran di sekolah.</p>
+          <span class="practice-open-btn">Buka Latihan UASA &rarr;</span>
+        </button>
+      </div>
+    </section>`;
+
+    app.querySelector('[data-category="pksk"]').addEventListener("click", renderTopicPicker);
+    app.querySelector('[data-category="uasa"]').addEventListener("click", renderPracticeUASA);
+  }
+
+  /* ---------------- Paparan: Latihan UASA (sedang dikemaskini) ---------------- */
+  function renderPracticeUASA() {
+    app.innerHTML = `<section class="practice-page practice-uasa">
+      <div class="practice-detail-header">
+        <div>
+          <p class="practice-eyebrow">Latihan UASA</p>
+          <h1>Latihan UASA</h1>
+          <p>Ujian Akhir Sesi Akademik.</p>
+        </div>
+        <button class="practice-back-btn" id="backCategoryUasa" type="button">Kembali ke Kategori</button>
+      </div>
+
+      <div class="uasa-construction">
+        <div class="uasa-robot-art">${ROBOT_REPAIR_SVG}</div>
+        <span class="uasa-badge">Sedang Dikemaskini</span>
+        <h2>Sedang dikemaskini…</h2>
+        <p>Latihan UASA sedang disiapkan. Kami sedang menyusun soalan dan bahan pengukuhan terbaik untuk anda. Sila kembali semula tidak lama lagi.</p>
+      </div>
+    </section>`;
+
+    app.querySelector("#backCategoryUasa").onclick = renderPracticeLanding;
+  }
+
   function renderTopicPicker() {
     const sets = Array.from({ length: 10 }, (_, i) => i + 1);
     const setProgress = loadSetProgress();
@@ -1020,6 +1151,7 @@
           <h1>Latihan PKSK (Bahagian B)</h1>
           <p>Pilih set latihan terlebih dahulu, kemudian pilih kategori subjek untuk mula menjawab soalan.</p>
         </div>
+        <button class="practice-back-btn" id="backCategoryPksk" type="button">Kembali ke Kategori</button>
       </div>
 
       <div class="practice-set-grid">
@@ -1027,6 +1159,7 @@
       </div>
     </section>`;
 
+    app.querySelector("#backCategoryPksk").onclick = renderPracticeLanding;
     app.querySelectorAll(".practice-set-card").forEach(card =>
       card.addEventListener("click", () => {
         const setNo = +card.dataset.set;
