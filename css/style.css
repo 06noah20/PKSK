@@ -4225,11 +4225,12 @@ body.article-lightbox-open { overflow: hidden; }
 }
 .admin-login-card .auth-submit { width: 100%; margin-top: 6px; }
 
-/* Font paparan menarik khusus untuk tajuk hero halaman utama */
+/* Tajuk hero halaman utama — Adobe Caslon Italic (fallback Libre Caslon) */
 .fhero-title {
-  font-family: "Bricolage Grotesque", "Segoe UI", system-ui, -apple-system, sans-serif;
-  font-weight: 800;
-  letter-spacing: -1px;
+  font-family: "Adobe Caslon Pro", "ACaslon Pro", "Adobe Caslon", "Libre Caslon Text", Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
 /* Header brand-title: font Palatino Linotype, di tengah & sedikit lebih besar */
