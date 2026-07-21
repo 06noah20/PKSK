@@ -4231,3 +4231,17 @@ body.article-lightbox-open { overflow: hidden; }
   font-weight: 800;
   letter-spacing: -1px;
 }
+
+/* Header brand-title: font Palatino Linotype, di tengah & sedikit lebih besar */
+.brand-title {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, "URW Palladio L", Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.15;
+  text-align: center;
+  align-self: center;
+  white-space: nowrap;
+}
+@media (max-width: 720px) {
+  .brand-title { font-size: 14px; }
+}
