@@ -525,9 +525,9 @@
   /* ---------------- Paparan: INFO PKSK ---------------- */
   function renderInfoPage() {
     const infoCards = [
-      { title: "Bahagian A", subtitle: "Kecerdasan Insaniah", percent: "20%" },
-      { title: "Bahagian B", subtitle: "Kecerdasan Intelek", percent: "70%" },
-      { title: "Bahagian C", subtitle: "Artikulasi Penulisan", percent: "10%" }
+      { num: "01", title: "Latihan", subtitle: "Latihan Interaktif Percuma" },
+      { num: "02", title: "Panduan", subtitle: "Nota & Panduan Belajar" },
+      { num: "03", title: "Ilmu", subtitle: "Perkongsian Bicara Ilmu" }
     ];
 
     app.innerHTML = `
@@ -535,23 +535,23 @@
         <div class="info-hero">
           <div class="info-wrap">
             <p class="info-eyebrow">Info Portal</p>
-            <h1>Pentaksiran Kemasukan Sekolah Khusus</h1>
+            <h1>Belajar Tanpa Batas</h1>
           </div>
         </div>
 
         <div class="info-wrap info-content">
           <article class="info-main-panel">
-            <h2>Pengenalan PKSK</h2>
-            <p>Pentaksiran Kemasukan Sekolah Khusus atau PKSK ialah pentaksiran penting bagi murid yang ingin melanjutkan pembelajaran ke sekolah khusus seperti SBP, SMKA, SMT, Kolej Vokasional, Maktab Tentera Diraja dan laluan pendidikan khusus yang berkaitan.</p>
-            <p>PKSK bukan hanya menguji pengetahuan akademik, tetapi turut menilai pemikiran kritis, penyelesaian masalah, sahsiah, minat, kecenderungan dan kesiapsiagaan murid untuk belajar dalam persekitaran yang lebih mencabar.</p>
-            <p>Portal ini memberi penekanan khusus kepada aspek Kecerdasan Intelek kerana <strong style="color:#9b1c31;font-weight:900;">Bahagian B membawa peratusan markah yang paling besar berbanding bahagian lain</strong>. Melalui latihan pengukuhan yang tersusun, murid dapat membina keyakinan, membiasakan diri dengan bentuk soalan dan membuat persediaan yang lebih terarah untuk menghadapi Bahagian B.</p>
+            <h2>Tentang Portal Kami</h2>
+            <p>Selamat datang ke portal pembelajaran yang membuka ruang belajar tanpa batas. Kami percaya setiap murid berhak mendapat latihan berkualiti secara <strong style="color:#9b1c31;font-weight:900;">percuma, mudah dan menyeronokkan</strong> — tanpa sebarang halangan.</p>
+            <p>Portal ini menghimpunkan latihan interaktif, panduan pembelajaran dan perkongsian ilmu dalam satu tempat. Daripada set latihan tersusun mengikut subjek, nota ringkas, sehingga artikel Bicara Ilmu, semuanya direka untuk membantu murid berfikir lebih kreatif, belajar lebih terarah dan membina keyakinan menuju kecemerlangan.</p>
+            <p>Lebih daripada sekadar menjawab soalan, kami mahu memupuk minat, mengasah potensi dan menyemai sikap belajar yang berterusan. Mulakan dengan Latihan PKSK hari ini, dan nantikan modul Latihan UASA yang bakal menyusul tidak lama lagi.</p>
 
             <div class="info-card-grid">
               ${infoCards.map(card => `
                 <div class="info-card">
                   <p>${card.title}</p>
                   <h3>${card.subtitle}</h3>
-                  <strong>${card.percent}</strong>
+                  <strong>${card.num}</strong>
                 </div>
               `).join("")}
             </div>
