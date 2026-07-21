@@ -430,7 +430,7 @@
         <div class="fhero-inner">
           <div class="fhero-copy">
             <h2 class="fhero-title">Belajar dengan strategi,<br><b>berkembang dengan potensi.</b></h2>
-            <p class="fhero-sub">Platform pendidikan interaktif yang menghimpunkan latihan, panduan pembelajaran dan perkongsian ilmu untuk membantu murid berfikir dengan lebih kreatif, belajar dengan lebih terarah serta membina keyakinan menuju kecemerlangan.</p>
+            <p class="fhero-sub">Belajar tanpa batas melalui latihan percuma, panduan pembelajaran dan perkongsian ilmu yang membantu murid berfikir lebih kreatif, belajar lebih terarah dan membina keyakinan menuju kecemerlangan.</p>
             <p class="fhero-tagline">Pendidikan Kreatif. Strategi Kecemerlangan.</p>
             <div class="btn-row">
               <button class="btn" id="ctaPractice">Bicara Ilmu</button>
