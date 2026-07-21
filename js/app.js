@@ -981,23 +981,17 @@
         runSession(DATA.topics.find(x => x.id === el.dataset.topic))));
   }
 
-  /* ---------------- Akses akaun yang diluluskan ----------------
-   * Set 1 percuma untuk semua. Set 2+ dibuka selepas pendaftaran
-   * pengguna diluluskan oleh admin, atau untuk akaun admin. */
-  const FREE_SET = 1;
-  function currentAccess() {
-    return window.pkskAuth?.state?.().access || "anon";
+  /* ---------------- Akses latihan ----------------
+   * Semua set latihan dibuka secara percuma untuk semua pengunjung.
+   * Tiada log masuk, pendaftaran, langganan atau kelulusan admin diperlukan.
+   * Sistem akaun/langganan lama masih wujud dalam kod tetapi tidak lagi
+   * digunakan pada portal awam supaya boleh diguna semula pada masa hadapan. */
+  function canAccessSet() {
+    return true;
   }
-  function canAccessSet(setNo) {
-    if (setNo === FREE_SET) return true;
-    const a = currentAccess();
-    return a === "premium" || a === "admin";
-  }
-  // Set berkunci menggunakan aliran daftar + pembayaran + bukti resit yang
-  // sama seperti pilihan Daftar Akaun di header.
-  function showLockedNotice(setNo) {
-    window.pkskPremium?.openUpgrade?.();
-  }
+  // Dikekalkan sebagai fungsi kosong untuk keserasian dengan kod terdahulu;
+  // tiada sekatan langganan atau modal naik taraf dipaparkan lagi.
+  function showLockedNotice() {}
   // Segarkan senarai set bila status log masuk berubah
   document.addEventListener("pksk-auth-changed", () => {
     if (document.querySelector(".practice-set-grid")) renderTopicPicker();
