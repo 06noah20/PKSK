@@ -4185,3 +4185,34 @@ body.article-lightbox-open { overflow: hidden; }
   .article-editor-grid { grid-template-columns: 1fr; }
   .article-field-wide { grid-column: auto; }
 }
+
+/* ================= Halaman Admin khusus (/admin) ================= */
+.admin-topbar { justify-content: space-between; }
+.admin-topbar .admin-cta { margin-left: auto; }
+
+.admin-login-page {
+  display: flex;
+  justify-content: center;
+  padding: 48px 16px 90px;
+}
+.admin-login-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 34px 30px 32px;
+  box-shadow: 0 18px 46px rgba(42, 34, 38, .10);
+}
+.admin-login-card h1 {
+  margin: 6px 0 10px;
+  font-size: 26px;
+  color: var(--ink);
+}
+.admin-login-sub {
+  color: var(--ink-soft);
+  margin: 0 0 22px;
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+.admin-login-card .auth-submit { width: 100%; margin-top: 6px; }
