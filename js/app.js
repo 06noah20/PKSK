@@ -500,6 +500,14 @@
               </div>
             </div>
 
+            <div class="coming-feature">
+              <span class="coming-percent word">UASA</span>
+              <div>
+                <strong>Latihan UASA</strong>
+                <span>Ujian Akhir Sesi Akademik</span>
+              </div>
+            </div>
+
             <div class="coming-orbit" aria-hidden="true">
               <span></span><span></span><span></span>
             </div>
