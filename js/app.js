@@ -1090,9 +1090,8 @@
     app.innerHTML = `<section class="practice-page practice-landing">
       <div class="practice-hero-panel">
         <div>
-          <p class="practice-eyebrow">Pilih Kategori Latihan</p>
-          <h1>Latihan</h1>
-          <p>Pilih kategori latihan untuk mula. Latihan PKSK tersedia sekarang, manakala Latihan UASA akan datang.</p>
+          <h1>Asah Potensi, Bina Keyakinan</h1>
+          <p>Terokai latihan yang disusun secara sistematik untuk membantu murid mengukuhkan pengetahuan, meningkatkan kemahiran berfikir dan membuat persediaan dengan lebih yakin. Pilih kategori yang sesuai dan mulakan latihan mengikut tahap serta keperluan pembelajaran anda.</p>
         </div>
       </div>
 
