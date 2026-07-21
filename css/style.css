@@ -2469,6 +2469,11 @@ body {
   font-weight: 950;
   box-shadow: 0 14px 26px rgba(35, 7, 18, .18);
 }
+.coming-percent.word {
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: .6px;
+}
 .coming-feature strong {
   display: block;
   color: #fff;
