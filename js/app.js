@@ -983,20 +983,17 @@
 
   /* ---------------- Akses akaun yang diluluskan ----------------
    * Set 1 percuma untuk semua. Set 2+ dibuka selepas pendaftaran
-   * pengguna diluluskan oleh admin, atau untuk akaun admin. */
+   * Semua set kini dibuka untuk semua pengunjung tanpa log masuk. */
   const FREE_SET = 1;
   function currentAccess() {
-    return window.pkskAuth?.state?.().access || "anon";
+    return "premium"; // All visitors treated as having full access
   }
   function canAccessSet(setNo) {
-    if (setNo === FREE_SET) return true;
-    const a = currentAccess();
-    return a === "premium" || a === "admin";
+    return true; // All sets are free and open
   }
-  // Set berkunci menggunakan aliran daftar + pembayaran + bukti resit yang
-  // sama seperti pilihan Daftar Akaun di header.
+  // Set berkunci telah dihapuskan — semua set kini terbuka.
   function showLockedNotice(setNo) {
-    window.pkskPremium?.openUpgrade?.();
+    // No-op: all sets are now free
   }
   // Segarkan senarai set bila status log masuk berubah
   document.addEventListener("pksk-auth-changed", () => {
@@ -1043,9 +1040,7 @@
 
   function practiceSetCard(setNo, setProgress) {
     const padded = String(setNo).padStart(2, "0");
-    const locked = !canAccessSet(setNo);
-    return `<button class="practice-set-card${locked ? " locked" : ""}" data-set="${setNo}" type="button">
-      ${locked ? `<span class="set-lock" aria-label="Perlu kelulusan akaun">🔒 PERLU KELULUSAN</span>` : ""}
+    return `<button class="practice-set-card" data-set="${setNo}" type="button">
       <span class="practice-set-top">
         <span class="practice-set-number">${padded}</span>
         <span class="practice-set-art">

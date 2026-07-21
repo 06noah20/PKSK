@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Portal PKSK</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="../css/style.css?v=59" />
+  <style>
+    .admin-login-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: var(--bg, #f4f6fa);
+    }
+    .admin-login-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.08);
+      padding: 2.5rem 2rem;
+      max-width: 400px;
+      width: 100%;
+    }
+    .admin-login-card h1 {
+      font-size: 1.5rem;
+      margin: 0 0 .25rem;
+      text-align: center;
+    }
+    .admin-login-card .subtitle {
+      text-align: center;
+      color: #666;
+      margin: 0 0 1.5rem;
+      font-size: .9rem;
+    }
+    .admin-login-card label {
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .admin-login-card label span {
+      display: block;
+      font-size: .85rem;
+      font-weight: 600;
+      margin-bottom: .3rem;
+      color: #333;
+    }
+    .admin-login-card input {
+      width: 100%;
+      padding: .65rem .8rem;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      font-size: .95rem;
+      box-sizing: border-box;
+    }
+    .admin-login-card input:focus {
+      outline: none;
+      border-color: var(--accent, #2563eb);
+      box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+    }
+    .admin-login-card .admin-login-btn {
+      display: block;
+      width: 100%;
+      padding: .75rem;
+      border: none;
+      border-radius: 8px;
+      background: var(--accent, #2563eb);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: .5rem;
+    }
+    .admin-login-card .admin-login-btn:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+    .admin-login-msg {
+      margin-top: .75rem;
+      padding: .6rem .8rem;
+      border-radius: 8px;
+      font-size: .85rem;
+      text-align: center;
+    }
+    .admin-login-msg.error {
+      background: #fef2f2;
+      color: #dc2626;
+      border: 1px solid #fecaca;
+    }
+    .admin-login-msg.success {
+      background: #f0fdf4;
+      color: #16a34a;
+      border: 1px solid #bbf7d0;
+    }
+    .admin-login-msg[hidden] { display: none; }
+    .admin-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .admin-header .brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #1e293b;
+      text-decoration: none;
+    }
+    .admin-logout-btn {
+      padding: .5rem 1rem;
+      border: 1.5px solid #dc2626;
+      border-radius: 8px;
+      background: transparent;
+      color: #dc2626;
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .admin-logout-btn:hover { background: #fef2f2; }
+    .admin-denied {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .admin-denied h2 { color: #dc2626; }
+  </style>
+</head>
+<body>
+  <div id="admin-root">
+    <!-- Content injected by JS -->
+  </div>
+
+  <script src="../js/questions.js?v=14"></script>
+  <script src="../js/practice-set-questions.js?v=1"></script>
+  <script src="../js/practice-general-sets.js?v=1"></script>
+  <script src="../js/practice-math-sets.js?v=5"></script>
+  <script src="../js/practice-math-diagram-sets.js?v=1"></script>
+  <script src="../js/practice-math-additional.js?v=1"></script>
+  <script src="../js/practice-science-sets.js?v=29"></script>
+  <script src="../js/practice-english-sets.js?v=1"></script>
+  <script src="../js/supabase-client.js?v=6"></script>
+  <script src="../js/admin-questions.js?v=9"></script>
+  <script src="../js/articles.js?v=6"></script>
+  <script>
+  (function() {
+    "use strict";
+
+    const root = document.getElementById("admin-root");
+    const SUPABASE_URL = "https://erwmjhohjadwcrrvqack.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_4oPLpY3kC4yv1OqR-RyfrQ_akaY0Uqy";
+    const CDN = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js";
+    const FILE_PREVIEW = window.location?.protocol === "file:";
+    const REAL = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY) && !FILE_PREVIEW;
+
+    // Demo mode admin credentials
+    const ADMIN_ID = "pkskmy";
+    const ADMIN_PASSWORD = "pkskmy@2026";
+
+    function escapeHtml(value) {
+      return String(value == null ? "" : value).replace(/[&<>"']/g, char =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
+    }
+
+    function showLogin(errorMsg) {
+      root.innerHTML = `
+        <div class="admin-login-page">
+          <div class="admin-login-card">
+            <h1>Panel Admin PKSK</h1>
+            <p class="subtitle">Log masuk untuk mengurus portal</p>
+            <form id="adminLoginForm" novalidate>
+              <label>
+                <span>E-mel / ID Pengguna</span>
+                <input type="text" name="identifier" autocomplete="username" required placeholder="admin@pkskmy.com">
+              </label>
+              <label>
+                <span>Kata laluan</span>
+                <input type="password" name="password" autocomplete="current-password" required placeholder="Kata laluan">
+              </label>
+              <button type="submit" class="admin-login-btn">Log Masuk</button>
+              <div class="admin-login-msg error" ${errorMsg ? '' : 'hidden'}>${escapeHtml(errorMsg || '')}</div>
+            </form>
+          </div>
+        </div>`;
+
+      document.getElementById("adminLoginForm").addEventListener("submit", handleLogin);
+    }
+
+    function showDenied() {
+      root.innerHTML = `
+        <div class="admin-login-page">
+          <div class="admin-login-card admin-denied">
+            <h2>Akses tidak dibenarkan</h2>
+            <p>Halaman ini hanya untuk pentadbir.</p>
+            <button class="admin-login-btn" id="deniedLogout">Log Keluar</button>
+          </div>
+        </div>`;
+      document.getElementById("deniedLogout").addEventListener("click", async () => {
+        await window.pkskAuth.signOut();
+        showLogin();
+      });
+    }
+
+    async function handleLogin(event) {
+      event.preventDefault();
+      const form = event.target;
+      const identifier = String(new FormData(form).get("identifier") || "").trim();
+      const password = String(new FormData(form).get("password") || "");
+      const btn = form.querySelector(".admin-login-btn");
+      const msg = form.querySelector(".admin-login-msg");
+
+      if (!identifier || !password) {
+        msg.hidden = false;
+        msg.textContent = "Sila isi e-mel dan kata laluan.";
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Mengesahkan…";
+      msg.hidden = true;
+
+      try {
+        await window.pkskAuth.signIn(identifier, password);
+        const state = window.pkskAuth.state();
+
+        if (state.access !== "admin") {
+          // Not an admin — sign out immediately and show denied message
+          await window.pkskAuth.signOut();
+          showDenied();
+          return;
+        }
+
+        // Admin verified — show dashboard
+        showDashboard();
+      } catch (error) {
+        msg.hidden = false;
+        msg.textContent = String(error?.message || "Log masuk gagal.");
+        btn.disabled = false;
+        btn.textContent = "Log Masuk";
+      }
+    }
+
+    function showDashboard() {
+      const state = window.pkskAuth.state();
+      const name = state.profile?.full_name || state.user?.email || "Admin";
+
+      root.innerHTML = `
+        <header class="admin-header">
+          <a class="brand" href="../">← Portal PKSK</a>
+          <span style="font-weight:600">${escapeHtml(name)}</span>
+          <button class="admin-logout-btn" id="adminLogout">Log Keluar</button>
+        </header>
+        <main class="container" id="adminApp"></main>`;
+
+      document.getElementById("adminLogout").addEventListener("click", async () => {
+        await window.pkskAuth.signOut();
+        showLogin();
+      });
+
+      // Render admin panel into #adminApp
+      renderAdminPanel();
+    }
+
+    function renderAdminPanel() {
+      const app = document.getElementById("adminApp");
+      const BANK = { amount: 15 };
+
+      app.innerHTML = `<section class="admin-page">
+        <div class="admin-page-shell">
+          <div class="admin-panel-head">
+            <div><p class="practice-eyebrow">Pentadbiran Portal</p><h1>Panel Admin PKSK</h1>
+              <p>Urus pendaftaran pengguna, bank soalan dan artikel portal dari satu halaman.</p></div>
+            <span class="admin-mode-badge">ADMIN</span>
+          </div>
+          <nav class="admin-nav" aria-label="Navigasi panel admin">
+            <button type="button" class="active" data-admin-view="accounts">Pengesahan Akaun <span id="pendingNavCount">0</span></button>
+            <button type="button" data-admin-view="questions">Urus Soalan</button>
+            <button type="button" data-admin-view="articles">Urus Artikel</button>
+          </nav>
+          <section id="adminAccountsView"></section>
+          <section id="adminQuestionsView" hidden></section>
+          <section id="adminArticlesView" hidden></section>
+        </div>
+      </section>`;
+
+      const panel = app.querySelector(".admin-page");
+      const accountsView = panel.querySelector("#adminAccountsView");
+      const questionsView = panel.querySelector("#adminQuestionsView");
+      const articlesView = panel.querySelector("#adminArticlesView");
+
+      renderAccounts(accountsView, panel.querySelector("#pendingNavCount"));
+
+      panel.querySelectorAll("[data-admin-view]").forEach(button =>
+        button.addEventListener("click", async () => {
+          const view = button.dataset.adminView;
+          panel.querySelectorAll("[data-admin-view]").forEach(item => item.classList.toggle("active", item === button));
+          accountsView.hidden = view !== "accounts";
+          questionsView.hidden = view !== "questions";
+          articlesView.hidden = view !== "articles";
+          if (view === "questions" && !questionsView.dataset.ready) {
+            questionsView.dataset.ready = "true";
+            await renderQuestionManager(questionsView);
+          }
+          if (view === "articles" && !articlesView.dataset.ready) {
+            articlesView.dataset.ready = "true";
+            await renderArticleManager(articlesView);
+          }
+        }));
+    }
+
+    async function renderAccounts(host, pendingBadge) {
+      host.innerHTML = `
+        <div class="admin-summary" id="adminSummary"></div>
+        <div class="admin-filters" role="group" aria-label="Tapis akaun">
+          <button type="button" class="active" data-filter="all">Semua</button>
+          <button type="button" data-filter="pending">Menunggu</button>
+          <button type="button" data-filter="approved">Diluluskan</button>
+          <button type="button" data-filter="rejected">Ditolak</button>
+        </div>
+        <div class="admin-list"><p class="auth-note">Memuatkan akaun…</p></div>`;
+
+      const list = host.querySelector(".admin-list");
+      const summary = host.querySelector("#adminSummary");
+      let records = [];
+      let filter = "all";
+
+      function label(status) {
+        return status === "approved" ? "Diluluskan" : status === "rejected" ? "Ditolak" : "Menunggu";
+      }
+
+      function draw() {
+        const counts = records.reduce((result, record) => {
+          const status = record.approval_status || "pending";
+          result[status] = (result[status] || 0) + 1;
+          return result;
+        }, { pending: 0, approved: 0, rejected: 0 });
+        pendingBadge.textContent = counts.pending;
+        summary.innerHTML = `
+          <div><strong>${records.length}</strong><span>Jumlah Akaun</span></div>
+          <div><strong>${counts.pending}</strong><span>Menunggu</span></div>
+          <div><strong>${counts.approved}</strong><span>Diluluskan</span></div>`;
+
+        const visible = filter === "all" ? records : records.filter(record => (record.approval_status || "pending") === filter);
+        if (!visible.length) {
+          list.innerHTML = '<p class="admin-empty">Tiada akaun untuk paparan ini.</p>';
+          return;
+        }
+
+        list.innerHTML = visible.map(record => {
+          const status = record.approval_status || "pending";
+          const paid = Boolean(record.payment_reference && record.receipt_url);
+          const date = record.payment_submitted_at || record.created_at;
+          return `<article class="admin-req status-${escapeHtml(status)}">
+            <div class="admin-user-avatar">${escapeHtml((record.full_name || record.email || "P").charAt(0).toUpperCase())}</div>
+            <div class="admin-req-main">
+              <strong>${escapeHtml(record.full_name || "Pengguna")}</strong>
+              <span class="admin-req-meta">${escapeHtml(record.email || record.username || "")}</span>
+              ${paid ? `
+                <span class="admin-payment-ref">Rujukan: ${escapeHtml(record.payment_reference)} · RM${escapeHtml(record.payment_amount || BANK.amount)}</span>
+                ${record.payment_note ? `<span class="admin-req-note">${escapeHtml(record.payment_note)}</span>` : ""}
+                <a class="admin-req-receipt" href="${escapeHtml(record.receipt_url)}" target="_blank" rel="noopener">Lihat resit pembayaran</a>`
+                : '<span class="admin-payment-missing">Bukti bayaran belum dihantar</span>'}
+              <span class="admin-req-date">${date ? new Date(date).toLocaleString("ms-MY") : ""}</span>
+            </div>
+            <div class="admin-req-actions">
+              <span class="admin-badge ${escapeHtml(status)}">${label(status)}</span>
+              ${status !== "approved" && paid ? `<button class="admin-approve" type="button" data-id="${escapeHtml(record.id)}">Luluskan</button>` : ""}
+              ${status === "pending" ? `<button class="admin-reject" type="button" data-id="${escapeHtml(record.id)}">Tolak</button>` : ""}
+            </div>
+          </article>`;
+        }).join("");
+
+        list.querySelectorAll(".admin-approve").forEach(button =>
+          button.addEventListener("click", () => review(button, "approveRegistration")));
+        list.querySelectorAll(".admin-reject").forEach(button =>
+          button.addEventListener("click", () => review(button, "rejectRegistration")));
+      }
+
+      async function reload() {
+        try { records = await window.pkskAuth.listRegistrations(); draw(); }
+        catch (error) { list.innerHTML = `<p class="auth-msg">Ralat: ${escapeHtml(error?.message || error)}</p>`; }
+      }
+
+      async function review(button, action) {
+        if (action === "rejectRegistration" && !confirm("Tolak pendaftaran pengguna ini?")) return;
+        button.disabled = true;
+        button.textContent = "Memproses…";
+        try { await window.pkskAuth[action](button.dataset.id); await reload(); }
+        catch (error) { alert("Ralat: " + (error?.message || error)); button.disabled = false; }
+      }
+
+      host.querySelectorAll(".admin-filters button").forEach(button =>
+        button.addEventListener("click", () => {
+          filter = button.dataset.filter;
+          host.querySelectorAll(".admin-filters button").forEach(item => item.classList.toggle("active", item === button));
+          draw();
+        }));
+      await reload();
+    }
+
+    async function renderQuestionManager(host) {
+      const api = window.pkskQuestionAdmin;
+      await api.ready;
+      host.innerHTML = `
+        <div class="question-admin-toolbar">
+          <label><span>Set Latihan</span><select id="questionSet">${Array.from({ length: 10 }, (_, i) => `<option value="${i + 1}">Set ${i + 1}</option>`).join("")}</select></label>
+          <label><span>Subjek</span><select id="questionSubject">${Object.entries(api.subjects).map(([id, name]) => `<option value="${id}">${escapeHtml(name)}</option>`).join("")}</select></label>
+          <button type="button" class="admin-primary" id="addQuestion">+ Soalan Baharu</button>
+        </div>
+        <div class="question-admin-actions">
+          <button type="button" id="importQuestions">Import JSON</button>
+          <input id="questionJsonFile" type="file" accept="application/json,.json" hidden>
+          <button type="button" id="exportQuestions">Eksport JSON</button>
+          <button type="button" class="danger" id="resetQuestions">Pulihkan Asal</button>
+        </div>
+        <p class="question-admin-note">Tambah atau kemas kini soalan terus di sini.</p>
+        <div id="questionEditor" hidden></div>
+        <div class="question-admin-list" id="questionAdminList"></div>`;
+
+      const setSelect = host.querySelector("#questionSet");
+      const subjectSelect = host.querySelector("#questionSubject");
+      const listEl = host.querySelector("#questionAdminList");
+      const editor = host.querySelector("#questionEditor");
+
+      function loc() { return { setNo: Number(setSelect.value), subject: subjectSelect.value }; }
+
+      function drawList() {
+        const { setNo, subject } = loc();
+        const questions = api.getQuestions(setNo, subject);
+        listEl.innerHTML = `<div class="question-list-head"><strong>${questions.length} soalan</strong><span>Set ${setNo} · ${escapeHtml(api.subjects[subject])}</span></div>` +
+          (questions.length ? questions.map((question, index) => `
+            <article class="question-admin-row">
+              <span class="question-admin-number">${index + 1}</span>
+              <div><strong>${escapeHtml(question.q)}</strong><span>Jawapan: ${String.fromCharCode(65 + question.answer)} · ${question.options.length} pilihan</span></div>
+              <button type="button" data-edit="${index}">Edit</button>
+              <button type="button" class="danger" data-delete="${index}">Padam</button>
+            </article>`).join("") : '<p class="admin-empty">Belum ada soalan untuk pilihan ini.</p>');
+
+        listEl.querySelectorAll("[data-edit]").forEach(button => button.addEventListener("click", () => openEditor(Number(button.dataset.edit))));
+        listEl.querySelectorAll("[data-delete]").forEach(button => button.addEventListener("click", async () => {
+          if (!confirm("Padam soalan ini?")) return;
+          const current = loc();
+          await api.deleteQuestion(current.setNo, current.subject, Number(button.dataset.delete));
+          drawList();
+        }));
+      }
+
+      function openEditor(index = null) {
+        const current = loc();
+        const question = index == null ? null : api.getQuestions(current.setNo, current.subject)[index];
+        const options = question?.options || ["", "", "", ""];
+        editor.hidden = false;
+        editor.innerHTML = `<form class="question-editor-form">
+          <div class="question-editor-head"><strong>${index == null ? "Tambah Soalan" : `Kemas Kini Soalan ${index + 1}`}</strong><button type="button" data-close-editor>×</button></div>
+          <label><span>Teks soalan</span><textarea name="q" required>${escapeHtml(question?.q || "")}</textarea></label>
+          <div class="question-option-grid">
+            ${[0, 1, 2, 3].map(i => `<label><span>Pilihan ${String.fromCharCode(65 + i)}</span><input name="option${i}" value="${escapeHtml(options[i] || "")}"></label>`).join("")}
+          </div>
+          <label><span>Jawapan betul</span><select name="answer">${[0,1,2,3].map(i => `<option value="${i}" ${question?.answer === i ? "selected" : ""}>${String.fromCharCode(65+i)}</option>`).join("")}</select></label>
+          <label><span>Penerangan (pilihan)</span><textarea name="explain">${escapeHtml(question?.explain || "")}</textarea></label>
+          <button type="submit" class="admin-primary">${index == null ? "Tambah" : "Simpan"}</button>
+        </form>`;
+
+        editor.querySelector("[data-close-editor]").addEventListener("click", () => { editor.hidden = true; });
+        editor.querySelector("form").addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const fd = new FormData(e.target);
+          const opts = [0,1,2,3].map(i => String(fd.get(`option${i}`) || "").trim()).filter(Boolean);
+          const q = {
+            q: String(fd.get("q") || "").trim(),
+            options: opts,
+            answer: Number(fd.get("answer")),
+            explain: String(fd.get("explain") || "").trim()
+          };
+          try {
+            if (index == null) {
+              await api.addQuestion(current.setNo, current.subject, q);
+            } else {
+              await api.updateQuestion(current.setNo, current.subject, index, q);
+            }
+            editor.hidden = true;
+            drawList();
+          } catch (err) { alert(err.message); }
+        });
+      }
+
+      setSelect.addEventListener("change", drawList);
+      subjectSelect.addEventListener("change", drawList);
+      host.querySelector("#addQuestion").addEventListener("click", () => openEditor());
+
+      host.querySelector("#importQuestions").addEventListener("click", () => host.querySelector("#questionJsonFile").click());
+      host.querySelector("#questionJsonFile").addEventListener("change", async (e) => {
+        const file = e.target.files[0]; if (!file) return;
+        try {
+          const text = await file.text();
+          const json = JSON.parse(text);
+          const current = loc();
+          await api.importQuestions(current.setNo, current.subject, json);
+          drawList();
+        } catch (err) { alert("Import gagal: " + err.message); }
+        e.target.value = "";
+      });
+
+      host.querySelector("#exportQuestions").addEventListener("click", () => {
+        const current = loc();
+        const questions = api.getQuestions(current.setNo, current.subject);
+        const blob = new Blob([JSON.stringify(questions, null, 2)], { type: "application/json" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = `set${current.setNo}-${current.subject}.json`;
+        a.click();
+      });
+
+      host.querySelector("#resetQuestions").addEventListener("click", async () => {
+        if (!confirm("Pulihkan soalan asal untuk set dan subjek ini?")) return;
+        const current = loc();
+        await api.resetQuestions(current.setNo, current.subject);
+        drawList();
+      });
+
+      drawList();
+    }
+
+    async function renderArticleManager(host) {
+      const api = window.pkskArticles;
+      if (!api) { host.innerHTML = '<p class="admin-empty">Modul artikel tidak tersedia.</p>'; return; }
+      await api.ready;
+      host.innerHTML = `
+        <div class="article-admin-toolbar">
+          <div><strong>Pengurusan Bicara Ilmu</strong><span>Tambah, kemas kini dan terbitkan artikel tanpa mengubah kod portal.</span></div>
+          <button type="button" class="admin-primary" id="addArticle">+ Artikel Baharu</button>
+        </div>
+        <div id="articleAdminEditor" hidden></div>
+        <div class="article-admin-list" id="articleAdminList"><p class="auth-note">Memuatkan artikel…</p></div>`;
+
+      const editor = host.querySelector("#articleAdminEditor");
+      const listEl = host.querySelector("#articleAdminList");
+
+      function statusLabel(article) {
+        return article.published === false ? "Disembunyikan" : "Diterbitkan";
+      }
+
+      async function drawList() {
+        const articles = await api.listAdminArticles();
+        listEl.innerHTML = articles.length ? articles.map(article => `
+          <article class="article-admin-row ${article.published === false ? "is-hidden" : ""}">
+            <img src="${escapeHtml(article.image)}" alt="" loading="lazy">
+            <div class="article-admin-main">
+              <strong>${escapeHtml(article.title)}</strong>
+              <span>${escapeHtml(article.category)} · ${escapeHtml(article.date)} · ${escapeHtml(article.readTime)}</span>
+            </div>
+            <span class="article-admin-status">${statusLabel(article)}</span>
+            <div class="article-admin-actions">
+              <button type="button" data-edit-article="${escapeHtml(article.slug)}">Edit</button>
+              ${article.published !== false
+                ? `<button type="button" class="danger" data-hide-article="${escapeHtml(article.slug)}">Padam</button>`
+                : `<button type="button" data-restore-article="${escapeHtml(article.slug)}">Terbitkan Semula</button>`}
+            </div>
+          </article>`).join("") : '<p class="admin-empty">Belum ada artikel.</p>';
+
+        listEl.querySelectorAll("[data-edit-article]").forEach(button =>
+          button.addEventListener("click", () => openArticleEditor(button.dataset.editArticle)));
+        listEl.querySelectorAll("[data-hide-article]").forEach(button => button.addEventListener("click", async () => {
+          if (!confirm("Padam artikel ini daripada paparan?")) return;
+          button.disabled = true;
+          try { await api.hideManagedArticle(button.dataset.hideArticle); await drawList(); }
+          catch (error) { alert("Gagal: " + (error?.message || error)); button.disabled = false; }
+        }));
+        listEl.querySelectorAll("[data-restore-article]").forEach(button => button.addEventListener("click", async () => {
+          button.disabled = true;
+          try {
+            const article = await api.getAdminArticle(button.dataset.restoreArticle);
+            await api.saveManagedArticle({ ...article, published: true });
+            await drawList();
+          } catch (error) { alert("Gagal: " + (error?.message || error)); button.disabled = false; }
+        }));
+      }
+
+      async function openArticleEditor(slug = "") {
+        const article = slug ? await api.getAdminArticle(slug) : null;
+        editor.hidden = false;
+        editor.innerHTML = `<form class="article-editor-form">
+          <div class="question-editor-head">
+            <strong>${article ? "Edit Artikel" : "Artikel Baharu"}</strong>
+            <button type="button" data-close-article-editor>×</button>
+          </div>
+          <div class="article-editor-grid">
+            <label class="article-field-wide"><span>Tajuk artikel</span>
+              <input name="title" required value="${escapeHtml(article?.title || "")}" placeholder="Tajuk artikel"></label>
+            <label><span>Slug</span>
+              <input name="slug" value="${escapeHtml(article?.slug || "")}" ${article ? "readonly" : ""}></label>
+            <label><span>Kategori</span>
+              <input name="category" value="${escapeHtml(article?.category || "Pendidikan")}" required></label>
+            <label><span>Penulis</span>
+              <input name="author" value="${escapeHtml(article?.author || "Editorial PKSKMY")}" required></label>
+            <label><span>Tarikh</span>
+              <input name="date" value="${escapeHtml(article?.date || "")}"></label>
+            <label><span>Masa bacaan</span>
+              <input name="readTime" value="${escapeHtml(article?.readTime || "")}"></label>
+            <label class="article-field-wide"><span>Ringkasan</span>
+              <textarea name="excerpt" rows="3">${escapeHtml(article?.excerpt || "")}</textarea></label>
+            <label class="article-field-wide"><span>Muat naik fail .md</span>
+              <input name="markdownFile" type="file" accept="text/markdown,.md,text/plain"></label>
+            <label class="article-field-wide"><span>Kandungan Markdown</span>
+              <textarea name="markdown" rows="18" required>${escapeHtml(article?.markdown || "")}</textarea></label>
+            <label class="article-field-wide"><span>Muat naik poster</span>
+              <input name="poster" type="file" accept="image/png,image/jpeg,image/webp"></label>
+          </div>
+          <label class="article-publish-toggle"><input name="published" type="checkbox" ${article?.published === false ? "" : "checked"}> Terbitkan</label>
+          <div class="auth-msg" role="status" hidden></div>
+          <div class="question-editor-buttons">
+            <button type="button" data-close-article-editor>Batal</button>
+            <button type="submit" class="admin-primary">Simpan Artikel</button>
+          </div>
+        </form>`;
+
+        const form = editor.querySelector("form");
+        const title = form.elements.title;
+        const slugInput = form.elements.slug;
+        const markdown = form.elements.markdown;
+
+        editor.querySelectorAll("[data-close-article-editor]").forEach(btn => btn.addEventListener("click", () => { editor.hidden = true; }));
+        if (!article) title.addEventListener("input", () => { slugInput.value = api.slugify(title.value); });
+        form.elements.markdownFile.addEventListener("change", async e => {
+          const file = e.target.files[0]; if (!file) return;
+          markdown.value = await file.text();
+        });
+        form.addEventListener("submit", async e => {
+          e.preventDefault();
+          const submit = form.querySelector('[type="submit"]');
+          const msg = form.querySelector(".auth-msg");
+          submit.disabled = true; submit.textContent = "Menyimpan…"; msg.hidden = true;
+          try {
+            await api.saveManagedArticle({
+              id: article?.id || null,
+              image: article?.image || "",
+              title: title.value,
+              slug: slugInput.value,
+              category: form.elements.category.value,
+              author: form.elements.author.value,
+              date: form.elements.date.value,
+              readTime: form.elements.readTime.value,
+              excerpt: form.elements.excerpt.value,
+              markdown: markdown.value,
+              published: form.elements.published.checked
+            }, form.elements.poster.files[0] || null);
+            editor.hidden = true;
+            await drawList();
+          } catch (error) {
+            msg.hidden = false; msg.textContent = error?.message || error;
+            submit.disabled = false; submit.textContent = "Simpan Artikel";
+          }
+        });
+      }
+
+      host.querySelector("#addArticle").addEventListener("click", () => openArticleEditor());
+      await drawList();
+    }
+
+    // ====== INIT ======
+    async function init() {
+      // Wait for pkskAuth to be ready
+      if (!window.pkskAuth) {
+        root.innerHTML = '<div class="admin-login-page"><p>Memuatkan…</p></div>';
+        setTimeout(init, 200);
+        return;
+      }
+
+      await window.pkskAuth.init();
+      const state = window.pkskAuth.state();
+
+      if (state.user && state.access === "admin") {
+        showDashboard();
+      } else if (state.user) {
+        // Logged in but not admin
+        await window.pkskAuth.signOut();
+        showDenied();
+      } else {
+        showLogin();
+      }
+    }
+
+    // Start
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  })();
+  </script>
+</body>
+</html>

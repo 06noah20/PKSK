@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal PKSK</title>
+  <script>
+    // SPA route fallback for GitHub Pages / static hosting.
+    // Redirects unknown paths back to the main app or admin page.
+    (function() {
+      var path = window.location.pathname;
+      if (path.indexOf('/admin') === 0) {
+        window.location.replace('/admin/');
+      } else if (path === '/latihan' || path === '/artikel') {
+        // Map friendly URLs to hash-based navigation
+        window.location.replace('/#' + path.slice(1));
+      } else {
+        window.location.replace('/');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <p>Mengalihkan halaman…</p>
+</body>
+</html>
