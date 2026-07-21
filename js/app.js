@@ -429,8 +429,9 @@
       <section class="fhero">
         <div class="fhero-inner">
           <div class="fhero-copy">
-            <h2 class="fhero-title">Persediaan tepat,<br>langkah pertama ke<br><b>sekolah impian.</b></h2>
-            <p class="fhero-sub">Portal pembelajaran interaktif yang membantu calon <b>Pentaksiran Kemasukan Sekolah Khusus - PKSK</b> bersedia dengan lebih yakin dan terarah menuju MRSM &amp; SBP terbaik negara.</p>
+            <h2 class="fhero-title">Belajar dengan strategi,<br><b>berkembang dengan potensi.</b></h2>
+            <p class="fhero-sub">Platform pendidikan interaktif yang menghimpunkan latihan, panduan pembelajaran dan perkongsian ilmu untuk membantu murid berfikir dengan lebih kreatif, belajar dengan lebih terarah serta membina keyakinan menuju kecemerlangan.</p>
+            <p class="fhero-tagline">Pendidikan Kreatif. Strategi Kecemerlangan.</p>
             <div class="btn-row">
               <button class="btn" id="ctaPractice">Mula Latihan</button>
               <button class="btn ghost" id="ctaNotes">Nota PKSK <span class="ico">&rsaquo;</span></button>
