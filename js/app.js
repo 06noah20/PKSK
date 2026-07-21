@@ -433,8 +433,8 @@
             <p class="fhero-sub">Platform pendidikan interaktif yang menghimpunkan latihan, panduan pembelajaran dan perkongsian ilmu untuk membantu murid berfikir dengan lebih kreatif, belajar dengan lebih terarah serta membina keyakinan menuju kecemerlangan.</p>
             <p class="fhero-tagline">Pendidikan Kreatif. Strategi Kecemerlangan.</p>
             <div class="btn-row">
-              <button class="btn" id="ctaPractice">Mula Latihan</button>
-              <button class="btn ghost" id="ctaNotes">Nota PKSK <span class="ico">&rsaquo;</span></button>
+              <button class="btn" id="ctaPractice">Bicara Ilmu</button>
+              <button class="btn ghost" id="ctaNotes">Latihan PKSK <span class="ico">&rsaquo;</span></button>
             </div>
           </div>
           <div class="fhero-visual">
@@ -509,8 +509,8 @@
         </div>
       </section>`;
 
-    app.querySelector("#ctaPractice").onclick = () => go("practice");
-    app.querySelector("#ctaNotes").onclick = () => go("learn");
+    app.querySelector("#ctaPractice").onclick = () => go("bicara");
+    app.querySelector("#ctaNotes").onclick = () => go("practice");
     initCarousel();
   }
 
