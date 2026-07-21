@@ -4224,3 +4224,10 @@ body.article-lightbox-open { overflow: hidden; }
   line-height: 1.55;
 }
 .admin-login-card .auth-submit { width: 100%; margin-top: 6px; }
+
+/* Font paparan menarik khusus untuk tajuk hero halaman utama */
+.fhero-title {
+  font-family: "Bricolage Grotesque", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
