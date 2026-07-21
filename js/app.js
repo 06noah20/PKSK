@@ -543,6 +543,7 @@
           <article class="info-main-panel">
             <h2>Tentang Portal Kami</h2>
             <p>Selamat datang ke portal pembelajaran yang membuka ruang belajar tanpa batas. Kami percaya setiap murid berhak mendapat latihan berkualiti secara <strong style="color:#9b1c31;font-weight:900;">percuma, mudah dan menyeronokkan</strong> — tanpa sebarang halangan.</p>
+            <p>Di sinilah lahirnya nama kami, <strong style="color:#9b1c31;font-weight:900;">PKSK — Pendidikan Kreatif, Strategi Kecemerlangan</strong>: sebuah falsafah yang menjadi tunjang setiap latihan, panduan dan ilmu yang kami kongsikan, agar pembelajaran sentiasa kreatif, berstrategi dan menuju kecemerlangan.</p>
             <p>Portal ini menghimpunkan latihan interaktif, panduan pembelajaran dan perkongsian ilmu dalam satu tempat. Daripada set latihan tersusun mengikut subjek, nota ringkas, sehingga artikel Bicara Ilmu, semuanya direka untuk membantu murid berfikir lebih kreatif, belajar lebih terarah dan membina keyakinan menuju kecemerlangan.</p>
             <p>Lebih daripada sekadar menjawab soalan, kami mahu memupuk minat, mengasah potensi dan menyemai sikap belajar yang berterusan. Mulakan dengan Latihan PKSK hari ini, dan nantikan modul Latihan UASA yang bakal menyusul tidak lama lagi.</p>
 
