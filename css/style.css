@@ -4251,3 +4251,6 @@ body.article-lightbox-open { overflow: hidden; }
 @media (max-width: 720px) {
   .brand-title { font-size: 14px; }
 }
+
+/* Perenggan ringkasan hero dalam italik */
+.fhero-sub { font-style: italic; }
