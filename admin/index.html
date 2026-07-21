@@ -149,15 +149,8 @@
     "use strict";
 
     const root = document.getElementById("admin-root");
-    const SUPABASE_URL = "https://erwmjhohjadwcrrvqack.supabase.co";
-    const SUPABASE_ANON_KEY = "sb_publishable_4oPLpY3kC4yv1OqR-RyfrQ_akaY0Uqy";
-    const CDN = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js";
-    const FILE_PREVIEW = window.location?.protocol === "file:";
-    const REAL = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY) && !FILE_PREVIEW;
-
-    // Demo mode admin credentials
-    const ADMIN_ID = "pkskmy";
-    const ADMIN_PASSWORD = "pkskmy@2026";
+    // Authentication is handled by supabase-client.js (loaded above).
+    // Admin credentials and Supabase config are in js/supabase-client.js.
 
     function escapeHtml(value) {
       return String(value == null ? "" : value).replace(/[&<>"']/g, char =>
