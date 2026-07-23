@@ -541,20 +541,49 @@
   async function loadMindaSantaiPoster() {
     const fig = app.querySelector("#mindaPoster");
     if (!fig) return;
-    let url = null;
-    try { url = await window.pkskPoster?.get?.(); } catch (_) { url = null; }
+    const debug = new URLSearchParams(location.search).has("debug");
+    const diag = (msg) => {
+      if (!debug) return;
+      let box = fig.querySelector(".poster-debug");
+      if (!box) {
+        box = document.createElement("div");
+        box.className = "poster-debug";
+        box.style.cssText = "position:absolute;left:8px;right:8px;bottom:8px;padding:8px 10px;background:#111;color:#7CFC00;font:12px/1.4 monospace;border-radius:8px;z-index:5;word-break:break-word;text-align:left;white-space:pre-wrap;";
+        fig.appendChild(box);
+      }
+      box.textContent = "DEBUG Minda Santai\n" + msg;
+    };
+    if (!window.pkskPoster || typeof window.pkskPoster.get !== "function") {
+      fig.classList.add("is-empty");
+      diag("window.pkskPoster tiada — skrip lama masih di-cache. Hard refresh / incognito.");
+      return;
+    }
+    let url = null, errMsg = "";
+    try { url = await window.pkskPoster.get(); }
+    catch (e) { errMsg = String(e?.message || e); url = null; }
     if (!app.querySelector("#mindaPoster")) return; // paparan sudah bertukar
-    if (!url) { fig.classList.add("is-empty"); return; }
+    if (!url) {
+      fig.classList.add("is-empty");
+      diag(errMsg
+        ? ("Ralat baca DB: " + errMsg + "\n(isDemo=" + (window.pkskAuth?.isDemo?.()) + ")")
+        : ("Tiada baris poster dalam DB (notes/minda-santai).\nisDemo=" + (window.pkskAuth?.isDemo?.()) + " — perlu simpan poster & jalankan SQL policy."));
+      return;
+    }
     let img = fig.querySelector("img");
     if (!img) {
       img = document.createElement("img");
       img.loading = "lazy";
       img.alt = "Poster Minda Santai";
-      img.addEventListener("error", () => { fig.classList.add("is-empty"); img.remove(); });
+      img.addEventListener("error", () => {
+        fig.classList.add("is-empty");
+        img.remove();
+        diag("URL diperoleh tetapi imej gagal dimuat (data URL rosak?).\nlen=" + url.length);
+      });
       fig.prepend(img);
     }
     img.src = url;
     fig.classList.remove("is-empty");
+    diag("OK: URL diperoleh, len=" + url.length + ", mula: " + url.slice(0, 24));
   }
 
   // Kemas kini poster secara langsung jika admin menukarnya dalam sesi yang sama.
