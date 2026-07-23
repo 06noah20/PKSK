@@ -217,6 +217,97 @@
   applyOverrides();
   const ready = loadRemote().catch(error => console.error("PKSK question overrides:", error));
 
+  /* =========================================================
+     RUANG "MINDA SANTAI" (poster laman utama)
+     Disimpan sebagai satu baris notes (subject = 'minda-santai'),
+     imej dalam bentuk data URL WebP — sama seperti poster artikel.
+     ========================================================= */
+  const POSTER_LOCAL_KEY = "pksk_minda_santai_poster_v1";
+
+  function optimizePoster(file) {
+    if (!file) return Promise.resolve("");
+    if (!/^image\/(?:png|jpeg|webp)$/i.test(file.type || "")) {
+      throw new Error("Poster mesti dalam format PNG, JPG atau WebP.");
+    }
+    if (file.size > 8 * 1024 * 1024) throw new Error("Saiz poster melebihi 8 MB.");
+    return new Promise((resolve, reject) => {
+      const image = new Image();
+      const url = URL.createObjectURL(file);
+      image.onload = () => {
+        URL.revokeObjectURL(url);
+        const scale = Math.min(1, 1400 / Math.max(image.naturalWidth, image.naturalHeight));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+        canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+        canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL("image/webp", .85));
+      };
+      image.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Poster tidak dapat dibaca.")); };
+      image.src = url;
+    });
+  }
+
+  function posterChanged() {
+    document.dispatchEvent(new CustomEvent("pksk-poster-changed"));
+  }
+
+  async function getPoster() {
+    await window.pkskAuth?.init?.();
+    const client = window.pkskAuth?.client;
+    if (!client || window.pkskAuth.isDemo()) {
+      try { return localStorage.getItem(POSTER_LOCAL_KEY) || null; } catch (_) { return null; }
+    }
+    const { data, error } = await client.from("notes")
+      .select("id, image_url, created_at")
+      .eq("subject", "minda-santai")
+      .eq("is_published", true)
+      .order("created_at", { ascending: false })
+      .limit(1);
+    if (error) throw error;
+    return data?.[0]?.image_url || null;
+  }
+
+  async function savePoster(file) {
+    const dataUrl = await optimizePoster(file);
+    await window.pkskAuth?.init?.();
+    const client = window.pkskAuth?.client;
+    if (!client || window.pkskAuth.isDemo()) {
+      try { localStorage.setItem(POSTER_LOCAL_KEY, dataUrl); } catch (_) {}
+      posterChanged();
+      return dataUrl;
+    }
+    const existing = await client.from("notes").select("id").eq("subject", "minda-santai").limit(1);
+    const payload = {
+      subject: "minda-santai",
+      title: "Minda Santai",
+      image_url: dataUrl,
+      access_level: "free",
+      is_published: true
+    };
+    const query = existing.data?.[0]?.id
+      ? client.from("notes").update(payload).eq("id", existing.data[0].id)
+      : client.from("notes").insert(payload);
+    const { error } = await query;
+    if (error) throw error;
+    posterChanged();
+    return dataUrl;
+  }
+
+  async function removePoster() {
+    await window.pkskAuth?.init?.();
+    const client = window.pkskAuth?.client;
+    if (!client || window.pkskAuth.isDemo()) {
+      try { localStorage.removeItem(POSTER_LOCAL_KEY); } catch (_) {}
+      posterChanged();
+      return;
+    }
+    const { error } = await client.from("notes").delete().eq("subject", "minda-santai");
+    if (error) throw error;
+    posterChanged();
+  }
+
+  window.pkskPoster = { get: getPoster, save: savePoster, remove: removePoster };
+
   window.pkskQuestionAdmin = {
     subjects: SUBJECTS,
     ready,
