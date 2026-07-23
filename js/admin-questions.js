@@ -280,6 +280,7 @@
     const payload = {
       subject: "minda-santai",
       title: "Minda Santai",
+      content: JSON.stringify({ type: "minda-santai", updatedAt: new Date().toISOString() }),
       image_url: dataUrl,
       access_level: "free",
       is_published: true
