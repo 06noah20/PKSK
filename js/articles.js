@@ -641,11 +641,25 @@
     }
   }
 
+  // Artikel terkini (untuk ruangan "Bicara Ilmu Terkini" di laman utama).
+  // Artikel yang diurus admin didahulukan mengikut tarikh dikemas kini,
+  // kemudian diikuti artikel asal portal.
+  async function latestArticles(limit = 4) {
+    await articlesReady;
+    const stamp = article => String(article.updatedAt || article.createdAt || "");
+    const managed = ARTICLES.filter(article => article.managed)
+      .slice()
+      .sort((a, b) => stamp(b).localeCompare(stamp(a)));
+    const others = ARTICLES.filter(article => !article.managed);
+    return [...managed, ...others].slice(0, limit).map(article => ({ ...article }));
+  }
+
   window.pkskArticles = {
     renderHub,
     renderArticle,
     ready: articlesReady,
     listArticles: () => ARTICLES.map(article => ({ ...article })),
+    latestArticles,
     listAdminArticles,
     getAdminArticle,
     saveManagedArticle,

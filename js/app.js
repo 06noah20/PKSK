@@ -464,6 +464,19 @@
         </div>
       </section>
 
+      <section class="bicara-latest-band" aria-label="Bicara Ilmu Terkini">
+        <div class="bicara-latest-inner">
+          <div class="band-head">
+            <h2>Bicara Ilmu Terkini</h2>
+            <p>Artikel terbaharu yang diterbitkan untuk anda.</p>
+          </div>
+          <div class="bicara-latest-grid" id="bicaraLatestGrid">
+            <p class="bicara-latest-loading">Memuatkan artikel terkini…</p>
+          </div>
+          <p class="bicara-latest-note"><em>Sila ke ruangan <a href="#" id="bicaraLatestLink">Bicara Ilmu</a> bagi melihat semua artikel yang diterbitkan oleh pkskmy.com.</em></p>
+        </div>
+      </section>
+
       <section class="slider-band">
         <div class="slider-duo-wrap">
           <div class="school-slider-panel">
@@ -498,8 +511,39 @@
 
     app.querySelector("#ctaPractice").onclick = () => go("bicara");
     app.querySelector("#ctaNotes").onclick = () => go("practice");
+    const bicaraLink = app.querySelector("#bicaraLatestLink");
+    if (bicaraLink) bicaraLink.onclick = (e) => { e.preventDefault(); go("bicara"); };
     initCarousel();
     loadMindaSantaiPoster();
+    loadLatestBicara();
+  }
+
+  async function loadLatestBicara() {
+    const grid = app.querySelector("#bicaraLatestGrid");
+    if (!grid || !window.pkskArticles?.latestArticles) return;
+    let articles = [];
+    try { articles = await window.pkskArticles.latestArticles(4); } catch (_) { articles = []; }
+    if (!app.querySelector("#bicaraLatestGrid")) return; // paparan sudah bertukar
+    if (!articles.length) {
+      grid.innerHTML = `<p class="bicara-latest-loading">Belum ada artikel untuk dipaparkan.</p>`;
+      return;
+    }
+    grid.innerHTML = articles.map(article => `
+      <button class="bicara-mini-card" type="button" data-article="${esc(article.slug)}" aria-label="Baca artikel: ${esc(article.title)}">
+        <span class="bicara-mini-cover"><img src="${esc(article.image)}" alt="" loading="lazy"></span>
+        <span class="bicara-mini-body">
+          <span class="bicara-mini-cat">${esc(article.category || "Pendidikan")}</span>
+          <strong>${esc(article.title)}</strong>
+          <span class="bicara-mini-byline"><span>Oleh ${esc(article.author || "PKSKMY")}</span><time>${esc(article.date || "")}</time></span>
+        </span>
+      </button>`).join("");
+    grid.querySelectorAll("[data-article]").forEach(card =>
+      card.addEventListener("click", () => {
+        document.getElementById("adminBtn")?.classList.remove("active");
+        document.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.view === "bicara"));
+        window.pkskArticles.renderArticle(card.dataset.article);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }));
   }
 
   async function loadMindaSantaiPoster() {

@@ -4483,3 +4483,56 @@ body.article-lightbox-open { overflow: hidden; }
   .poster-admin { grid-template-columns: 1fr; }
   .poster-admin-preview { max-width: 300px; }
 }
+
+/* ============ Ruang "Bicara Ilmu Terkini" (laman utama) ============ */
+.bicara-latest-band { padding: 42px 0 6px; }
+.bicara-latest-inner { width: min(1056px, calc(100% - 48px)); margin: 0 auto; }
+.bicara-latest-inner .band-head h2 {
+  margin: 0;
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 900;
+  color: var(--ink);
+}
+.bicara-latest-inner .band-head p {
+  margin: 6px 0 20px;
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+.bicara-latest-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.bicara-mini-card {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 0;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(91, 9, 25, .07);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.bicara-mini-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(91, 9, 25, .14); }
+.bicara-mini-cover { display: block; aspect-ratio: 16 / 10; overflow: hidden; background: var(--bg-soft); }
+.bicara-mini-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bicara-mini-body { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px 16px; }
+.bicara-mini-cat {
+  font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
+}
+.bicara-mini-body strong {
+  font-size: 15px; line-height: 1.35; font-weight: 800; color: var(--ink);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.bicara-mini-byline {
+  margin-top: auto; display: flex; justify-content: space-between; gap: 8px;
+  font-size: 11.5px; color: var(--ink-soft);
+}
+.bicara-latest-note { margin: 16px 0 0; font-size: 13px; color: var(--ink-soft); }
+.bicara-latest-note a { color: var(--accent); font-weight: 700; text-decoration: underline; }
+.bicara-latest-loading { grid-column: 1 / -1; color: var(--ink-soft); font-size: 14px; }
+@media (max-width: 960px) { .bicara-latest-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .bicara-latest-grid { grid-template-columns: 1fr; } }
