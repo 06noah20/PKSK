@@ -520,9 +520,7 @@
       <section class="poster-band" aria-label="Poster santai">
         <div class="poster-band-inner">
           <div class="poster-head">
-            <p class="notes-eyebrow">Selingan Santai</p>
-            <h2>Poster Santai PKSK</h2>
-            <p>Sedikit selingan ceria untuk suntik semangat belajar setiap hari.</p>
+            <h2 class="poster-title-comic">Minda Santai</h2>
           </div>
           <figure class="fun-poster">
             <img src="assets/poster-lawak.png" alt="Poster kartun santai PKSK" loading="lazy"

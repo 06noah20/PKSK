@@ -4449,3 +4449,10 @@ body.article-lightbox-open { overflow: hidden; }
 .fun-poster.is-empty .fun-poster-fallback { display: flex; }
 .fun-poster-fallback b { color: var(--ink); font-size: 16px; }
 .fun-poster-ico { font-size: 34px; }
+
+/* Tajuk ruang poster — font comic */
+.poster-title-comic {
+  font-family: "Comic Sans MS", "Comic Neue", "Chalkboard SE", "Baloo 2", cursive;
+  font-size: clamp(26px, 3.4vw, 36px);
+  letter-spacing: .5px;
+}
