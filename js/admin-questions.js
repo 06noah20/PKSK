@@ -251,20 +251,31 @@
     document.dispatchEvent(new CustomEvent("pksk-poster-changed"));
   }
 
+  // Poster disimpan dalam baldi Storage awam 'question-images' (sama seperti
+  // gambar soalan) pada laluan tetap, supaya boleh dibaca oleh sesiapa sahaja.
+  const POSTER_BUCKET = "question-images";
+  const POSTER_FOLDER = "minda-santai";
+  const POSTER_PATH = POSTER_FOLDER + "/poster";
+
   async function getPoster() {
     await window.pkskAuth?.init?.();
     const client = window.pkskAuth?.client;
     if (!client || window.pkskAuth.isDemo()) {
       try { return localStorage.getItem(POSTER_LOCAL_KEY) || null; } catch (_) { return null; }
     }
-    const { data, error } = await client.from("notes")
-      .select("id, image_url, created_at")
-      .eq("subject", "minda-santai")
-      .eq("is_published", true)
-      .order("created_at", { ascending: false })
-      .limit(1);
+    const { data, error } = await client.storage.from(POSTER_BUCKET)
+      .list(POSTER_FOLDER, { limit: 100 });
     if (error) throw error;
-    return data?.[0]?.image_url || null;
+    const object = (data || []).find(item => item.name === "poster");
+    if (!object) return null;
+    const base = client.storage.from(POSTER_BUCKET).getPublicUrl(POSTER_PATH).data.publicUrl;
+    const version = object.updated_at || object.created_at || "";
+    return version ? `${base}?v=${encodeURIComponent(version)}` : base;
+  }
+
+  async function dataUrlToBlob(dataUrl) {
+    const response = await fetch(dataUrl);
+    return response.blob();
   }
 
   async function savePoster(file) {
@@ -276,19 +287,11 @@
       posterChanged();
       return dataUrl;
     }
-    const existing = await client.from("notes").select("id").eq("subject", "minda-santai").limit(1);
-    const payload = {
-      subject: "minda-santai",
-      title: "Minda Santai",
-      content: JSON.stringify({ type: "minda-santai", updatedAt: new Date().toISOString() }),
-      image_url: dataUrl,
-      access_level: "free",
-      is_published: true
-    };
-    const query = existing.data?.[0]?.id
-      ? client.from("notes").update(payload).eq("id", existing.data[0].id)
-      : client.from("notes").insert(payload);
-    const { error } = await query;
+    const blob = await dataUrlToBlob(dataUrl);
+    // Baldi tiada dasar UPDATE — padam dahulu, kemudian muat naik semula.
+    await client.storage.from(POSTER_BUCKET).remove([POSTER_PATH]).catch(() => {});
+    const { error } = await client.storage.from(POSTER_BUCKET)
+      .upload(POSTER_PATH, blob, { contentType: "image/webp", upsert: false });
     if (error) throw error;
     posterChanged();
     return dataUrl;
@@ -302,7 +305,7 @@
       posterChanged();
       return;
     }
-    const { error } = await client.from("notes").delete().eq("subject", "minda-santai");
+    const { error } = await client.storage.from(POSTER_BUCKET).remove([POSTER_PATH]);
     if (error) throw error;
     posterChanged();
   }
