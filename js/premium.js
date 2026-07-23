@@ -247,10 +247,15 @@
       submit.textContent = "Menyimpan…";
       showMessage("");
       try {
-        await window.pkskPoster.save(file);
+        const savedUrl = await window.pkskPoster.save(file);
         form.reset();
         showMessage("Poster berjaya dikemas kini dan kini dipaparkan di laman utama.", true);
-        await draw();
+        if (savedUrl) {
+          preview.innerHTML = `<img src="${escapeHtml(savedUrl)}" alt="Poster Minda Santai semasa">`;
+          removeBtn.hidden = false;
+        } else {
+          await draw();
+        }
       } catch (error) {
         showMessage(error?.message || error);
       } finally {
