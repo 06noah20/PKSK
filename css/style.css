@@ -2348,7 +2348,8 @@ body {
   width: min(1540px, calc(100% - 72px));
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(370px, 430px);
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
   gap: 34px;
   align-items: center;
 }
@@ -2360,7 +2361,7 @@ body {
   padding-left: 0;
   overflow: visible;
   align-self: center;
-  justify-self: start;
+  justify-self: center;
   width: min(100%, 1056px);
   padding-right: 0;
 }
