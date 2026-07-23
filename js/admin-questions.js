@@ -260,11 +260,12 @@
     if (!client || window.pkskAuth.isDemo()) {
       try { return localStorage.getItem(POSTER_LOCAL_KEY) || null; } catch (_) { return null; }
     }
+    // Nota: jadual notes langsung tidak mempunyai lajur created_at, jadi
+    // jangan pilih/susun mengikutnya. Satu baris sahaja untuk minda-santai.
     const { data, error } = await client.from("notes")
-      .select("id, image_url, created_at")
+      .select("id, image_url")
       .eq("subject", "minda-santai")
       .eq("is_published", true)
-      .order("created_at", { ascending: false })
       .limit(1);
     if (error) throw error;
     return data?.[0]?.image_url || null;
