@@ -515,6 +515,25 @@
             <p class="coming-note">Latihan sahsiah, situasi, komunikasi dan penulisan ringkas akan ditambah secara berperingkat.</p>
           </aside>
         </div>
+      </section>
+
+      <section class="poster-band" aria-label="Poster santai">
+        <div class="poster-band-inner">
+          <div class="poster-head">
+            <p class="notes-eyebrow">Selingan Santai</p>
+            <h2>Poster Santai PKSK</h2>
+            <p>Sedikit selingan ceria untuk suntik semangat belajar setiap hari.</p>
+          </div>
+          <figure class="fun-poster">
+            <img src="assets/poster-lawak.png" alt="Poster kartun santai PKSK" loading="lazy"
+              onerror="this.closest('.fun-poster').classList.add('is-empty'); this.remove();">
+            <figcaption class="fun-poster-fallback">
+              <span class="fun-poster-ico" aria-hidden="true">🖼️</span>
+              <b>Ruang poster kartun</b>
+              <span>Poster kartun lawak anda akan dipaparkan di sini.</span>
+            </figcaption>
+          </figure>
+        </div>
       </section>`;
 
     app.querySelector("#ctaPractice").onclick = () => go("bicara");
