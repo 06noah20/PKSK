@@ -157,43 +157,123 @@
       <div class="admin-page-shell">
         <div class="admin-panel-head">
           <div><p class="practice-eyebrow">Pentadbiran Portal</p><h1>Panel Admin PKSK</h1>
-            <p>Urus pendaftaran pengguna, bank soalan dan artikel portal dari satu halaman.</p></div>
+            <p>Urus bank soalan, artikel portal dan ruang Minda Santai dari satu halaman.</p></div>
           <span class="admin-mode-badge">ADMIN</span>
         </div>
         <nav class="admin-nav" aria-label="Navigasi panel admin">
-          <button type="button" class="active" data-admin-view="accounts">Pengesahan Akaun <span id="pendingNavCount">0</span></button>
-          <button type="button" data-admin-view="questions">Urus Soalan</button>
+          <button type="button" class="active" data-admin-view="questions">Urus Soalan</button>
           <button type="button" data-admin-view="articles">Urus Artikel</button>
+          <button type="button" data-admin-view="poster">Minda Santai</button>
         </nav>
-        <section id="adminAccountsView"></section>
-        <section id="adminQuestionsView" hidden></section>
+        <section id="adminQuestionsView"></section>
         <section id="adminArticlesView" hidden></section>
+        <section id="adminPosterView" hidden></section>
       </div>
     </section>`;
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     const panel = app.querySelector(".admin-page");
-    const accountsView = panel.querySelector("#adminAccountsView");
     const questionsView = panel.querySelector("#adminQuestionsView");
     const articlesView = panel.querySelector("#adminArticlesView");
-    await renderAccounts(accountsView, panel.querySelector("#pendingNavCount"));
+    const posterView = panel.querySelector("#adminPosterView");
+    questionsView.dataset.ready = "true";
+    await renderQuestionManager(questionsView);
 
     panel.querySelectorAll("[data-admin-view]").forEach(button =>
       button.addEventListener("click", async () => {
         const view = button.dataset.adminView;
         panel.querySelectorAll("[data-admin-view]").forEach(item => item.classList.toggle("active", item === button));
-        accountsView.hidden = view !== "accounts";
         questionsView.hidden = view !== "questions";
         articlesView.hidden = view !== "articles";
-        if (view === "questions" && !questionsView.dataset.ready) {
-          questionsView.dataset.ready = "true";
-          await renderQuestionManager(questionsView);
-        }
+        posterView.hidden = view !== "poster";
         if (view === "articles" && !articlesView.dataset.ready) {
           articlesView.dataset.ready = "true";
           await renderArticleManager(articlesView);
         }
+        if (view === "poster" && !posterView.dataset.ready) {
+          posterView.dataset.ready = "true";
+          await renderPosterManager(posterView);
+        }
       }));
+  }
+
+  async function renderPosterManager(host) {
+    host.innerHTML = `
+      <div class="article-admin-toolbar">
+        <div><strong>Ruang Minda Santai</strong><span>Muat naik atau kemas kini poster kartun yang dipaparkan di laman utama.</span></div>
+      </div>
+      <div class="poster-admin">
+        <div class="poster-admin-preview" id="posterAdminPreview"><p class="auth-note">Memuatkan…</p></div>
+        <form class="poster-admin-form" id="posterAdminForm" novalidate>
+          <label class="auth-field"><span>Muat naik poster (PNG, JPG atau WebP)</span>
+            <input type="file" name="poster" accept="image/png,image/jpeg,image/webp" required></label>
+          <p class="pay-file-hint">Disyorkan bersaiz segi empat sama (contoh 800×800). Maksimum 8 MB.</p>
+          <div class="auth-msg" role="status" hidden></div>
+          <div class="question-editor-buttons">
+            <button type="button" class="danger" id="posterRemove" hidden>Buang Poster</button>
+            <button type="submit" class="admin-primary">Simpan Poster</button>
+          </div>
+        </form>
+      </div>`;
+
+    const preview = host.querySelector("#posterAdminPreview");
+    const form = host.querySelector("#posterAdminForm");
+    const message = form.querySelector(".auth-msg");
+    const submit = form.querySelector('[type="submit"]');
+    const removeBtn = host.querySelector("#posterRemove");
+    const showMessage = (text, ok = false) => {
+      message.hidden = !text;
+      message.textContent = text;
+      message.className = "auth-msg" + (ok ? " ok" : "");
+    };
+
+    async function draw() {
+      let url = null;
+      try { url = await window.pkskPoster.get(); } catch (_) { url = null; }
+      if (url) {
+        preview.innerHTML = `<img src="${escapeHtml(url)}" alt="Poster Minda Santai semasa">`;
+        removeBtn.hidden = false;
+      } else {
+        preview.innerHTML = `<div class="poster-admin-empty"><span>🖼️</span><p>Belum ada poster. Muat naik untuk memaparkannya di laman utama.</p></div>`;
+        removeBtn.hidden = true;
+      }
+    }
+
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+      const file = form.querySelector('[name="poster"]').files[0] || null;
+      if (!file) return showMessage("Sila pilih fail poster.");
+      submit.disabled = true;
+      submit.textContent = "Menyimpan…";
+      showMessage("");
+      try {
+        await window.pkskPoster.save(file);
+        form.reset();
+        showMessage("Poster berjaya dikemas kini dan kini dipaparkan di laman utama.", true);
+        await draw();
+      } catch (error) {
+        showMessage(error?.message || error);
+      } finally {
+        submit.disabled = false;
+        submit.textContent = "Simpan Poster";
+      }
+    });
+
+    removeBtn.addEventListener("click", async () => {
+      if (!confirm("Buang poster Minda Santai daripada laman utama?")) return;
+      removeBtn.disabled = true;
+      try {
+        await window.pkskPoster.remove();
+        showMessage("Poster telah dibuang.", true);
+        await draw();
+      } catch (error) {
+        showMessage(error?.message || error);
+      } finally {
+        removeBtn.disabled = false;
+      }
+    });
+
+    await draw();
   }
 
   async function renderAccounts(host, pendingBadge) {

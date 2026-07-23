@@ -522,9 +522,7 @@
           <div class="poster-head">
             <h2 class="poster-title-comic">Minda Santai</h2>
           </div>
-          <figure class="fun-poster">
-            <img src="assets/poster-lawak.png" alt="Poster kartun santai PKSK" loading="lazy"
-              onerror="this.closest('.fun-poster').classList.add('is-empty'); this.remove();">
+          <figure class="fun-poster is-empty" id="mindaPoster">
             <figcaption class="fun-poster-fallback">
               <span class="fun-poster-ico" aria-hidden="true">🖼️</span>
               <b>Ruang poster kartun</b>
@@ -537,7 +535,32 @@
     app.querySelector("#ctaPractice").onclick = () => go("bicara");
     app.querySelector("#ctaNotes").onclick = () => go("practice");
     initCarousel();
+    loadMindaSantaiPoster();
   }
+
+  async function loadMindaSantaiPoster() {
+    const fig = app.querySelector("#mindaPoster");
+    if (!fig) return;
+    let url = null;
+    try { url = await window.pkskPoster?.get?.(); } catch (_) { url = null; }
+    if (!app.querySelector("#mindaPoster")) return; // paparan sudah bertukar
+    if (!url) { fig.classList.add("is-empty"); return; }
+    let img = fig.querySelector("img");
+    if (!img) {
+      img = document.createElement("img");
+      img.loading = "lazy";
+      img.alt = "Poster Minda Santai";
+      img.addEventListener("error", () => { fig.classList.add("is-empty"); img.remove(); });
+      fig.prepend(img);
+    }
+    img.src = url;
+    fig.classList.remove("is-empty");
+  }
+
+  // Kemas kini poster secara langsung jika admin menukarnya dalam sesi yang sama.
+  document.addEventListener("pksk-poster-changed", () => {
+    if (app.querySelector("#mindaPoster")) loadMindaSantaiPoster();
+  });
 
   /* ---------------- Paparan: INFO PKSK ---------------- */
   function renderInfoPage() {

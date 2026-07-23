@@ -4456,3 +4456,28 @@ body.article-lightbox-open { overflow: hidden; }
   font-size: clamp(26px, 3.4vw, 36px);
   letter-spacing: .5px;
 }
+
+/* ============ Panel Admin: Ruang Minda Santai ============ */
+.poster-admin {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 22px;
+  align-items: start;
+}
+.poster-admin-preview {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--bg-soft);
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+}
+.poster-admin-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.poster-admin-empty { text-align: center; color: var(--ink-soft); padding: 18px; }
+.poster-admin-empty span { font-size: 34px; display: block; margin-bottom: 8px; }
+.poster-admin-form { min-width: 0; }
+@media (max-width: 640px) {
+  .poster-admin { grid-template-columns: 1fr; }
+  .poster-admin-preview { max-width: 300px; }
+}
