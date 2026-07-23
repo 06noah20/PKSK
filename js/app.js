@@ -478,42 +478,6 @@
             </div>
             <div class="cdots" id="cDots"></div>
           </div>
-
-          <aside class="coming-slider-panel" aria-label="Promosi akan datang">
-            <div class="coming-badge">Akan Datang</div>
-            <h2>Bonus Latihan PKSK</h2>
-            <p class="coming-lead">Modul tambahan untuk melengkapkan persediaan selain Bahagian B.</p>
-
-            <div class="coming-feature primary">
-              <span class="coming-percent">20%</span>
-              <div>
-                <strong>Bahagian A</strong>
-                <span>Kecerdasan Insaniah</span>
-              </div>
-            </div>
-
-            <div class="coming-feature">
-              <span class="coming-percent">10%</span>
-              <div>
-                <strong>Bahagian C</strong>
-                <span>Artikulasi Penulisan</span>
-              </div>
-            </div>
-
-            <div class="coming-feature">
-              <span class="coming-percent word">UASA</span>
-              <div>
-                <strong>Latihan UASA</strong>
-                <span>Ujian Akhir Sesi Akademik</span>
-              </div>
-            </div>
-
-            <div class="coming-orbit" aria-hidden="true">
-              <span></span><span></span><span></span>
-            </div>
-
-            <p class="coming-note">Latihan sahsiah, situasi, komunikasi dan penulisan ringkas akan ditambah secara berperingkat.</p>
-          </aside>
         </div>
       </section>
 
