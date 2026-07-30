@@ -1074,6 +1074,21 @@
    * disimpan dalam localStorage supaya tidak perlu masuk semula. */
   const SET_PASSWORD = "Pkskmy@2026!";
   const SET_UNLOCK_KEY = "pksk_sets_unlocked_v1";
+  const SHOPEE_UNLOCK_URL = "https://s.shopee.com.my/2g9wj61dJS?share_channel_code=1";
+  function unlockPromoMarkup() {
+    return `<a class="unlock-promo" href="${SHOPEE_UNLOCK_URL}" target="_blank" rel="noopener nofollow sponsored">
+      <span class="unlock-promo-art" aria-hidden="true">
+        <span class="unlock-promo-lock">🔓</span>
+        <span class="unlock-promo-bag">🛍️</span>
+      </span>
+      <span class="unlock-promo-main">
+        <span class="unlock-promo-eyebrow">Buka Set Latihan 2 – 10</span>
+        <strong>Dapatkan Kata Laluan Set Latihan Penuh</strong>
+        <span class="unlock-promo-sub">Dapatkan pakej latihan lengkap PKSK di Shopee untuk memperoleh kata laluan membuka kesemua Set Latihan 2 hingga 10.</span>
+      </span>
+      <span class="unlock-promo-cta">Dapatkan di Shopee &rarr;</span>
+    </a>`;
+  }
   const FREE_SET = 1;
   function setsUnlocked() {
     try { return localStorage.getItem(SET_UNLOCK_KEY) === "1"; } catch (_) { return false; }
@@ -1101,6 +1116,7 @@
         <div class="auth-msg" role="status" hidden></div>
         <button type="submit" class="auth-submit">Buka Set Latihan</button>
       </form>
+      <p class="auth-note">Belum ada kata laluan? <a href="${SHOPEE_UNLOCK_URL}" target="_blank" rel="noopener nofollow sponsored">Dapatkan di Shopee &rarr;</a></p>
     </div>`;
     document.body.appendChild(overlay);
     const close = () => overlay.remove();
@@ -1276,6 +1292,8 @@
         </div>
         <button class="practice-back-btn" id="backCategoryPksk" type="button">Kembali ke Kategori</button>
       </div>
+
+      ${setsUnlocked() ? "" : unlockPromoMarkup()}
 
       <div class="practice-set-grid">
         ${sets.map(setNo => practiceSetCard(setNo, setProgress)).join("")}

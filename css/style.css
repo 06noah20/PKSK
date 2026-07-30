@@ -4536,3 +4536,67 @@ body.article-lightbox-open { overflow: hidden; }
 .bicara-latest-loading { grid-column: 1 / -1; color: var(--ink-soft); font-size: 14px; }
 @media (max-width: 960px) { .bicara-latest-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .bicara-latest-grid { grid-template-columns: 1fr; } }
+
+/* ============ Promosi Shopee: buka Set Latihan 2–10 ============ */
+.unlock-promo {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0 0 24px;
+  padding: 18px 22px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(135deg, #ee4d2d 0%, #ff7337 60%, #ff9d3c 100%);
+  box-shadow: 0 16px 38px rgba(238, 77, 45, .28);
+  border: 1px solid rgba(255, 255, 255, .25);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.unlock-promo:hover { transform: translateY(-3px); box-shadow: 0 22px 48px rgba(238, 77, 45, .36); }
+.unlock-promo-art {
+  position: relative;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .22);
+  font-size: 30px;
+}
+.unlock-promo-bag {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  font-size: 20px;
+  background: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .18);
+}
+.unlock-promo-main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.unlock-promo-eyebrow {
+  font-size: 11.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; opacity: .92;
+}
+.unlock-promo-main strong { font-size: 18px; font-weight: 900; line-height: 1.25; }
+.unlock-promo-sub { font-size: 13px; line-height: 1.55; opacity: .95; }
+.unlock-promo-cta {
+  flex: 0 0 auto;
+  align-self: center;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: #fff;
+  color: #ee4d2d;
+  font-weight: 900;
+  font-size: 14px;
+  white-space: nowrap;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .16);
+}
+.set-unlock-modal .auth-note a { color: var(--accent); font-weight: 800; text-decoration: underline; }
+@media (max-width: 680px) {
+  .unlock-promo { flex-direction: column; align-items: flex-start; text-align: left; }
+  .unlock-promo-cta { align-self: stretch; text-align: center; }
+}
