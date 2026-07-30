@@ -283,6 +283,12 @@
     if (btn) go(btn.dataset.view);
   });
 
+  // Klik jenama PKSK di header untuk kembali ke laman utama.
+  document.querySelector(".topbar .brand")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    go("home");
+  });
+
   /* ---------------- Senarai sekolah MRSM & SBP ---------------- */
   const SCHOOLS = [
     { name: "MRSM Kuala Kubu Bharu", rank: 1, score: "1.261", type: "MRSM", image: "mrsm-kuala-kubu-bharu.jpg", search: "https://www.bing.com/images/search?q=MRSM+Kuala+Kubu+Bharu+gambar+sekolah+rasmi" },
