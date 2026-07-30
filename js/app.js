@@ -1069,16 +1069,62 @@
   }
 
   /* ---------------- Akses latihan ----------------
-   * Semua set latihan dibuka secara percuma untuk semua pengunjung.
-   * Tiada log masuk, pendaftaran, langganan atau kelulusan admin diperlukan.
-   * Sistem akaun/langganan lama masih wujud dalam kod tetapi tidak lagi
-   * digunakan pada portal awam supaya boleh diguna semula pada masa hadapan. */
-  function canAccessSet() {
-    return true;
+   * Set 1 percuma untuk semua. Set 2–10 dibuka menggunakan kata laluan
+   * (tanpa log masuk). Setelah kata laluan betul dimasukkan, status buka
+   * disimpan dalam localStorage supaya tidak perlu masuk semula. */
+  const SET_PASSWORD = "Pkskmy@2026!";
+  const SET_UNLOCK_KEY = "pksk_sets_unlocked_v1";
+  const FREE_SET = 1;
+  function setsUnlocked() {
+    try { return localStorage.getItem(SET_UNLOCK_KEY) === "1"; } catch (_) { return false; }
   }
-  // Dikekalkan sebagai fungsi kosong untuk keserasian dengan kod terdahulu;
-  // tiada sekatan langganan atau modal naik taraf dipaparkan lagi.
-  function showLockedNotice() {}
+  function unlockSets() {
+    try { localStorage.setItem(SET_UNLOCK_KEY, "1"); } catch (_) {}
+  }
+  function canAccessSet(setNo) {
+    if (Number(setNo) === FREE_SET) return true;
+    return setsUnlocked();
+  }
+  function showLockedNotice(setNo) {
+    openSetPasswordModal(setNo);
+  }
+  function openSetPasswordModal(setNo) {
+    const overlay = document.createElement("div");
+    overlay.className = "auth-overlay show";
+    overlay.innerHTML = `<div class="auth-modal set-unlock-modal" role="dialog" aria-modal="true">
+      <button class="auth-close" type="button" aria-label="Tutup">&times;</button>
+      <h3 class="auth-title">Set Latihan Berkunci</h3>
+      <p class="auth-note">Masukkan kata laluan untuk membuka Set Latihan 2 hingga 10. Tiada log masuk diperlukan.</p>
+      <form class="auth-form" novalidate>
+        <label class="auth-field"><span>Kata laluan</span>
+          <input type="password" name="pw" autocomplete="off" placeholder="Kata laluan set latihan" required></label>
+        <div class="auth-msg" role="status" hidden></div>
+        <button type="submit" class="auth-submit">Buka Set Latihan</button>
+      </form>
+    </div>`;
+    document.body.appendChild(overlay);
+    const close = () => overlay.remove();
+    let pressedOnBackdrop = false;
+    overlay.addEventListener("pointerdown", e => { pressedOnBackdrop = e.target === overlay; });
+    overlay.addEventListener("pointerup", e => { if (pressedOnBackdrop && e.target === overlay) close(); pressedOnBackdrop = false; });
+    overlay.querySelector(".auth-close").addEventListener("click", close);
+    const form = overlay.querySelector(".auth-form");
+    const msg = overlay.querySelector(".auth-msg");
+    const input = form.querySelector('[name="pw"]');
+    setTimeout(() => input.focus(), 0);
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      if (String(input.value || "") === SET_PASSWORD) {
+        unlockSets();
+        close();
+        if (setNo) renderPracticeSetDetail(setNo); else renderTopicPicker();
+      } else {
+        msg.hidden = false;
+        msg.textContent = "Kata laluan salah. Sila cuba lagi.";
+        input.select();
+      }
+    });
+  }
   // Segarkan senarai set bila status log masuk berubah
   document.addEventListener("pksk-auth-changed", () => {
     if (document.querySelector(".practice-set-grid")) renderTopicPicker();
@@ -1258,7 +1304,7 @@
     const padded = String(setNo).padStart(2, "0");
     const locked = !canAccessSet(setNo);
     return `<button class="practice-set-card${locked ? " locked" : ""}" data-set="${setNo}" type="button">
-      ${locked ? `<span class="set-lock" aria-label="Perlu kelulusan akaun">🔒 PERLU KELULUSAN</span>` : ""}
+      ${locked ? `<span class="set-lock" aria-label="Perlu kata laluan">🔒 PERLU KATA LALUAN</span>` : ""}
       <span class="practice-set-top">
         <span class="practice-set-number">${padded}</span>
         <span class="practice-set-art">
