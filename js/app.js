@@ -513,6 +513,19 @@
             </figcaption>
           </figure>
         </div>
+      </section>
+
+      <section class="refer-band" aria-label="Peluang Freelancer">
+        <a class="refer-card" href="https://www.freelancer.com/get/myjobkini?f=give" target="_blank" rel="noopener sponsored">
+          <span class="refer-glow" aria-hidden="true"></span>
+          <span class="refer-icon" aria-hidden="true">💼</span>
+          <span class="refer-main">
+            <span class="refer-eyebrow">Peluang Pendapatan</span>
+            <strong>Jana Pendapatan Sebagai Freelancer</strong>
+            <span class="refer-sub">Sertai jutaan freelancer di seluruh dunia — cari projek, tawarkan kepakaran anda dan mula menjana pendapatan tambahan. Daftar percuma di Freelancer.com hari ini.</span>
+          </span>
+          <span class="refer-cta">Daftar Percuma &rarr;</span>
+        </a>
       </section>`;
 
     app.querySelector("#ctaPractice").onclick = () => go("bicara");
