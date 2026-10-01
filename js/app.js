@@ -1091,12 +1091,81 @@
    * Set 1 percuma untuk semua. Set 2–10 dibuka menggunakan kata laluan
    * (tanpa log masuk). Setelah kata laluan betul dimasukkan, status buka
    * disimpan dalam localStorage supaya tidak perlu masuk semula. */
+  /* ---------------- Akses latihan ----------------
+   * Set 1 percuma. Set 2–10 dibuka dengan kata laluan (tanpa log masuk).
+   * Kata laluan diperoleh melalui WhatsApp. Status buka disimpan dalam
+   * localStorage supaya tidak perlu masuk semula pada peranti yang sama. */
   const FREE_SET = 1;
-  function canAccessSet() {
-    // Semua set latihan dibuka untuk semua pengunjung — tiada kata laluan.
-    return true;
+  const SET_PASSWORD = "Pkskmy@2026";
+  const SET_UNLOCK_KEY = "pksk_sets_unlocked_v1";
+  const WHATSAPP_NUMBER_DISPLAY = "016-613 6748";
+  const WHATSAPP_UNLOCK_URL = "https://wa.me/60166136748?text=" +
+    encodeURIComponent("Salam, saya mahu mendapatkan kata laluan untuk membuka Set Latihan 2 hingga 10 di PKSKMY.com.");
+  function setsUnlocked() {
+    try { return localStorage.getItem(SET_UNLOCK_KEY) === "1"; } catch (_) { return false; }
   }
-  function showLockedNotice() {}
+  function unlockSets() {
+    try { localStorage.setItem(SET_UNLOCK_KEY, "1"); } catch (_) {}
+  }
+  function canAccessSet(setNo) {
+    if (Number(setNo) === FREE_SET) return true;
+    return setsUnlocked();
+  }
+  function unlockPromoMarkup() {
+    return `<a class="unlock-promo" href="${WHATSAPP_UNLOCK_URL}" target="_blank" rel="noopener">
+      <span class="unlock-promo-art" aria-hidden="true">
+        <span class="unlock-promo-lock">🔓</span>
+        <span class="unlock-promo-bag">💬</span>
+      </span>
+      <span class="unlock-promo-main">
+        <span class="unlock-promo-eyebrow">Buka Set Latihan 2 – 10</span>
+        <strong>Dapatkan Kata Laluan melalui WhatsApp</strong>
+        <span class="unlock-promo-sub">WhatsApp kami di ${WHATSAPP_NUMBER_DISPLAY} untuk mendapatkan kata laluan membuka kesemua Set Latihan 2 hingga 10.</span>
+      </span>
+      <span class="unlock-promo-cta">WhatsApp Sekarang &rarr;</span>
+    </a>`;
+  }
+  function showLockedNotice(setNo) {
+    openSetPasswordModal(setNo);
+  }
+  function openSetPasswordModal(setNo) {
+    const overlay = document.createElement("div");
+    overlay.className = "auth-overlay show";
+    overlay.innerHTML = `<div class="auth-modal set-unlock-modal" role="dialog" aria-modal="true">
+      <button class="auth-close" type="button" aria-label="Tutup">&times;</button>
+      <h3 class="auth-title">Set Latihan Berkunci</h3>
+      <p class="auth-note">Masukkan kata laluan untuk membuka Set Latihan 2 hingga 10. Tiada log masuk diperlukan.</p>
+      <form class="auth-form" novalidate>
+        <label class="auth-field"><span>Kata laluan</span>
+          <input type="password" name="pw" autocomplete="off" placeholder="Kata laluan set latihan" required></label>
+        <div class="auth-msg" role="status" hidden></div>
+        <button type="submit" class="auth-submit">Buka Set Latihan</button>
+      </form>
+      <p class="auth-note">Belum ada kata laluan? <a href="${WHATSAPP_UNLOCK_URL}" target="_blank" rel="noopener">Dapatkan melalui WhatsApp (${WHATSAPP_NUMBER_DISPLAY}) &rarr;</a></p>
+    </div>`;
+    document.body.appendChild(overlay);
+    const close = () => overlay.remove();
+    let pressedOnBackdrop = false;
+    overlay.addEventListener("pointerdown", e => { pressedOnBackdrop = e.target === overlay; });
+    overlay.addEventListener("pointerup", e => { if (pressedOnBackdrop && e.target === overlay) close(); pressedOnBackdrop = false; });
+    overlay.querySelector(".auth-close").addEventListener("click", close);
+    const form = overlay.querySelector(".auth-form");
+    const msg = overlay.querySelector(".auth-msg");
+    const input = form.querySelector('[name="pw"]');
+    setTimeout(() => input.focus(), 0);
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      if (String(input.value || "") === SET_PASSWORD) {
+        unlockSets();
+        close();
+        if (setNo) renderPracticeSetDetail(setNo); else renderTopicPicker();
+      } else {
+        msg.hidden = false;
+        msg.textContent = "Kata laluan salah. Sila cuba lagi.";
+        input.select();
+      }
+    });
+  }
   // Segarkan senarai set bila status log masuk berubah
   document.addEventListener("pksk-auth-changed", () => {
     if (document.querySelector(".practice-set-grid")) renderTopicPicker();
@@ -1248,6 +1317,8 @@
         </div>
         <button class="practice-back-btn" id="backCategoryPksk" type="button">Kembali ke Kategori</button>
       </div>
+
+      ${setsUnlocked() ? "" : unlockPromoMarkup()}
 
       <div class="practice-set-grid">
         ${sets.map(setNo => practiceSetCard(setNo, setProgress)).join("")}
