@@ -1091,75 +1091,12 @@
    * Set 1 percuma untuk semua. Set 2–10 dibuka menggunakan kata laluan
    * (tanpa log masuk). Setelah kata laluan betul dimasukkan, status buka
    * disimpan dalam localStorage supaya tidak perlu masuk semula. */
-  const SET_PASSWORD = "Pkskmy@2026!";
-  const SET_UNLOCK_KEY = "pksk_sets_unlocked_v1";
-  const SHOPEE_UNLOCK_URL = "https://s.shopee.com.my/2g9wj61dJS?share_channel_code=1";
-  function unlockPromoMarkup() {
-    return `<a class="unlock-promo" href="${SHOPEE_UNLOCK_URL}" target="_blank" rel="noopener nofollow sponsored">
-      <span class="unlock-promo-art" aria-hidden="true">
-        <span class="unlock-promo-lock">🔓</span>
-        <span class="unlock-promo-bag">🛍️</span>
-      </span>
-      <span class="unlock-promo-main">
-        <span class="unlock-promo-eyebrow">Buka Set Latihan 2 – 10</span>
-        <strong>Dapatkan Kata Laluan Set Latihan Penuh</strong>
-        <span class="unlock-promo-sub">Dapatkan pakej latihan lengkap PKSK di Shopee untuk memperoleh kata laluan membuka kesemua Set Latihan 2 hingga 10.</span>
-      </span>
-      <span class="unlock-promo-cta">Dapatkan di Shopee &rarr;</span>
-    </a>`;
-  }
   const FREE_SET = 1;
-  function setsUnlocked() {
-    try { return localStorage.getItem(SET_UNLOCK_KEY) === "1"; } catch (_) { return false; }
+  function canAccessSet() {
+    // Semua set latihan dibuka untuk semua pengunjung — tiada kata laluan.
+    return true;
   }
-  function unlockSets() {
-    try { localStorage.setItem(SET_UNLOCK_KEY, "1"); } catch (_) {}
-  }
-  function canAccessSet(setNo) {
-    if (Number(setNo) === FREE_SET) return true;
-    return setsUnlocked();
-  }
-  function showLockedNotice(setNo) {
-    openSetPasswordModal(setNo);
-  }
-  function openSetPasswordModal(setNo) {
-    const overlay = document.createElement("div");
-    overlay.className = "auth-overlay show";
-    overlay.innerHTML = `<div class="auth-modal set-unlock-modal" role="dialog" aria-modal="true">
-      <button class="auth-close" type="button" aria-label="Tutup">&times;</button>
-      <h3 class="auth-title">Set Latihan Berkunci</h3>
-      <p class="auth-note">Masukkan kata laluan untuk membuka Set Latihan 2 hingga 10. Tiada log masuk diperlukan.</p>
-      <form class="auth-form" novalidate>
-        <label class="auth-field"><span>Kata laluan</span>
-          <input type="password" name="pw" autocomplete="off" placeholder="Kata laluan set latihan" required></label>
-        <div class="auth-msg" role="status" hidden></div>
-        <button type="submit" class="auth-submit">Buka Set Latihan</button>
-      </form>
-      <p class="auth-note">Belum ada kata laluan? <a href="${SHOPEE_UNLOCK_URL}" target="_blank" rel="noopener nofollow sponsored">Dapatkan di Shopee &rarr;</a></p>
-    </div>`;
-    document.body.appendChild(overlay);
-    const close = () => overlay.remove();
-    let pressedOnBackdrop = false;
-    overlay.addEventListener("pointerdown", e => { pressedOnBackdrop = e.target === overlay; });
-    overlay.addEventListener("pointerup", e => { if (pressedOnBackdrop && e.target === overlay) close(); pressedOnBackdrop = false; });
-    overlay.querySelector(".auth-close").addEventListener("click", close);
-    const form = overlay.querySelector(".auth-form");
-    const msg = overlay.querySelector(".auth-msg");
-    const input = form.querySelector('[name="pw"]');
-    setTimeout(() => input.focus(), 0);
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      if (String(input.value || "") === SET_PASSWORD) {
-        unlockSets();
-        close();
-        if (setNo) renderPracticeSetDetail(setNo); else renderTopicPicker();
-      } else {
-        msg.hidden = false;
-        msg.textContent = "Kata laluan salah. Sila cuba lagi.";
-        input.select();
-      }
-    });
-  }
+  function showLockedNotice() {}
   // Segarkan senarai set bila status log masuk berubah
   document.addEventListener("pksk-auth-changed", () => {
     if (document.querySelector(".practice-set-grid")) renderTopicPicker();
@@ -1311,8 +1248,6 @@
         </div>
         <button class="practice-back-btn" id="backCategoryPksk" type="button">Kembali ke Kategori</button>
       </div>
-
-      ${setsUnlocked() ? "" : unlockPromoMarkup()}
 
       <div class="practice-set-grid">
         ${sets.map(setNo => practiceSetCard(setNo, setProgress)).join("")}
