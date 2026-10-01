@@ -1100,7 +1100,7 @@
   const SET_UNLOCK_KEY = "pksk_sets_unlocked_v1";
   const WHATSAPP_NUMBER_DISPLAY = "016-613 6748";
   const WHATSAPP_UNLOCK_URL = "https://wa.me/60166136748?text=" +
-    encodeURIComponent("Salam, saya mahu mendapatkan kata laluan untuk membuka Set Latihan 2 hingga 10 di PKSKMY.com.");
+    encodeURIComponent("Salam, saya mahu melanggan pakej akses penuh PKSKMY.com (RM10 / 1 tahun) untuk membuka Set Latihan 2 hingga 10. Mohon kata laluan.");
   function setsUnlocked() {
     try { return localStorage.getItem(SET_UNLOCK_KEY) === "1"; } catch (_) { return false; }
   }
@@ -1118,11 +1118,14 @@
         <span class="unlock-promo-bag">💬</span>
       </span>
       <span class="unlock-promo-main">
-        <span class="unlock-promo-eyebrow">Buka Set Latihan 2 – 10</span>
-        <strong>Dapatkan Kata Laluan melalui WhatsApp</strong>
-        <span class="unlock-promo-sub">WhatsApp kami di ${WHATSAPP_NUMBER_DISPLAY} untuk mendapatkan kata laluan membuka kesemua Set Latihan 2 hingga 10.</span>
+        <span class="unlock-promo-eyebrow">Buka Set Latihan 2 – 10 · Akses 1 Tahun</span>
+        <strong>Hanya RM10 untuk Akses Penuh Setahun</strong>
+        <span class="unlock-promo-sub">Dengan hanya <b>RM10</b>, dapatkan kata laluan untuk membuka kesemua Set Latihan 2 hingga 10 dan menikmati akses penuh selama <b>1 tahun</b>. WhatsApp kami di ${WHATSAPP_NUMBER_DISPLAY} untuk melanggan.</span>
       </span>
-      <span class="unlock-promo-cta">WhatsApp Sekarang &rarr;</span>
+      <span class="unlock-promo-price-wrap">
+        <span class="unlock-promo-price"><small>RM</small>10<em>/tahun</em></span>
+        <span class="unlock-promo-cta">WhatsApp Sekarang &rarr;</span>
+      </span>
     </a>`;
   }
   function showLockedNotice(setNo) {
@@ -1141,7 +1144,7 @@
         <div class="auth-msg" role="status" hidden></div>
         <button type="submit" class="auth-submit">Buka Set Latihan</button>
       </form>
-      <p class="auth-note">Belum ada kata laluan? <a href="${WHATSAPP_UNLOCK_URL}" target="_blank" rel="noopener">Dapatkan melalui WhatsApp (${WHATSAPP_NUMBER_DISPLAY}) &rarr;</a></p>
+      <p class="auth-note">Belum ada kata laluan? Langgan akses penuh <b>RM10 / 1 tahun</b> — <a href="${WHATSAPP_UNLOCK_URL}" target="_blank" rel="noopener">WhatsApp ${WHATSAPP_NUMBER_DISPLAY} &rarr;</a></p>
     </div>`;
     document.body.appendChild(overlay);
     const close = () => overlay.remove();
